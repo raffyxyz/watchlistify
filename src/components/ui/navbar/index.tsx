@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import UserMenu from "./user-menu";
 
 const Navbar = () => {
   return (
@@ -20,10 +19,7 @@ const Navbar = () => {
         <Link href="/">Anime</Link>
         <Link href="/">K-drama</Link>
         <Link href="/">Library</Link>
-        <Avatar>
-          <AvatarImage src="images/avatar.jpg" alt="Avatar user" />
-          <AvatarFallback>RA</AvatarFallback>
-        </Avatar>
+        <UserMenu />
       </div>
     </div>
   );
