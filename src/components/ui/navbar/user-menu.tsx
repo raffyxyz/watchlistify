@@ -8,7 +8,6 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import ThemeSwitch from "./theme-switch";
 
 import { UserRound, Library, Settings, LogOut } from "lucide-react";
 
@@ -31,16 +30,12 @@ const UserMenu = () => {
     <Menubar className="border-0 rounded-none">
       <MenubarMenu>
         <MenubarTrigger className="px-0 py-0">
-          <Avatar>
+          <Avatar className="h-7 w-7 md:h-10 md:w-10">
             <AvatarImage src="images/avatar.jpg" alt="Avatar user" />
             <AvatarFallback>RA</AvatarFallback>
           </Avatar>
         </MenubarTrigger>
         <MenubarContent className="min-w-[8rem]" align="end">
-          <MenubarItem>
-            <ThemeSwitch />
-          </MenubarItem>
-          <MenubarSeparator />
           <MenubarItem>
             <UserMenuLabel label="Profile" icon={<UserRound size={17} />} />
           </MenubarItem>
