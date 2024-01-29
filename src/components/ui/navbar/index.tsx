@@ -1,39 +1,36 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import UserMenu from "./user-menu";
-import { Search } from "../search-input";
+import WatchListifyLogo from "./logo";
 
-import { Search as SearchIcon } from "lucide-react";
+import { Search as SearchIcon, Library, Menu } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <div className="flex justify-between content-center px-2 md:px-4 py-2">
-      <div className="flex items-center space-x-3">
-        <Image
-          src="/images/logo.png"
-          width={40}
-          height={40}
-          alt="WatchListify Logo"
-        />
-        <h1 className="text-xl font-semibold hidden md:block">WatchListify</h1>
+    <div className="flex justify-between content-center px-2 md:px-16 py-2 bg-slate-800">
+      <div className="flex items-center space-x-8">
+        <div className="flex items-center space-x-5 md:space-x-3">
+          <Menu className="block md:hidden" />
+          <WatchListifyLogo />
+          <h1 className="text-xl font-semibold hidden md:block">
+            WatchListify
+          </h1>
+        </div>
+        <div className="hidden md:flex items-center space-x-4">
+          <Link className="text-md lg:text-lg" href="/">
+            Anime
+          </Link>
+          <Link className="text-md lg:text-lg" href="/">
+            K-drama
+          </Link>
+          <Link className="text-md lg:text-lg" href="/">
+            Genre
+          </Link>
+        </div>
       </div>
-      <Search
-        icon={<SearchIcon className="h-[16px] w-[16px]" />}
-        type="text"
-        placeholder="Search anime or kdrama"
-        className="w-60 md:w-72 lg:w-96"
-      />
-      <div className="flex items-center space-x-0 md:space-x-4">
-        <Link className="hidden md:block text-md lg:text-lg" href="/">
-          Anime
-        </Link>
-        <Link className="hidden md:block text-md lg:text-lg" href="/">
-          K-drama
-        </Link>
-        <Link className="hidden md:block text-md lg:text-lg" href="/">
-          Library
-        </Link>
+      <div className="flex items-center space-x-4 md:space-x-6">
+        <SearchIcon />
+        <Library />
         <UserMenu />
       </div>
     </div>
