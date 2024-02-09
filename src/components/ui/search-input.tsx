@@ -9,27 +9,27 @@ export interface SearchProps
   loading?: boolean;
 }
 
-const Search = React.forwardRef<HTMLInputElement, SearchProps>(
+const SearchInput = React.forwardRef<HTMLInputElement, SearchProps>(
   ({ className, icon, loading, ...props }, ref) => {
     return (
       <div
         className={cn(
-          "flex h-10 items-center rounded-md border border-input pl-1 pr-3 text-sm ring-offset-background focus-within:ring-1 focus-within:ring-ring focus-within:ring-offset-1",
+          "flex h-10 items-center rounded-md bg-slate-800 border border-input pl-3 pr-1 text-sm ring-offset-background focus-within:ring-1 focus-within:ring-ring focus-within:ring-offset-1",
           className
         )}
       >
+        {loading ? <Spinner size={16} /> : icon}
         <input
           {...props}
           type="search"
           ref={ref}
-          className="w-full p-2 bg-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full p-2 bg-slate-800 placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
         />
-        {loading ? <Spinner size={16} /> : icon}
       </div>
     );
   }
 );
 
-Search.displayName = "Search";
+SearchInput.displayName = "SearchInput";
 
-export { Search };
+export { SearchInput };
