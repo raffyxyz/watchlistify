@@ -6,3 +6,11 @@ export interface RecentAnimeTypes {
   image: string;
   url: string;
 }
+
+export interface TopAnimeTypes {
+  id: string;
+  title: string;
+  image: string;
+  url: string;
+  genres: Array<string>;
+}
