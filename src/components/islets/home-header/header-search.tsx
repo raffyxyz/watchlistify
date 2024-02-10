@@ -4,7 +4,7 @@ import { SearchIcon } from "lucide-react";
 
 const HeaderSearch = () => {
   return (
-    <div className="w-[900px] m-auto mt-4">
+    <div className="w-full lg:w-[900px] m-auto mt-4">
       <SearchInput
         icon={<SearchIcon className="h-[16px] w-[16px]" />}
         type="text"
