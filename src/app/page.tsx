@@ -6,6 +6,7 @@ import HomeWatchHistory from "@/components/islets/home-watch-history";
 import TopAiringAnime from "@/components/islets/home-top-anime";
 
 import { RecentAnimeTypes, TopAnimeTypes } from "@/lib/types";
+import { API_HOST, GOGOANIME_ENDPOINT, ANIME } from "../config";
 
 import Footer from "@/components/islets/footer";
 
@@ -14,11 +15,11 @@ const getData = async (): Promise<{
   topAnime: TopAnimeTypes[];
 }> => {
   const { data: dataRecent } = await axios.get(
-    "https://api-consumet-raffy.vercel.app/anime/gogoanime/recent-episodes"
+    `${API_HOST + ANIME + GOGOANIME_ENDPOINT}/recent-episodes`
   );
 
   const { data: dataTop } = await axios.get(
-    "https://api-consumet-raffy.vercel.app/anime/gogoanime/top-airing"
+    `${API_HOST + ANIME + GOGOANIME_ENDPOINT}/top-airing`
   );
 
   return { recentAnime: dataRecent.results, topAnime: dataTop.results };
