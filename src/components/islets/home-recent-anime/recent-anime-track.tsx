@@ -44,11 +44,13 @@ const RecentAnimeTrack: React.FC<RecentAnimeTrackProps> = ({ recentAnime }) => {
           {recentAnime.slice(0, 12).map((anime: RecentAnimeTypes) => (
             <div key={anime.id} className="cursor-pointer">
               <img
-                className="md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] md:h-[270px] lg:h-[280px] xl:h-[330px] 2xl:h-[400px]"
+                className="md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] md:h-[270px] lg:h-[280px] xl:h-[330px] 2xl:h-[400px] hover:blur-sm hover:scale-105"
                 src={anime.image}
                 alt={anime.title}
               />
-              <h3 className="mt-2">{anime.title.substring(0, 27)}</h3>
+              <h3 className="mt-2 hover:text-orange-400">
+                {anime.title.substring(0, 27)}
+              </h3>
             </div>
           ))}
         </div>
