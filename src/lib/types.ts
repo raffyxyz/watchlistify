@@ -14,3 +14,9 @@ export interface TopAnimeTypes {
   url: string;
   genres: Array<string>;
 }
+
+export interface RecentAnimeRequestTypes {
+  currentPage: string | undefined;
+  hasNextPage: boolean;
+  results: RecentAnimeTypes[];
+}
