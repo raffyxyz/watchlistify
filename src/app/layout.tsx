@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
+import ReactQueryWrapper from "@/components/react-query-wrapper";
 import MainLayout from "@/components/layouts/main-layout";
 
 const lato = Lato({
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lato.className}>
-        <MainLayout>{children}</MainLayout>
+        <ReactQueryWrapper>
+          <MainLayout>{children}</MainLayout>
+        </ReactQueryWrapper>
       </body>
     </html>
   );
