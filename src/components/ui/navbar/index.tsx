@@ -29,18 +29,18 @@ const Navbar = () => {
 
           {/* App logo */}
           <WatchListifyLogo />
-          <h1 className="text-xl font-semibold hidden md:block">
+          <Link href="/" className="text-xl font-semibold hidden md:block">
             WatchListify
-          </h1>
+          </Link>
         </div>
 
         {/* Links */}
         <div className="hidden md:flex items-center space-x-4">
-          <Link className="text-md lg:text-lg" href="/">
-            Anime
+          <Link className="text-md lg:text-lg" href="/recent">
+            Recent
           </Link>
-          <Link className="text-md lg:text-lg" href="/">
-            K-drama
+          <Link className="text-md lg:text-lg" href="/top">
+            Top
           </Link>
           <Link className="text-md lg:text-lg" href="/">
             Genre
