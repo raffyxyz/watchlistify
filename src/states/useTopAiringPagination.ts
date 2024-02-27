@@ -2,7 +2,7 @@ import axios from "axios";
 import { createWithEqualityFn } from "zustand/traditional";
 import { shallow } from "zustand/shallow";
 
-import { RecentAnimeRequestTypes } from "@/lib/types";
+import { TopAiringAnimeRequestType } from "@/lib/types";
 import { API_HOST_CLIENT, GOGOANIME_ENDPOINT, ANIME } from "@/config";
 
 type State = {
@@ -11,7 +11,7 @@ type State = {
 
 type Action = {
   setPage: (page: number) => void;
-  fetchTopAnime: (page: number) => Promise<RecentAnimeRequestTypes>;
+  fetchTopAnime: (page: number) => Promise<TopAiringAnimeRequestType>;
 };
 
 const initialState: State = {
