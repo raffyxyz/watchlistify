@@ -30,7 +30,12 @@ const SearchResult: React.FC<SearchResultProps> = ({
       {isFetchingAnime ? (
         <SearchLoadingSkeleton />
       ) : (
-        <AnimeResult data={dataAnime} />
+        <>
+          <h2 className="font-semibold text-xl md:text-2xl text-orange-400">
+            Search Result:
+          </h2>
+          <AnimeResult data={dataAnime} />
+        </>
       )}
     </div>
   );

@@ -23,8 +23,7 @@ const SearchSomething = () => {
   const { data: dataAnimeResult, isFetching: isFetchingAnime } = useQuery({
     queryKey: ["animeResult", searchQuery, animePage],
     queryFn: () => searchAnime(searchQuery, 1),
-    staleTime: 5000,
-    enabled: !!searchQuery && isActiveAnime(),
+    enabled: !!searchQuery,
   });
 
   return (
