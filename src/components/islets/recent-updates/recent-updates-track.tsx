@@ -11,7 +11,7 @@ const RecentUpdatesTrack: React.FC<RecentAnimeTrackProps> = ({ data }) => {
       {data?.map((anime: RecentAnimeTypes) => (
         <div key={anime.id} className="cursor-pointer">
           <img
-            className="w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[240px] xl:h-[330px] 2xl:h-[400px] hover:scale-105"
+            className="w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[330px] 2xl:h-[390px] hover:scale-105"
             src={anime.image}
             alt={anime.title}
           />
