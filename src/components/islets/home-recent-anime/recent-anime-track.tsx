@@ -11,11 +11,11 @@ interface RecentAnimeTrackProps {
 function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
   return (
     <div className="hidden md:block">
-      <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-5">
+      <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-3 2xl:gap-5">
         {recentAnime.slice(0, 12).map((anime: RecentAnimeTypes) => (
           <div key={anime.id} className="cursor-pointer">
             <img
-              className="md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] md:h-[270px] lg:h-[280px] xl:h-[330px] 2xl:h-[400px] hover:scale-105"
+              className="md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px] hover:scale-105"
               src={anime.image}
               alt={anime.title}
             />

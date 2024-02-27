@@ -12,7 +12,7 @@ export default function CardSkeleton() {
       <Skeleton
         className={cn(
           width && width >= 1700 ? "w-[280px]" : "",
-          "w-[160px] sm:w-[200px] md:w-[160px] lg:w-[170px] xl:w-[190px] 2xl:w-[230px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[330px] 2xl:h-[390px] rounded-sm"
+          "w-[160px] sm:w-[200px] md:w-[160px] lg:w-[170px] xl:w-[190px] 2xl:w-[230px] 3xl:w-[270px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[330px] 2xl:h-[390px] rounded-sm"
         )}
       />
       <div className="space-y-2">
