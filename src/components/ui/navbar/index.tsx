@@ -37,10 +37,10 @@ const Navbar = () => {
         {/* Links */}
         <div className="hidden md:flex items-center space-x-4">
           <Link className="text-md lg:text-lg" href="/recent">
-            Recent
+            Recent Updates
           </Link>
           <Link className="text-md lg:text-lg" href="/top">
-            Top
+            Top Airing
           </Link>
           <Link className="text-md lg:text-lg" href="/">
             Genre
