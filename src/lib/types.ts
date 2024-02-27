@@ -20,3 +20,9 @@ export interface RecentAnimeRequestTypes {
   hasNextPage: boolean;
   results: RecentAnimeTypes[];
 }
+
+export interface TopAiringAnimeRequestType {
+  currentPage: string | undefined;
+  hasNextPage: boolean;
+  results: TopAnimeTypes[];
+}
