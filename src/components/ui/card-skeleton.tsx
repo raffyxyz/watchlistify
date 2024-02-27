@@ -17,6 +17,9 @@ export default function CardSkeleton() {
       />
       <div className="space-y-2">
         <Skeleton
+          className={cn("h-3 w-[80px] xl:w-[160px] 2xl:w-[190px] rounded-sm")}
+        />
+        <Skeleton
           className={cn("h-4 w-[100px] xl:w-[170px] 2xl:w-[210px] rounded-sm")}
         />
       </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Plus } from "lucide-react";
 import { TopAnimeTypes } from "@/lib/types";
 
 interface TopAnimeTrackProps {
@@ -19,9 +20,24 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
               height={400}
               alt={anime.title}
             />
-            <h3 className="mt-2 hover:text-orange-400">
-              {anime.title.substring(0, 27)}
-            </h3>
+            <div className="mt-2 flex justify-between items-center">
+              <div className="flex">
+                {anime.genres
+                  .slice(0, 3)
+                  .map((genre: string, index: number) => (
+                    <p
+                      key={genre}
+                      className="text-sm text-muted-foreground mr-2"
+                    >
+                      {genre}
+                    </p>
+                  ))}
+              </div>
+              <div className=" flex space-x-2">
+                <Plus className="text-orange-400" size={26} />
+              </div>
+            </div>
+            <h3 className="mt-1 hover:text-orange-400">{anime.title}</h3>
           </div>
         ))}
       </div>
