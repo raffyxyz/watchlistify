@@ -7,22 +7,18 @@ type State = {
 
 type Action = {
   setFilter: (filter: string) => void;
-  isActiveAll: () => boolean;
   isActiveAnime: () => boolean;
   isActiveDrama: () => boolean;
 };
 
 const initialState: State = {
-  filter: "all",
+  filter: "anime",
 };
 
 export const useSearchFilter = createWithEqualityFn<State & Action>()(
   (set, get) => ({
     ...initialState,
     setFilter: (filter: string) => set({ filter }),
-    isActiveAll: () => {
-      return get().filter === "all";
-    },
     isActiveAnime: () => {
       return get().filter === "anime";
     },
