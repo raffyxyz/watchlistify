@@ -24,8 +24,8 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
                 Episode {anime.episodeNumber}
               </p>
               <div className=" flex space-x-2">
-                <Play className="text-orange-400" size={24} />
-                <Plus className="text-orange-400" size={26} />
+                <Play className="text-orange-400 w-[18px] md:w-[24px]" />
+                <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
               </div>
             </div>
 
@@ -56,8 +56,8 @@ function RecentCardsMobile({ recentAnime }: RecentAnimeTrackProps) {
                   Episode {anime.episodeNumber}
                 </p>
                 <div className="flex space-x-2">
-                  <Play className="text-orange-400" size={24} />
-                  <Plus className="text-orange-400" size={26} />
+                  <Play className="text-orange-400 w-[18px] md:w-[24px]" />
+                  <Plus className="text-orange-400  w-[22px] md:w-[26px]" />
                 </div>
               </div>
               <h3 className="mt-1 mb-2">{anime.title.substring(0, 20)}</h3>

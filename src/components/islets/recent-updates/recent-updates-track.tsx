@@ -21,8 +21,8 @@ const RecentUpdatesTrack: React.FC<RecentAnimeTrackProps> = ({ data }) => {
               Episode {anime.episodeNumber}
             </p>
             <div className=" flex space-x-2">
-              <Play className="text-orange-400" size={24} />
-              <Plus className="text-orange-400" size={26} />
+              <Play className="text-orange-400 w-[18px] md:w-[24px]" />
+              <Plus className="text-orange-400  w-[22px] md:w-[26px]" />
             </div>
           </div>
           <h3 className="mt-1 hover:text-orange-400">

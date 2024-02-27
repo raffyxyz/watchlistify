@@ -23,7 +23,7 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
             <div className="mt-2 flex justify-between items-center">
               <div className="flex">
                 {anime.genres
-                  .slice(0, 3)
+                  .slice(0, 2)
                   .map((genre: string, index: number) => (
                     <p
                       key={genre}
@@ -34,7 +34,7 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
                   ))}
               </div>
               <div className=" flex space-x-2">
-                <Plus className="text-orange-400" size={26} />
+                <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
               </div>
             </div>
             <h3 className="mt-1 hover:text-orange-400">{anime.title}</h3>
@@ -57,7 +57,24 @@ function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
                 src={anime.image}
                 alt={anime.title}
               />
-              <h3 className="mt-2 mb-2">{anime.title.substring(0, 20)}</h3>
+              <div className="mt-2 flex justify-between items-center">
+                <div className="flex">
+                  {anime.genres
+                    .slice(0, 2)
+                    .map((genre: string, index: number) => (
+                      <p
+                        key={genre}
+                        className="text-xs xl:text-sm text-muted-foreground mr-1 xl:mr-2"
+                      >
+                        {genre}
+                      </p>
+                    ))}
+                </div>
+                <div className=" flex space-x-2">
+                  <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
+                </div>
+              </div>
+              <h3 className="mt-1 mb-2">{anime.title.substring(0, 20)}</h3>
             </div>
           ))}
         </div>
