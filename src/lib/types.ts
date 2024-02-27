@@ -7,6 +7,14 @@ export interface RecentAnimeTypes {
   url: string;
 }
 
+export interface AnimeResultTypes {
+  id: string;
+  title: string;
+  image: string;
+  releaseDate: string;
+  subOrDub: string;
+}
+
 export interface TopAnimeTypes {
   id: string;
   title: string;
@@ -25,4 +33,10 @@ export interface TopAiringAnimeRequestType {
   currentPage: string | undefined;
   hasNextPage: boolean;
   results: TopAnimeTypes[];
+}
+
+export interface AnimeResultRequestTypes {
+  currentPage: number;
+  hasNextPage: boolean;
+  results: AnimeResultTypes[];
 }
