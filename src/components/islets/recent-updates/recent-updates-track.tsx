@@ -1,4 +1,5 @@
 import React from "react";
+import { Plus, Play } from "lucide-react";
 import { RecentAnimeTypes } from "@/lib/types";
 
 interface RecentAnimeTrackProps {
@@ -15,7 +16,16 @@ const RecentUpdatesTrack: React.FC<RecentAnimeTrackProps> = ({ data }) => {
             src={anime.image}
             alt={anime.title}
           />
-          <h3 className="mt-2 hover:text-orange-400">
+          <div className="mt-2 flex justify-between items-center">
+            <p className="text-sm text-muted-foreground">
+              Episode {anime.episodeNumber}
+            </p>
+            <div className=" flex space-x-2">
+              <Play className="text-orange-400" size={24} />
+              <Plus className="text-orange-400" size={26} />
+            </div>
+          </div>
+          <h3 className="mt-1 hover:text-orange-400">
             {anime.title.substring(0, 27)}
           </h3>
         </div>
