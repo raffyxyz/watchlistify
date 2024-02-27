@@ -23,7 +23,7 @@ const RecentUpdatesPagination: React.FC<{
   ]);
   return (
     <Pagination className={cn(className)}>
-      <PaginationContent>
+      <PaginationContent className="gap-2">
         {page !== 1 ? (
           <PaginationItem>
             <PaginationLink
@@ -70,10 +70,6 @@ const RecentUpdatesPagination: React.FC<{
           ) : null}
         </PaginationItem>
         <PaginationItem>
-          {/* <PaginationNext
-            className="cursor-pointer"
-            onClick={() => setPage(hasNextPage ? page + 1 : page)}
-          /> */}
           <PaginationLink
             className="cursor-pointer"
             onClick={() => setPage(hasNextPage ? page + 1 : page)}
