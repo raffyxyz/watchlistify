@@ -36,10 +36,6 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
           <Link className="text-sm" href="/top">
             Top Airing
           </Link>
-          <Separator className="my-4" />
-          <Link className="text-sm" href="/">
-            Genre
-          </Link>
         </div>
         {/* </div> */}
       </div>
