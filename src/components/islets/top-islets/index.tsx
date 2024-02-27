@@ -51,7 +51,7 @@ const TopPage = () => {
         <TopPageTrack data={topAiringAnime?.results} />
       )}
       <TopPagePagination
-        className="mt-10 mb-2"
+        className="mt-10 mb-4"
         hasNextPage={topAiringAnime?.hasNextPage}
       />
     </>

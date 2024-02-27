@@ -47,7 +47,7 @@ const RecentUpdates = () => {
         <RecentUpdatesTrack data={data?.results} />
       )}
       <RecentUpdatesPagination
-        className="mt-10 mb-2"
+        className="mt-10 mb-4"
         hasNextPage={data?.hasNextPage}
       />
     </>

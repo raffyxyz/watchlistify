@@ -10,11 +10,11 @@ interface TopAnimeTrackProps {
 function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
   return (
     <div className="hidden md:block">
-      <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-5">
+      <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-3 2xl:gap-5">
         {topAnime.slice(0, 6).map((anime: TopAnimeTypes) => (
           <div key={anime.id} className="cursor-pointer">
             <img
-              className="md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] md:h-[270px] lg:h-[280px] xl:h-[330px] 2xl:h-[400px] hover:scale-105"
+              className="md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px] hover:scale-105"
               src={anime.image}
               width={280}
               height={400}
@@ -23,7 +23,7 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
             <div className="mt-2 flex justify-between items-center">
               <div className="flex">
                 {anime.genres
-                  .slice(0, 3)
+                  .slice(0, 2)
                   .map((genre: string, index: number) => (
                     <p
                       key={genre}
@@ -34,7 +34,7 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
                   ))}
               </div>
               <div className=" flex space-x-2">
-                <Plus className="text-orange-400" size={26} />
+                <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
               </div>
             </div>
             <h3 className="mt-1 hover:text-orange-400">{anime.title}</h3>
@@ -57,7 +57,24 @@ function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
                 src={anime.image}
                 alt={anime.title}
               />
-              <h3 className="mt-2 mb-2">{anime.title.substring(0, 20)}</h3>
+              <div className="mt-2 flex justify-between items-center">
+                <div className="flex">
+                  {anime.genres
+                    .slice(0, 2)
+                    .map((genre: string, index: number) => (
+                      <p
+                        key={genre}
+                        className="text-xs xl:text-sm text-muted-foreground mr-1 xl:mr-2"
+                      >
+                        {genre}
+                      </p>
+                    ))}
+                </div>
+                <div className=" flex space-x-2">
+                  <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
+                </div>
+              </div>
+              <h3 className="mt-1 mb-2">{anime.title.substring(0, 20)}</h3>
             </div>
           ))}
         </div>
