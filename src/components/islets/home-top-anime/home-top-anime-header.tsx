@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 
 const TopAnimeHeader = () => {
   return (
@@ -7,7 +8,9 @@ const TopAnimeHeader = () => {
       <h2 className="font-semibold text-xl md:text-2xl text-orange-400">
         Top Anime
       </h2>
-      <h4 className="cursor-pointer text-sm md:text-lg">View More</h4>
+      <Link href="/top" className="cursor-pointer text-sm md:text-lg">
+        View More
+      </Link>
     </div>
   );
 };
