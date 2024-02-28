@@ -1,25 +1,27 @@
 import axios from "axios";
 import { createWithEqualityFn } from "zustand/traditional";
 import { shallow } from "zustand/shallow";
-import { API_HOST_CLIENT, ANIME, GOGOANIME_ENDPOINT } from "@/config";
-import { AnimeResultRequestTypes } from "@/lib/types";
+import {
+  API_HOST_CLIENT,
+  ANIME,
+  GOGOANIME_ENDPOINT,
+  MOVIE,
+  DRAMA_COOL,
+} from "@/config";
+import { AnimeResultRequestTypes, DramaResultRequestTypes } from "@/lib/types";
 
 type State = {
   searchQuery: string;
-  animePage: number;
 };
 
 type Action = {
   setSearchQuery: (query: string) => void;
-  searchAnime: (
-    query: string,
-    page?: number
-  ) => Promise<AnimeResultRequestTypes>;
+  searchAnime: (query: string) => Promise<AnimeResultRequestTypes>;
+  searchDrama: (query: string) => Promise<DramaResultRequestTypes>;
 };
 
 const initialState: State = {
   searchQuery: "",
-  animePage: 1,
 };
 
 export const useSearch = createWithEqualityFn<State & Action>()((set, get) => ({
@@ -28,6 +30,13 @@ export const useSearch = createWithEqualityFn<State & Action>()((set, get) => ({
   searchAnime: async (query: string) => {
     const { data } = await axios.get(
       `${API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT}/${query}`
+    );
+
+    return data;
+  },
+  searchDrama: async (query: string) => {
+    const { data } = await axios.get(
+      `${API_HOST_CLIENT + MOVIE + DRAMA_COOL}/${query}`
     );
 
     return data;
