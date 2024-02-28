@@ -1,40 +1,56 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import HeaderSearch from "../home-header/header-search";
 import SearchFilter from "./search-filter";
 import SearchResult from "./search-result";
 
 import { useSearch } from "@/states/useSearch";
-import { useSearchFilter } from "@/states/useSearchFilter";
 
 const SearchSomething = () => {
-  // Search filter state.
-  const [isActiveAnime] = useSearchFilter((state) => [state.isActiveAnime]);
+  const searchParams = useSearchParams();
+  const query = searchParams.get("q") as string;
 
   // Search query state.
-  const [searchQuery, animePage, searchAnime] = useSearch((state) => [
-    state.searchQuery,
-    state.animePage,
+  const [setSearchQuery, searchAnime, searchDrama] = useSearch((state) => [
+    state.setSearchQuery,
     state.searchAnime,
+    state.searchDrama,
   ]);
 
   //   Client search for anime.
   const { data: dataAnimeResult, isFetching: isFetchingAnime } = useQuery({
-    queryKey: ["animeResult", searchQuery, animePage],
-    queryFn: () => searchAnime(searchQuery, 1),
-    enabled: !!searchQuery,
+    queryKey: ["animeResult", query],
+    queryFn: () => searchAnime(query),
+    refetchOnWindowFocus: false,
+    enabled: !!query,
   });
 
+  //   Client search for drama.
+  const { data: dataDramaResult, isFetching: isFetchingDrama } = useQuery({
+    queryKey: ["animeDrama", query],
+    queryFn: () => searchDrama(query),
+    refetchOnWindowFocus: false,
+    enabled: !!query,
+  });
+
+  useEffect(() => {
+    if (!!query) {
+      setSearchQuery(query);
+    }
+  }, [query]);
+
+  console.log("Drama: ", dataDramaResult);
   return (
     <div className="mt-10">
       <HeaderSearch />
       <SearchFilter />
       <SearchResult
         isFetchingAnime={isFetchingAnime}
-        isFetchingDrama={isFetchingAnime}
+        isFetchingDrama={isFetchingDrama}
         dataAnime={dataAnimeResult?.results}
-        animeHasNextPage={dataAnimeResult?.hasNextPage}
+        dataDrama={dataDramaResult?.results}
       />
     </div>
   );
