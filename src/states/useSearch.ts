@@ -25,10 +25,9 @@ const initialState: State = {
 export const useSearch = createWithEqualityFn<State & Action>()((set, get) => ({
   ...initialState,
   setSearchQuery: (query: string) => set({ searchQuery: query }),
-  searchAnime: async (query: string, page?: number) => {
+  searchAnime: async (query: string) => {
     const { data } = await axios.get(
-      `${API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT}/${query}`,
-      { params: { page } }
+      `${API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT}/${query}`
     );
 
     return data;
