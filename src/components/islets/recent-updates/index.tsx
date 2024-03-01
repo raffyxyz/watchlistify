@@ -47,7 +47,7 @@ const RecentUpdates = () => {
   return (
     <>
       <RecentUpdatesHeader />
-      {data?.results.length !== 0 && (
+      // {data?.results.length !== 0 && (
         <RecentUpdatesPagination
           className="mt-2 mb-10"
           hasNextPage={data?.hasNextPage}
