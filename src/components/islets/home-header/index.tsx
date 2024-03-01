@@ -5,7 +5,7 @@ import HeaderSearch from "./header-search";
 export default function HomeHeader() {
   return (
     <>
-      <HeaderText text="Watch Anime and Kdrama Online." />
+      <HeaderText text="Watch Anime and Drama Online." />
       <HeaderSearch />
     </>
   );

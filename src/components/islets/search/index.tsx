@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import HeaderSearch from "../home-header/header-search";
+import SearchField from "./search-field";
 import SearchFilter from "./search-filter";
 import SearchResult from "./search-result";
 
@@ -49,9 +49,14 @@ const SearchSomething = () => {
       setFilter(filter);
     }
   }, [query, filter]);
+
   return (
     <div className="mt-10">
-      <HeaderSearch searchParams={query} />
+      <SearchField
+        searchParams={query}
+        isFetchingAnime={isFetchingAnime}
+        isFetchingDrama={isFetchingDrama}
+      />
       <SearchFilter filterParams={filter} />
       <SearchResult
         filter={filter}
