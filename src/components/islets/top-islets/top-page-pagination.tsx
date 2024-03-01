@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 import {
   Pagination,
   PaginationContent,
@@ -15,10 +17,18 @@ const TopPagePagination: React.FC<{
   className?: string;
   hasNextPage: boolean | undefined;
 }> = ({ className, hasNextPage }) => {
+  const router = useRouter();
   const [topPage, setPage] = useTopAiringPagination((state) => [
     state.topPage,
     state.setPage,
   ]);
+
+  const handlePageClick = (page: number) => {
+    setPage(page);
+    if (!!page) {
+      router.push(`?p=${page}`);
+    }
+  };
   return (
     <Pagination className={cn(className)}>
       <PaginationContent className="gap-2">
@@ -26,7 +36,7 @@ const TopPagePagination: React.FC<{
           <PaginationItem>
             <PaginationLink
               className="cursor-pointer"
-              onClick={() => setPage(1)}
+              onClick={() => handlePageClick(1)}
             >
               <ChevronsLeft size={18} />
             </PaginationLink>
@@ -35,7 +45,9 @@ const TopPagePagination: React.FC<{
         <PaginationItem>
           <PaginationLink
             className="cursor-pointer"
-            onClick={() => setPage(topPage === 1 ? topPage : topPage - 1)}
+            onClick={() =>
+              handlePageClick(topPage === 1 ? topPage : topPage - 1)
+            }
           >
             <ChevronLeft size={18} />
           </PaginationLink>
@@ -46,7 +58,7 @@ const TopPagePagination: React.FC<{
           ) : (
             <PaginationLink
               className="cursor-pointer"
-              onClick={() => setPage(topPage - 1)}
+              onClick={() => handlePageClick(topPage - 1)}
             >
               {topPage - 1}
             </PaginationLink>
@@ -61,7 +73,7 @@ const TopPagePagination: React.FC<{
           {hasNextPage ? (
             <PaginationLink
               className="cursor-pointer"
-              onClick={() => setPage(topPage + 1)}
+              onClick={() => handlePageClick(topPage + 1)}
             >
               {topPage + 1}
             </PaginationLink>
@@ -70,7 +82,7 @@ const TopPagePagination: React.FC<{
         <PaginationItem>
           <PaginationLink
             className="cursor-pointer"
-            onClick={() => setPage(hasNextPage ? topPage + 1 : topPage)}
+            onClick={() => handlePageClick(hasNextPage ? topPage + 1 : topPage)}
           >
             <ChevronRight size={18} />
           </PaginationLink>

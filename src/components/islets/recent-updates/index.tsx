@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   keepPreviousData,
   useQuery,
@@ -13,9 +14,12 @@ import { useRecentPagination } from "@/states/useRecentPagination";
 import RecentUpdatesSkeleton from "./recent-updates-skeleton";
 
 const RecentUpdates = () => {
+  const searchParams = useSearchParams();
+  const page = parseInt(searchParams.get("p") || "1", 10);
+
   const queryClient = useQueryClient();
-  const [page, fetchRecentAnime] = useRecentPagination((state) => [
-    state.page,
+  const [setPage, fetchRecentAnime] = useRecentPagination((state) => [
+    state.setPage,
     state.fetchRecentAnime,
   ]);
   const { status, data, error, isFetching, isPlaceholderData } = useQuery({
@@ -34,22 +38,32 @@ const RecentUpdates = () => {
     }
   }, [data, isPlaceholderData, page, queryClient]);
 
+  useEffect(() => {
+    if (!!page) {
+      setPage(page);
+    }
+  }, [page]);
+
   return (
     <>
       <RecentUpdatesHeader />
-      <RecentUpdatesPagination
-        className="mt-2 mb-10"
-        hasNextPage={data?.hasNextPage}
-      />
+      {data?.results.length !== 0 && (
+        <RecentUpdatesPagination
+          className="mt-2 mb-10"
+          hasNextPage={data?.hasNextPage}
+        />
+      )}
       {isFetching ? (
         <RecentUpdatesSkeleton />
       ) : (
         <RecentUpdatesTrack data={data?.results} />
       )}
-      <RecentUpdatesPagination
-        className="mt-10 mb-4"
-        hasNextPage={data?.hasNextPage}
-      />
+      {data?.results.length !== 0 && (
+        <RecentUpdatesPagination
+          className="mt-10 mb-4"
+          hasNextPage={data?.hasNextPage}
+        />
+      )}
     </>
   );
 };
