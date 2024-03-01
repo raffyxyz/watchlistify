@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   keepPreviousData,
   useQuery,
@@ -12,9 +13,12 @@ import TopPagePagination from "./top-page-pagination";
 import TopPageSkeleton from "./top-page-skeleton";
 
 const TopPage = () => {
+  const searchParams = useSearchParams();
+  const page = parseInt(searchParams.get("p") || "1", 10);
+
   const queryClient = useQueryClient();
-  const [topPage, fetchTopAnime] = useTopAiringPagination((state) => [
-    state.topPage,
+  const [setPage, fetchTopAnime] = useTopAiringPagination((state) => [
+    state.setPage,
     state.fetchTopAnime,
   ]);
   const {
@@ -24,8 +28,8 @@ const TopPage = () => {
     isFetching,
     isPlaceholderData,
   } = useQuery({
-    queryKey: ["topAiring", topPage],
-    queryFn: () => fetchTopAnime(topPage),
+    queryKey: ["topAiring", page],
+    queryFn: () => fetchTopAnime(page),
     placeholderData: keepPreviousData,
     staleTime: 5000,
   });
@@ -33,27 +37,37 @@ const TopPage = () => {
   useEffect(() => {
     if (!isPlaceholderData && topAiringAnime?.hasNextPage) {
       queryClient.prefetchQuery({
-        queryKey: ["topAiring", topPage + 1],
-        queryFn: () => fetchTopAnime(topPage + 1),
+        queryKey: ["topAiring", page + 1],
+        queryFn: () => fetchTopAnime(page + 1),
       });
     }
-  }, [topAiringAnime, isPlaceholderData, topPage, queryClient]);
+  }, [topAiringAnime, isPlaceholderData, page, queryClient]);
+
+  useEffect(() => {
+    if (!!page) {
+      setPage(page);
+    }
+  }, [page]);
   return (
     <>
       <TopPageHeader />
-      <TopPagePagination
-        className="mt-2 mb-10"
-        hasNextPage={topAiringAnime?.hasNextPage}
-      />
+      {topAiringAnime?.results.length !== 0 && (
+        <TopPagePagination
+          className="mt-2 mb-10"
+          hasNextPage={topAiringAnime?.hasNextPage}
+        />
+      )}
       {isFetching ? (
         <TopPageSkeleton />
       ) : (
         <TopPageTrack data={topAiringAnime?.results} />
       )}
-      <TopPagePagination
-        className="mt-10 mb-4"
-        hasNextPage={topAiringAnime?.hasNextPage}
-      />
+      {topAiringAnime?.results.length !== 0 && (
+        <TopPagePagination
+          className="mt-10 mb-4"
+          hasNextPage={topAiringAnime?.hasNextPage}
+        />
+      )}
     </>
   );
 };

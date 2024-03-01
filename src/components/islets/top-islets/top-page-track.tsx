@@ -7,6 +7,16 @@ interface RecentAnimeTrackProps {
 }
 
 const TopPageTrack: React.FC<RecentAnimeTrackProps> = ({ data }) => {
+  if (data?.length === 0) {
+    return (
+      <div className="flex justify-center mt-52">
+        <h2 className="font-semibold text-xl md:text-2xl text-orange-400">
+          There is no data.
+        </h2>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-5">
       {data?.map((anime: TopAnimeTypes) => (

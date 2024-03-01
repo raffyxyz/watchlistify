@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 import {
   Pagination,
   PaginationContent,
@@ -11,14 +13,28 @@ import { ChevronsLeft, ChevronRight, ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRecentPagination } from "@/states/useRecentPagination";
 
-const RecentUpdatesPagination: React.FC<{
+interface Props {
   className?: string;
   hasNextPage: boolean | undefined;
-}> = ({ className, hasNextPage }) => {
+}
+
+const RecentUpdatesPagination: React.FC<Props> = ({
+  className,
+  hasNextPage,
+}) => {
+  const router = useRouter();
   const [page, setPage] = useRecentPagination((state) => [
     state.page,
     state.setPage,
   ]);
+
+  const handlePageClick = (page: number) => {
+    setPage(page);
+    if (!!page) {
+      router.push(`?p=${page}`);
+    }
+  };
+
   return (
     <Pagination className={cn(className)}>
       <PaginationContent className="gap-2">
@@ -26,7 +42,7 @@ const RecentUpdatesPagination: React.FC<{
           <PaginationItem>
             <PaginationLink
               className="cursor-pointer"
-              onClick={() => setPage(1)}
+              onClick={() => handlePageClick(1)}
             >
               <ChevronsLeft size={18} />
             </PaginationLink>
@@ -35,7 +51,7 @@ const RecentUpdatesPagination: React.FC<{
         <PaginationItem>
           <PaginationLink
             className="cursor-pointer"
-            onClick={() => setPage(page === 1 ? page : page - 1)}
+            onClick={() => handlePageClick(page === 1 ? page : page - 1)}
           >
             <ChevronLeft size={18} />
           </PaginationLink>
@@ -46,7 +62,7 @@ const RecentUpdatesPagination: React.FC<{
           ) : (
             <PaginationLink
               className="cursor-pointer"
-              onClick={() => setPage(page - 1)}
+              onClick={() => handlePageClick(page - 1)}
             >
               {page - 1}
             </PaginationLink>
@@ -61,7 +77,7 @@ const RecentUpdatesPagination: React.FC<{
           {hasNextPage ? (
             <PaginationLink
               className="cursor-pointer"
-              onClick={() => setPage(page + 1)}
+              onClick={() => handlePageClick(page + 1)}
             >
               {page + 1}
             </PaginationLink>
@@ -70,7 +86,7 @@ const RecentUpdatesPagination: React.FC<{
         <PaginationItem>
           <PaginationLink
             className="cursor-pointer"
-            onClick={() => setPage(hasNextPage ? page + 1 : page)}
+            onClick={() => handlePageClick(hasNextPage ? page + 1 : page)}
           >
             <ChevronRight size={18} />
           </PaginationLink>
