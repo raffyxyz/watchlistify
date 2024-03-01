@@ -51,12 +51,6 @@ const TopPage = () => {
   return (
     <>
       <TopPageHeader />
-      {topAiringAnime?.results.length !== 0 && (
-        <TopPagePagination
-          className="mt-2 mb-10"
-          hasNextPage={topAiringAnime?.hasNextPage}
-        />
-      )}
       {isFetching ? (
         <TopPageSkeleton />
       ) : (
