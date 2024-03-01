@@ -1,51 +1,64 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import { SearchInput } from "@/components/ui/search-input";
 import { SearchIcon } from "lucide-react";
 
-import { useSearch } from "@/states/useSearch";
-import { useSearchFilter } from "@/states/useSearchFilter";
-
-interface Props {
-  searchParams?: string;
-}
-
-const HeaderSearch: React.FC<Props> = ({ searchParams }) => {
+const HeaderSearch = () => {
   const router = useRouter();
 
-  const [searchQuery, setSearchQuery] = useSearch((state) => [
-    state.searchQuery,
-    state.setSearchQuery,
-  ]);
+  const [search, setSearch] = useState<string>("");
+  const [filter, setFilter] = useState<string>("anime");
 
-  const filter = useSearchFilter((state) => state.filter);
-
-  const handleSearchInputChange = (value: string) => {
-    setSearchQuery(value);
-    if (!!value) {
-      router.push(`/search?q=${value}&filter=${filter}`, { scroll: false });
+  const handleSearchClick = () => {
+    if (!!search) {
+      router.push(`/search?q=${search}&filter=${filter}`);
     }
   };
 
-  useEffect(() => {
-    if (!!searchParams) {
-      setSearchQuery(searchParams);
-    } else {
-      setSearchQuery("");
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      handleSearchClick();
     }
-  }, [searchParams]);
+  };
 
+  const handleFilterChange = () => {
+    if (filter === "anime") {
+      setFilter("drama");
+    } else {
+      setFilter("anime");
+    }
+  };
   return (
     <div className="w-full lg:w-[900px] m-auto mt-4">
-      <SearchInput
-        icon={<SearchIcon className="h-[16px] w-[16px]" />}
-        type="text"
-        className="h-12 md:h-14 text-md"
-        placeholder="Search anime or kdrama"
-        value={searchQuery}
-        onChange={(e) => handleSearchInputChange(e.target.value)}
-      />
+      <div className="flex space-x-2">
+        <SearchInput
+          icon={<SearchIcon className="h-[16px] w-[16px]" />}
+          type="text"
+          className="h-12 md:h-14 text-md w-full"
+          placeholder="Search anime or drama"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={handleKeyDown}
+          filter={
+            <Button
+              className="h-6 px-2 rounded-sm text-xs"
+              size="sm"
+              onClick={handleFilterChange}
+            >
+              {filter.charAt(0).toUpperCase() + filter.slice(1)}
+            </Button>
+          }
+        />
+        <Button
+          className="h-12 md:h-14"
+          variant="orange"
+          onClick={handleSearchClick}
+        >
+          <SearchIcon size={27} />
+        </Button>
+      </div>
     </div>
   );
 };
