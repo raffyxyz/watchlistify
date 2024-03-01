@@ -12,7 +12,7 @@ type Action = {
 };
 
 const initialState: State = {
-  filter: "anime",
+  filter: "",
 };
 
 export const useSearchFilter = createWithEqualityFn<State & Action>()(

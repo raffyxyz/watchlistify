@@ -4,10 +4,10 @@ import SearchLoadingSkeleton from "@/components/ui/search-loading-skeleton";
 import AnimeResult from "./anime-result";
 import DramaResult from "./drama-result";
 
-import { useSearchFilter } from "@/states/useSearchFilter";
 import { AnimeResultTypes, DramaResultTypes } from "@/lib/types";
 
 interface SearchResultProps {
+  filter: "anime" | "drama" | string;
   isFetchingAnime: boolean;
   isFetchingDrama: boolean;
   dataAnime: AnimeResultTypes[] | undefined;
@@ -15,13 +15,14 @@ interface SearchResultProps {
 }
 
 const SearchResult: React.FC<SearchResultProps> = ({
+  filter,
   isFetchingAnime,
   isFetchingDrama,
   dataAnime,
   dataDrama,
 }) => {
-  // Search filter state
-  const filter = useSearchFilter((state) => state.filter);
+  const noResultAnime = dataAnime?.length === 0;
+  const noResultDrama = dataDrama?.length === 0;
 
   if (filter === "drama") {
     return (
@@ -29,26 +30,54 @@ const SearchResult: React.FC<SearchResultProps> = ({
         {isFetchingDrama ? (
           <SearchLoadingSkeleton />
         ) : (
-          <DramaResult data={dataDrama} />
+          <>
+            <h2 className="font-semibold text-xl md:text-2xl text-orange-400">
+              Search Result:
+            </h2>
+            {!noResultDrama ? (
+              <DramaResult data={dataDrama} />
+            ) : (
+              <h1 className="flex justify-center mt-20">No drama found.</h1>
+            )}
+          </>
         )}
       </div>
     );
   }
 
-  return (
-    <div className="mt-10">
-      {isFetchingAnime ? (
-        <SearchLoadingSkeleton />
-      ) : (
-        <>
-          <h2 className="font-semibold text-xl md:text-2xl text-orange-400">
-            Search Result:
-          </h2>
-          <AnimeResult data={dataAnime} />
-        </>
-      )}
-    </div>
-  );
+  if (filter === "anime") {
+    return (
+      <div className="mt-10">
+        {isFetchingAnime ? (
+          <SearchLoadingSkeleton />
+        ) : (
+          <>
+            <h2 className="font-semibold text-xl md:text-2xl text-orange-400">
+              Search Result:
+            </h2>
+            {!noResultAnime ? (
+              <AnimeResult data={dataAnime} />
+            ) : (
+              <h1 className="flex justify-center mt-20">No anime found.</h1>
+            )}
+          </>
+        )}
+      </div>
+    );
+  }
+
+  if (filter !== "anime" && filter !== "drama" && filter !== null) {
+    console.log("True");
+    return (
+      <div className="mt-36 flex justify-center">
+        <h2 className="font-semibold text-xl md:text-2xl text-orange-400">
+          Filter not defined.
+        </h2>
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default SearchResult;

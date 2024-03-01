@@ -7,10 +7,15 @@ import SearchFilter from "./search-filter";
 import SearchResult from "./search-result";
 
 import { useSearch } from "@/states/useSearch";
+import { useSearchFilter } from "@/states/useSearchFilter";
 
 const SearchSomething = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get("q") as string;
+  const filter = searchParams.get("filter") as string;
+
+  // Search filter state
+  const setFilter = useSearchFilter((state) => state.setFilter);
 
   // Search query state.
   const [setSearchQuery, searchAnime, searchDrama] = useSearch((state) => [
@@ -39,14 +44,17 @@ const SearchSomething = () => {
     if (!!query) {
       setSearchQuery(query);
     }
-  }, [query]);
 
-  console.log("Drama: ", dataDramaResult);
+    if (!!filter) {
+      setFilter(filter);
+    }
+  }, [query, filter]);
   return (
     <div className="mt-10">
-      <HeaderSearch />
-      <SearchFilter />
+      <HeaderSearch searchParams={query} />
+      <SearchFilter filterParams={filter} />
       <SearchResult
+        filter={filter}
         isFetchingAnime={isFetchingAnime}
         isFetchingDrama={isFetchingDrama}
         dataAnime={dataAnimeResult?.results}

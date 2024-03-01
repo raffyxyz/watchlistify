@@ -1,12 +1,17 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { SearchInput } from "@/components/ui/search-input";
 import { SearchIcon } from "lucide-react";
 
 import { useSearch } from "@/states/useSearch";
+import { useSearchFilter } from "@/states/useSearchFilter";
 
-const HeaderSearch = () => {
+interface Props {
+  searchParams?: string;
+}
+
+const HeaderSearch: React.FC<Props> = ({ searchParams }) => {
   const router = useRouter();
 
   const [searchQuery, setSearchQuery] = useSearch((state) => [
@@ -14,10 +19,22 @@ const HeaderSearch = () => {
     state.setSearchQuery,
   ]);
 
+  const filter = useSearchFilter((state) => state.filter);
+
   const handleSearchInputChange = (value: string) => {
     setSearchQuery(value);
-    if (!!value) router.push(`/search?q=${value}`, { scroll: false });
+    if (!!value) {
+      router.push(`/search?q=${value}&filter=${filter}`, { scroll: false });
+    }
   };
+
+  useEffect(() => {
+    if (!!searchParams) {
+      setSearchQuery(searchParams);
+    } else {
+      setSearchQuery("");
+    }
+  }, [searchParams]);
 
   return (
     <div className="w-full lg:w-[900px] m-auto mt-4">
