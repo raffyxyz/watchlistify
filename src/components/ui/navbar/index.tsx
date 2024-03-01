@@ -42,13 +42,12 @@ const Navbar = () => {
           <Link className="text-md lg:text-lg" href="/top">
             Top Airing
           </Link>
-          <Link className="text-md lg:text-lg" href="/">
-            Genre
-          </Link>
         </div>
       </div>
       <div className="flex items-center space-x-4 md:space-x-6">
-        <SearchIcon />
+        <Link href="/search">
+          <SearchIcon />
+        </Link>
         <Library />
         <UserMenu />
       </div>

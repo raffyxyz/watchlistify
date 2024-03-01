@@ -21,7 +21,7 @@ const TopPageTrack: React.FC<RecentAnimeTrackProps> = ({ data }) => {
           />
           <div className="mt-2 flex justify-between items-center">
             <div className="flex">
-              {anime.genres.slice(0, 2).map((genre: string, index: number) => (
+              {anime.genres.slice(0, 2).map((genre: string) => (
                 <p
                   key={genre}
                   className="text-xs md:text-sm text-muted-foreground mr-1 md:mr-2"

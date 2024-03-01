@@ -1,8 +1,41 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { SearchInput } from "@/components/ui/search-input";
 import { SearchIcon } from "lucide-react";
 
-const HeaderSearch = () => {
+import { useSearch } from "@/states/useSearch";
+import { useSearchFilter } from "@/states/useSearchFilter";
+
+interface Props {
+  searchParams?: string;
+}
+
+const HeaderSearch: React.FC<Props> = ({ searchParams }) => {
+  const router = useRouter();
+
+  const [searchQuery, setSearchQuery] = useSearch((state) => [
+    state.searchQuery,
+    state.setSearchQuery,
+  ]);
+
+  const filter = useSearchFilter((state) => state.filter);
+
+  const handleSearchInputChange = (value: string) => {
+    setSearchQuery(value);
+    if (!!value) {
+      router.push(`/search?q=${value}&filter=${filter}`, { scroll: false });
+    }
+  };
+
+  useEffect(() => {
+    if (!!searchParams) {
+      setSearchQuery(searchParams);
+    } else {
+      setSearchQuery("");
+    }
+  }, [searchParams]);
+
   return (
     <div className="w-full lg:w-[900px] m-auto mt-4">
       <SearchInput
@@ -10,6 +43,8 @@ const HeaderSearch = () => {
         type="text"
         className="h-12 md:h-14 text-md"
         placeholder="Search anime or kdrama"
+        value={searchQuery}
+        onChange={(e) => handleSearchInputChange(e.target.value)}
       />
     </div>
   );
