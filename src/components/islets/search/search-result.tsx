@@ -67,7 +67,6 @@ const SearchResult: React.FC<SearchResultProps> = ({
   }
 
   if (filter !== "anime" && filter !== "drama" && filter !== null) {
-    console.log("True");
     return (
       <div className="mt-36 flex justify-center">
         <h2 className="font-semibold text-xl md:text-2xl text-orange-400">
