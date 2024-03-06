@@ -48,7 +48,10 @@ const Navbar = () => {
         <Link href="/search">
           <SearchIcon />
         </Link>
-        <Library />
+        <Link href="/library">
+          {" "}
+          <Library />
+        </Link>
         <UserMenu />
       </div>
     </div>
