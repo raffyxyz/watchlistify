@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import LibraryData from "@/components/islets/library-islets";
 
 import { TopAnimeTypes } from "@/lib/types";
@@ -16,7 +18,10 @@ const getData = async (): Promise<{
 };
 
 export default async function Library() {
+  const session = await getServerSession();
   const { topAnime } = await getData();
+
+  console.log("Session: ", session);
 
   return (
     <div className="px-4 md:px-10 lg:px-16 xs:m-auto sm:m-0 xs:w-[450px] sm:w-full">
