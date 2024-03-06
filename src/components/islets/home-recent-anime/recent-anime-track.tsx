@@ -1,5 +1,7 @@
 "use client";
 import React from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Plus, Play } from "lucide-react";
 import { RecentAnimeTypes } from "@/lib/types";
@@ -9,6 +11,20 @@ interface RecentAnimeTrackProps {
 }
 
 function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
+  const { status } = useSession();
+  const router = useRouter();
+
+  console.log(status);
+  const handleAddToLibrary = () => {
+    if (status === "unauthenticated") {
+      // Redirect
+      router.push("/login");
+    }
+
+    if (status === "authenticated") {
+      console.log("Add to library.");
+    }
+  };
   return (
     <div className="hidden md:block">
       <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-3 2xl:gap-5">
@@ -25,7 +41,10 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
               </p>
               <div className=" flex space-x-2">
                 <Play className="text-orange-400 w-[18px] md:w-[24px]" />
-                <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
+                <Plus
+                  className="text-orange-400 w-[22px] md:w-[26px]"
+                  onClick={handleAddToLibrary}
+                />
               </div>
             </div>
 
