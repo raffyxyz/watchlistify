@@ -21,7 +21,9 @@ export default async function Library() {
   const session = await getServerSession();
   const { topAnime } = await getData();
 
-  console.log("Session: ", session);
+  if (!session) {
+    redirect("/login");
+  }
 
   return (
     <div className="px-4 md:px-10 lg:px-16 xs:m-auto sm:m-0 xs:w-[450px] sm:w-full">
