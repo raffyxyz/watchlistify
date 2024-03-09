@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -34,6 +35,7 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
               className="md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px] hover:scale-105"
               src={anime.image}
               alt={anime.title}
+              onClick={() => router.push(`/anime/${anime.id}`)}
             />
             <div className="mt-2 flex justify-between items-center">
               <p className="text-sm text-muted-foreground">
@@ -48,9 +50,12 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
               </div>
             </div>
 
-            <h3 className="text-md mt-1 hover:text-orange-400">
+            <Link
+              href={`/anime/${anime.id}`}
+              className="text-md mt-1 hover:text-orange-400"
+            >
               {anime.title}
-            </h3>
+            </Link>
           </div>
         ))}
       </div>

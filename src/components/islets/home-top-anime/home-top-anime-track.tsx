@@ -1,4 +1,7 @@
+"use client";
 import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Plus } from "lucide-react";
 import { TopAnimeTypes } from "@/lib/types";
@@ -8,6 +11,7 @@ interface TopAnimeTrackProps {
 }
 
 function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
+  const router = useRouter();
   return (
     <div className="hidden md:block">
       <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-3 2xl:gap-5">
@@ -19,6 +23,7 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
               width={280}
               height={400}
               alt={anime.title}
+              onClick={() => router.push(`/anime/${anime.id}`)}
             />
             <div className="mt-2 flex justify-between items-center">
               <div className="flex">
@@ -37,7 +42,12 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
                 <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
               </div>
             </div>
-            <h3 className="mt-1 hover:text-orange-400">{anime.title}</h3>
+            <Link
+              href={`/anime/${anime.id}`}
+              className="mt-1 hover:text-orange-400"
+            >
+              {anime.title}
+            </Link>
           </div>
         ))}
       </div>
