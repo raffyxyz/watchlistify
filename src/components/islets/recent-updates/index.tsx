@@ -29,6 +29,7 @@ const RecentUpdates = () => {
     staleTime: 5000,
   });
 
+  // Prefetch query.
   useEffect(() => {
     if (!isPlaceholderData && data?.hasNextPage) {
       queryClient.prefetchQuery({
@@ -36,13 +37,12 @@ const RecentUpdates = () => {
         queryFn: () => fetchRecentAnime(page + 1),
       });
     }
-  }, [data, isPlaceholderData, page, queryClient]);
 
-  useEffect(() => {
+    // Checks if page params have value.
     if (!!page) {
-      setPage(page);
+      setPage(page); // Set page to re render the data.
     }
-  }, [page]);
+  }, [data, isPlaceholderData, page, queryClient]);
 
   return (
     <>

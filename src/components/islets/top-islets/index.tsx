@@ -34,6 +34,7 @@ const TopPage = () => {
     staleTime: 5000,
   });
 
+  // Prefetch query.
   useEffect(() => {
     if (!isPlaceholderData && topAiringAnime?.hasNextPage) {
       queryClient.prefetchQuery({
@@ -41,13 +42,13 @@ const TopPage = () => {
         queryFn: () => fetchTopAnime(page + 1),
       });
     }
+
+    // Checks if page params have value.
+    if (!!page) {
+      setPage(page); // Set page to re render the data.
+    }
   }, [topAiringAnime, isPlaceholderData, page, queryClient]);
 
-  useEffect(() => {
-    if (!!page) {
-      setPage(page);
-    }
-  }, [page]);
   return (
     <>
       <TopPageHeader />
