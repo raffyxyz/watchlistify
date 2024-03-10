@@ -8,6 +8,7 @@ import {
   AnimePlayer,
   AnimeWrapper,
   AnimeDetails,
+  AnimeActions,
 } from "@/components/islets/anime-islets";
 
 const getData = async (id: string): Promise<{ animeInfo: AnimeInfo }> => {
@@ -30,6 +31,7 @@ export default async function AnimePage({
       {/* Video component */}
 
       <AnimePlayer episodeId={animeInfo.episodes[0].id} />
+      <AnimeActions id={animeInfo.episodes[0].id} />
 
       <AnimeWrapper>
         <AnimeDetails
@@ -38,7 +40,8 @@ export default async function AnimePage({
           status={animeInfo.status}
           description={animeInfo.description}
         />
-        <div className="">
+
+        <div className="w-full">
           <h1 className="mb-1">Episodes:</h1>
           <div className="flex flex-wrap">
             {animeInfo.episodes.map((episode: EpisodeType) => (

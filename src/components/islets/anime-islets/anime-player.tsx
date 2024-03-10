@@ -23,9 +23,8 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId }) => {
     return data;
   };
 
-  console.log(data);
   return (
-    <div className="w-4/5 m-auto mt-0">
+    <div className="w-full 2xl:w-3/4 m-auto  mt-0">
       <PlayerWrapper url={data?.sources[3].url} />
     </div>
   );

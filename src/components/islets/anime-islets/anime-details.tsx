@@ -1,5 +1,7 @@
 import { AnimeInfo } from "@/lib/types";
 import React from "react";
+import { Button } from "@/components/ui/button";
+import { Bookmark } from "lucide-react";
 
 interface AnimeDetailsProps {
   title: string;
@@ -19,7 +21,14 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
       <h1 className="text-lg text-orange-400">{title}</h1>
       <p className="text-muted-foreground text-md">{subOrDub}</p>
       <p>{status}</p>
-      <p className="mt-2">{description}</p>
+      <Button
+        className="mt-3 border-2 rounded-none font-semibold uppercase"
+        variant="outline_orange"
+      >
+        <Bookmark className="mr-2 h-4 w-4" strokeWidth="3px" />
+        Add To Library
+      </Button>
+      <p className="mt-3">{description}</p>
     </div>
   );
 };
