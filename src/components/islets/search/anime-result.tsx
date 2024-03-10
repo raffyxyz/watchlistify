@@ -1,4 +1,7 @@
+"use client";
 import React from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Play, Plus } from "lucide-react";
 import { AnimeResultTypes } from "@/lib/types";
 
@@ -7,6 +10,7 @@ interface AnimeResultProps {
 }
 
 const AnimeResult: React.FC<AnimeResultProps> = ({ data }) => {
+  const router = useRouter();
   return (
     <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-3 2xl:gap-5">
       {data?.map((anime: AnimeResultTypes) => (
@@ -18,6 +22,7 @@ const AnimeResult: React.FC<AnimeResultProps> = ({ data }) => {
             className="w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px] hover:scale-105"
             src={anime.image}
             alt={anime.title}
+            onClick={() => router.push(`/anime/${anime.id}`)}
           />
           <div className="mt-2 flex justify-between items-center">
             <p className="text-sm text-muted-foreground">{anime.subOrDub}</p>
@@ -26,7 +31,12 @@ const AnimeResult: React.FC<AnimeResultProps> = ({ data }) => {
               <Plus className="text-orange-400  w-[22px] md:w-[26px]" />
             </div>
           </div>
-          <h3 className="mt-1 hover:text-orange-400">{anime.title}</h3>
+          <Link
+            href={`/anime/${anime.id}`}
+            className="mt-1 hover:text-orange-400"
+          >
+            {anime.title}
+          </Link>
         </div>
       ))}
     </div>
