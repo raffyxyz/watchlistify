@@ -10,6 +10,7 @@ import {
   AnimeDetails,
   AnimeActions,
 } from "@/components/islets/anime-islets";
+import AnimeEpisodes from "@/components/islets/anime-islets/anime-episodes";
 
 const getData = async (id: string): Promise<{ animeInfo: AnimeInfo }> => {
   const { data } = await axios.get(
@@ -41,20 +42,7 @@ export default async function AnimePage({
           description={animeInfo.description}
         />
 
-        <div className="w-full">
-          <h1 className="mb-1">Episodes:</h1>
-          <div className="flex flex-wrap">
-            {animeInfo.episodes.map((episode: EpisodeType) => (
-              <Button
-                key={episode.id}
-                className="mr-2 mt-2"
-                variant="secondary"
-              >
-                {episode.number}
-              </Button>
-            ))}
-          </div>
-        </div>
+        <AnimeEpisodes animeEpisodes={animeInfo.episodes} />
       </AnimeWrapper>
     </div>
   );
