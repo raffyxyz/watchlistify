@@ -26,7 +26,7 @@ const Login = () => {
         Login to Your Account
       </h1>
       <h3 className="mt-4 mb-10 text-center text-2xl font-semibold">
-        Sign in to create an awesome library of drama's and anime.
+        Sign in to create an awesome library of drama&apos;s and anime.
       </h3>
 
       <Button
