@@ -1,20 +1,16 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import AnimePlayer from "./anime-player";
 import AnimeDetails from "./anime-details";
 import AnimeActions from "./anime-actions";
-import { useAnimeEpisode } from "@/states/useAnimeEpisode";
+import useResetPlayerState from "@/hooks/useResetPlayerState";
 
 interface AnimeWrapperProps {
   children: React.ReactNode;
 }
 
 const AnimeWrapper: React.FC<AnimeWrapperProps> = ({ children }) => {
-  const [setQuality] = useAnimeEpisode((state) => [state.setQuality]);
-
-  useEffect(() => {
-    setQuality("default");
-  }, []);
+  useResetPlayerState();
 
   return (
     <div className="px-4 md:px-10 lg:px-16 mb-10">
