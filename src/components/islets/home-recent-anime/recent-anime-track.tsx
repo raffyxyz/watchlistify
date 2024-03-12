@@ -64,6 +64,7 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
 }
 
 function RecentCardsMobile({ recentAnime }: RecentAnimeTrackProps) {
+  const router = useRouter();
   return (
     <div className="block md:hidden">
       <ScrollArea className="mt-4 w-full whitespace-nowrap">
@@ -74,17 +75,27 @@ function RecentCardsMobile({ recentAnime }: RecentAnimeTrackProps) {
                 className="w-[190px] h-[270px]"
                 src={anime.image}
                 alt={anime.title}
+                onClick={() => router.push(`/anime/${anime.id}`)}
               />
               <div className="mt-2 flex justify-between items-center">
                 <p className="text-sm text-muted-foreground">
                   Episode {anime.episodeNumber}
                 </p>
                 <div className="flex space-x-2">
-                  <Play className="text-orange-400 w-[18px] md:w-[24px]" />
+                  <Play
+                    className="text-orange-400 w-[18px] md:w-[24px]"
+                    onClick={() =>
+                      router.push(
+                        `/anime/${anime.id}?ep=${anime.episodeId}&q=default`
+                      )
+                    }
+                  />
                   <Plus className="text-orange-400  w-[22px] md:w-[26px]" />
                 </div>
               </div>
-              <h3 className="mt-1 mb-2">{anime.title.substring(0, 20)}</h3>
+              <Link href={`/anime/${anime.id}`} className="mt-1 mb-2">
+                {anime.title.substring(0, 20)}
+              </Link>
             </div>
           ))}
         </div>

@@ -56,6 +56,7 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
 }
 
 function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
+  const router = useRouter();
   return (
     <div className="block md:hidden">
       <ScrollArea className="mt-4 w-full whitespace-nowrap">
@@ -66,6 +67,7 @@ function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
                 className="w-[190px] h-[270px]"
                 src={anime.image}
                 alt={anime.title}
+                onClick={() => router.push(`/anime/${anime.id}`)}
               />
               <div className="mt-2 flex justify-between items-center">
                 <div className="flex">
@@ -84,7 +86,9 @@ function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
                   <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
                 </div>
               </div>
-              <h3 className="mt-1 mb-2">{anime.title.substring(0, 20)}</h3>
+              <Link href={`/anime/${anime.id}`} className="mt-1 mb-2">
+                {anime.title.substring(0, 20)}
+              </Link>
             </div>
           ))}
         </div>
