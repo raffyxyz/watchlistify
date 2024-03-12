@@ -19,11 +19,8 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({ animeEpisodes }) => {
 
   const selectedEpisode = !episodeParams ? animeEpisodes[0]?.id : episodeParams;
 
-  const [setEpisode, quality] = useAnimeEpisode((state) => [
-    state.setEpisode,
-    state.quality,
-    state.server,
-  ]);
+  const [setEpisode] = useAnimeEpisode((state) => [state.setEpisode]);
+
   const [startIndex, endIndex] = useAnimeEpisodeChange((state) => [
     state.startIndex,
     state.endIndex,
@@ -32,7 +29,7 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({ animeEpisodes }) => {
   const animeEpisodesList = animeEpisodes.slice(startIndex - 1, endIndex);
 
   const handleEpisodeClick = (episode: string) => {
-    router.push(`?ep=${episode}&q=${quality}`, { scroll: false });
+    router.push(`?ep=${episode}`, { scroll: false });
     setEpisode(episode);
   };
 

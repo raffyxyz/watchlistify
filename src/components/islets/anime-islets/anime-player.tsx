@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAnimeEpisode } from "@/states/useAnimeEpisode";
 import PlayerWrapper from "@/components/ui/player-wrapper";
 import { API_HOST_CLIENT, GOGOANIME_ENDPOINT, ANIME } from "@/config";
+import { Spinner } from "@/components/ui/spinner";
 
 interface AnimePlayerProps {
   episodeId: string;
@@ -15,40 +16,32 @@ interface AnimePlayerProps {
 const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
   const searchParams = useSearchParams();
   const episodeParams = searchParams.get("ep") as string;
-  const qualityParams = searchParams.get("q") as string;
 
   const selectedEpisode = !episodeParams ? episodeId : episodeParams;
 
-  const setQuality = useAnimeEpisode((state) => state.setQuality);
-
   const { status, data, error, isFetching } = useQuery({
-    queryKey: ["streamingLinks", selectedEpisode, qualityParams],
-    queryFn: () => fetchAnimeStreamingLinks(selectedEpisode, qualityParams),
+    queryKey: ["streamingLinks", selectedEpisode],
+    queryFn: () => fetchAnimeStreamingLinks(selectedEpisode),
     refetchOnWindowFocus: false,
   });
 
-  const fetchAnimeStreamingLinks = async (episode: string, quality: string) => {
+  const fetchAnimeStreamingLinks = async (episode: string) => {
     const { data } = await axios.get(
       `${
         API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT
       }/watch/${encodeURIComponent(episode)}`
     );
 
-    let filteredSources = data.sources;
-
-    if (qualityParams) {
-      filteredSources = filteredSources.filter(
-        (source: any) => source.quality === qualityParams
-      );
-      setQuality(qualityParams); // Set quality params state.
-    } else {
-      filteredSources = filteredSources.filter(
-        (source: any) => source.quality === "default"
-      );
-    }
-
-    return filteredSources[0];
+    return data;
   };
+
+  if (isFetching) {
+    return (
+      <div className="flex justify-center items-center h-[260px] sm:h-[340px] md:h-[460px] lg:h-[580px] xl:h-[650px]">
+        <Spinner className="text-orange-400" size={40} />
+      </div>
+    );
+  }
 
   return (
     <div className="relative backdrop-blur-xl bg-background">
@@ -59,8 +52,8 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
       />
 
       <div className="relative px-0 md:px-10 lg:px-16">
-        <div className="w-full 2xl:w-3/4 m-auto mt-0 backdrop-blur-sm">
-          <PlayerWrapper url={data?.url} />
+        <div className="w-full 2xl:w-3/4 m-auto mt-0">
+          <PlayerWrapper data={data} image={cover} />
         </div>
       </div>
     </div>
