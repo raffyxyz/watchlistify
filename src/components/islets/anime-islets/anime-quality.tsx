@@ -53,6 +53,10 @@ const AnimeQuality: React.FC<{ id: string }> = ({ id }) => {
     return <Skeleton className="h-10 w-[140px] md:w-[230px]" />;
   }
 
+  if (status === "error") {
+    return <div className="flex items-center">No quality found.</div>;
+  }
+
   return (
     <div className="flex items-center space-x-2">
       <Label htmlFor="quality">Quality: </Label>

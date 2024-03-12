@@ -15,7 +15,7 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({ animeEpisodes }) => {
   const searchParams = useSearchParams();
   const episodeParams = searchParams.get("ep") as string;
 
-  const selectedEpisode = !episodeParams ? animeEpisodes[0].id : episodeParams;
+  const selectedEpisode = !episodeParams ? animeEpisodes[0]?.id : episodeParams;
 
   const [setEpisode, quality, server] = useAnimeEpisode((state) => [
     state.setEpisode,
@@ -28,8 +28,12 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({ animeEpisodes }) => {
     setEpisode(episode);
   };
 
+  if (animeEpisodes.length === 0) {
+    return <div className="mt-10 w-full">No episodes found.</div>;
+  }
+
   return (
-    <div className="w-full">
+    <div className="mt-10 w-full">
       <h1 className="mb-1">Episodes:</h1>
       <div className="flex flex-wrap">
         {animeEpisodes.map((episode: EpisodeType) => (
