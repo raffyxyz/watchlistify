@@ -24,6 +24,7 @@ const AnimeServer: React.FC<{ id: string }> = ({ id }) => {
   } = useQuery({
     queryKey: ["animeServer", id],
     queryFn: () => fetchAnimeStreamingServers(),
+    refetchOnWindowFocus: false,
   });
 
   const fetchAnimeStreamingServers = async () => {

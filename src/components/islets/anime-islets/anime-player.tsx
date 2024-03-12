@@ -20,6 +20,7 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId }) => {
   const { status, data, error, isFetching } = useQuery({
     queryKey: ["streamingLinks", selectedEpisode, qualityParams],
     queryFn: () => fetchAnimeStreamingLinks(selectedEpisode, qualityParams),
+    refetchOnWindowFocus: false,
   });
 
   const fetchAnimeStreamingLinks = async (episode: string, quality: string) => {

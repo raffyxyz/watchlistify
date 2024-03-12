@@ -34,6 +34,7 @@ const AnimeQuality: React.FC<{ id: string }> = ({ id }) => {
   } = useQuery({
     queryKey: ["animequality", id],
     queryFn: () => fetchAnimeStreamingLinks(),
+    refetchOnWindowFocus: false,
   });
 
   const fetchAnimeStreamingLinks = async () => {

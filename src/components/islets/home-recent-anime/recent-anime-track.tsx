@@ -42,7 +42,14 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
                 Episode {anime.episodeNumber}
               </p>
               <div className=" flex space-x-2">
-                <Play className="text-orange-400 w-[18px] md:w-[24px]" />
+                <Play
+                  className="text-orange-400 w-[18px] md:w-[24px]"
+                  onClick={() =>
+                    router.push(
+                      `/anime/${anime.id}?ep=${anime.episodeId}&q=default`
+                    )
+                  }
+                />
                 <Plus
                   className="text-orange-400 w-[22px] md:w-[26px]"
                   onClick={handleAddToLibrary}
