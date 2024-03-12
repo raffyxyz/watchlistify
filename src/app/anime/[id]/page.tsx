@@ -31,10 +31,10 @@ export default async function AnimePage({
     <>
       {/* Video component */}
       <AnimePlayer
-        episodeId={animeInfo.episodes[0].id}
+        episodeId={animeInfo?.episodes[0]?.id}
         cover={animeInfo.image}
       />
-      <AnimeActions id={animeInfo.episodes[0].id} />
+      <AnimeActions id={animeInfo.episodes[0]?.id} />
 
       <AnimeWrapper>
         <AnimeDetails

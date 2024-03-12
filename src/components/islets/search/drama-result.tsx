@@ -1,5 +1,8 @@
+"use client";
 import React from "react";
-import { Play, Plus } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Plus } from "lucide-react";
 import { DramaResultTypes } from "@/lib/types";
 
 interface DramaResultProps {
@@ -7,6 +10,7 @@ interface DramaResultProps {
 }
 
 const DramaResult: React.FC<DramaResultProps> = ({ data }) => {
+  const router = useRouter();
   return (
     <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-3 2xl:gap-5">
       {data?.map((drama: DramaResultTypes) => (
@@ -28,7 +32,6 @@ const DramaResult: React.FC<DramaResultProps> = ({ data }) => {
             </div>
 
             <div className="flex space-x-2">
-              <Play className="text-orange-400 w-[18px] md:w-[24px]" />
               <Plus className="text-orange-400  w-[22px] md:w-[26px]" />
             </div>
           </div>
