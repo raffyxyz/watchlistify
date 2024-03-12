@@ -30,14 +30,13 @@ const AnimeQuality: React.FC<{ id: string }> = ({ id }) => {
     data: animeQuality,
     error,
     isFetching,
-    isPlaceholderData,
   } = useQuery({
     queryKey: ["animequality", id],
-    queryFn: () => fetchAnimeStreamingLinks(),
+    queryFn: () => fetchAnimeStreamingLinks(id),
     refetchOnWindowFocus: false,
   });
 
-  const fetchAnimeStreamingLinks = async () => {
+  const fetchAnimeStreamingLinks = async (id: string) => {
     const { data } = await axios.get(
       `${API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT}/watch/${id}`
     );

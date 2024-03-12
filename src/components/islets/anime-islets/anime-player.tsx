@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
+import { useAnimeEpisode } from "@/states/useAnimeEpisode";
 import PlayerWrapper from "@/components/ui/player-wrapper";
 import { API_HOST_CLIENT, GOGOANIME_ENDPOINT, ANIME } from "@/config";
 
@@ -16,6 +17,8 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId }) => {
   const qualityParams = searchParams.get("q") as string;
 
   const selectedEpisode = !episodeParams ? episodeId : episodeParams;
+
+  const setQuality = useAnimeEpisode((state) => state.setQuality);
 
   const { status, data, error, isFetching } = useQuery({
     queryKey: ["streamingLinks", selectedEpisode, qualityParams],
@@ -36,6 +39,7 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId }) => {
       filteredSources = filteredSources.filter(
         (source: any) => source.quality === qualityParams
       );
+      setQuality(qualityParams); // Set quality params state.
     } else {
       filteredSources = filteredSources.filter(
         (source: any) => source.quality === "default"
