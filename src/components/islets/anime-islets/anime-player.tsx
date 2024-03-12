@@ -9,9 +9,10 @@ import { API_HOST_CLIENT, GOGOANIME_ENDPOINT, ANIME } from "@/config";
 
 interface AnimePlayerProps {
   episodeId: string;
+  cover: string;
 }
 
-const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId }) => {
+const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
   const searchParams = useSearchParams();
   const episodeParams = searchParams.get("ep") as string;
   const qualityParams = searchParams.get("q") as string;
@@ -50,8 +51,18 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId }) => {
   };
 
   return (
-    <div className="w-full 2xl:w-3/4 m-auto mt-0">
-      <PlayerWrapper url={data?.url} />
+    <div className="relative backdrop-blur-xl bg-background">
+      <img
+        src={cover}
+        alt="Background"
+        className="absolute h-full w-full object-cover blur-lg opacity-20"
+      />
+
+      <div className="relative px-0 md:px-10 lg:px-16">
+        <div className="w-full 2xl:w-3/4 m-auto mt-0 backdrop-blur-sm">
+          <PlayerWrapper url={data?.url} />
+        </div>
+      </div>
     </div>
   );
 };
