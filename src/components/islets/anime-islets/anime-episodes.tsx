@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { EpisodeType } from "@/lib/types";
 import { useAnimeEpisode } from "@/states/useAnimeEpisode";
+import { useAnimeEpisodeChange } from "@/states/useAnimeEpisodeChange";
+import EpisodeSelect from "./anime-episode-select";
 
 interface AnimeEpisodesProps {
   animeEpisodes: EpisodeType[];
@@ -17,11 +19,17 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({ animeEpisodes }) => {
 
   const selectedEpisode = !episodeParams ? animeEpisodes[0]?.id : episodeParams;
 
-  const [setEpisode, quality, server] = useAnimeEpisode((state) => [
+  const [setEpisode, quality] = useAnimeEpisode((state) => [
     state.setEpisode,
     state.quality,
     state.server,
   ]);
+  const [startIndex, endIndex] = useAnimeEpisodeChange((state) => [
+    state.startIndex,
+    state.endIndex,
+  ]);
+
+  const animeEpisodesList = animeEpisodes.slice(startIndex - 1, endIndex);
 
   const handleEpisodeClick = (episode: string) => {
     router.push(`?ep=${episode}&q=${quality}`, { scroll: false });
@@ -34,9 +42,12 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({ animeEpisodes }) => {
 
   return (
     <div className="mt-10 w-full">
-      <h1 className="mb-1">Episodes:</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="mb-1">Episodes:</h1>
+        <EpisodeSelect totalEpisodes={animeEpisodes.length} />
+      </div>
       <div className="flex flex-wrap">
-        {animeEpisodes.map((episode: EpisodeType) => (
+        {animeEpisodesList.map((episode: EpisodeType) => (
           <Button
             key={episode.id}
             className="mr-2 mt-2"
