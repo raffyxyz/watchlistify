@@ -1,22 +1,29 @@
 "use client";
-import React from "react";
-import ReactPlayer from "react-player";
+import React, { useRef } from "react";
+import VPlayer from "vnetwork-player";
+import Hls from "hls.js";
+import "vnetwork-player/dist/vnetwork-player.min.css";
 
 interface Props {
-  url: string;
+  data: any;
+  image: string;
 }
 
-const PlayerWrapper: React.FC<Props> = ({ url }) => {
+const PlayerWrapper: React.FC<Props> = ({ data, image }) => {
+  const playerRef = useRef<HTMLVideoElement | null>(null);
+
   return (
-    <div className="player-wrapper">
-      <ReactPlayer
-        className="react-player"
-        url={url}
-        width="100%"
-        height="100%"
-        controls
-      />
-    </div>
+    <VPlayer
+      Hls={Hls}
+      source={data?.sources?.map((item: any) => ({
+        label: item?.quality,
+        url: item?.url,
+      }))}
+      color="#db8b3c"
+      poster={image}
+      playerRef={playerRef}
+      autoPlay
+    />
   );
 };
 
