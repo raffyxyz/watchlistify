@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const AnimeQuality: React.FC<{ id: string }> = ({ id }) => {
   const router = useRouter();
@@ -48,11 +49,15 @@ const AnimeQuality: React.FC<{ id: string }> = ({ id }) => {
     setQuality(quality);
   };
 
+  if (isFetching) {
+    return <Skeleton className="h-10 w-[140px] md:w-[230px]" />;
+  }
+
   return (
     <div className="flex items-center space-x-2">
       <Label htmlFor="quality">Quality: </Label>
       <Select onValueChange={handleQualityClick} value={quality}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-[100px] md:w-[180px]">
           <SelectValue placeholder="Select a quality" />
         </SelectTrigger>
         <SelectContent>

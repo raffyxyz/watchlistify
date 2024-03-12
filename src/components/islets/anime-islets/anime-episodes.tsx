@@ -12,6 +12,10 @@ interface AnimeEpisodesProps {
 
 const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({ animeEpisodes }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const episodeParams = searchParams.get("ep") as string;
+
+  const selectedEpisode = !episodeParams ? animeEpisodes[0].id : episodeParams;
 
   const [setEpisode, quality, server] = useAnimeEpisode((state) => [
     state.setEpisode,
@@ -32,7 +36,9 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({ animeEpisodes }) => {
           <Button
             key={episode.id}
             className="mr-2 mt-2"
-            variant="secondary"
+            variant={`${
+              selectedEpisode === episode.id ? "orange" : "secondary"
+            }`}
             onClick={() => handleEpisodeClick(episode.id)}
           >
             {episode.number}

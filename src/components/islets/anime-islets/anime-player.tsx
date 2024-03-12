@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { useAnimeEpisode } from "@/states/useAnimeEpisode";
 import PlayerWrapper from "@/components/ui/player-wrapper";
 import { API_HOST_CLIENT, GOGOANIME_ENDPOINT, ANIME } from "@/config";
 
@@ -46,7 +45,7 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId }) => {
   };
 
   return (
-    <div className="w-full 2xl:w-3/4 m-auto  mt-0">
+    <div className="w-full 2xl:w-3/4 m-auto mt-0">
       <PlayerWrapper url={data?.url} />
     </div>
   );
