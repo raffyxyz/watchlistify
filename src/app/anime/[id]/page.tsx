@@ -28,10 +28,12 @@ export default async function AnimePage({
   const { animeInfo } = await getData(params.id);
 
   return (
-    <div className="px-4 md:px-10 lg:px-16">
+    <>
       {/* Video component */}
-
-      <AnimePlayer episodeId={animeInfo.episodes[0].id} />
+      <AnimePlayer
+        episodeId={animeInfo.episodes[0].id}
+        cover={animeInfo.image}
+      />
       <AnimeActions id={animeInfo.episodes[0].id} />
 
       <AnimeWrapper>
@@ -44,6 +46,6 @@ export default async function AnimePage({
 
         <AnimeEpisodes animeEpisodes={animeInfo.episodes} />
       </AnimeWrapper>
-    </div>
+    </>
   );
 }
