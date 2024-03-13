@@ -17,7 +17,7 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
   description,
 }) => {
   return (
-    <div className="mt-10 lg:col-span-2">
+    <div className="mt-10 lg:mt-0 lg:col-span-2">
       <h1 className="text-lg text-orange-400">{title}</h1>
       <p className="text-muted-foreground text-md">{subOrDub}</p>
       <p>{status}</p>

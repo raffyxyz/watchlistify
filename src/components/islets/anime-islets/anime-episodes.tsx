@@ -38,7 +38,7 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({ animeEpisodes }) => {
   }
 
   return (
-    <div className="mt-10 w-full">
+    <div className="w-full">
       <div className="flex justify-between items-center">
         <h1 className="mb-1">Episodes:</h1>
         <EpisodeSelect totalEpisodes={animeEpisodes.length} />
