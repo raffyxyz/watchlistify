@@ -46,7 +46,7 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
                   className="text-orange-400 w-[18px] md:w-[24px]"
                   onClick={() =>
                     router.push(
-                      `/anime/${anime.id}?ep=${anime.episodeId}&q=default`
+                      `/anime/watch/${anime.id}?ep=${anime.episodeId}`
                     )
                   }
                 />
@@ -93,7 +93,7 @@ function RecentCardsMobile({ recentAnime }: RecentAnimeTrackProps) {
                     className="text-orange-400 w-[18px] md:w-[24px]"
                     onClick={() =>
                       router.push(
-                        `/anime/${anime.id}?ep=${anime.episodeId}&q=default`
+                        `/anime/watch/${anime.id}?ep=${anime.episodeId}`
                       )
                     }
                   />

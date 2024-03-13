@@ -2,7 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { Plus, Play } from "lucide-react";
 import { AnimeResultTypes } from "@/lib/types";
 
 interface AnimeResultProps {
@@ -27,6 +27,10 @@ const AnimeResult: React.FC<AnimeResultProps> = ({ data }) => {
           <div className="mt-2 flex justify-between items-center">
             <p className="text-sm text-muted-foreground">{anime.subOrDub}</p>
             <div className="flex space-x-2">
+              <Play
+                className="text-orange-400 w-[18px] md:w-[24px]"
+                onClick={() => router.push(`/anime/watch/${anime.id}`)}
+              />
               <Plus className="text-orange-400  w-[22px] md:w-[26px]" />
             </div>
           </div>

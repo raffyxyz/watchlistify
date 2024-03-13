@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Plus } from "lucide-react";
+import { Plus, Play } from "lucide-react";
 import { TopAnimeTypes } from "@/lib/types";
 
 interface TopAnimeTrackProps {
@@ -39,6 +39,10 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
                   ))}
               </div>
               <div className=" flex space-x-2">
+                <Play
+                  className="text-orange-400 w-[18px] md:w-[24px]"
+                  onClick={() => router.push(`/anime/watch/${anime.id}`)}
+                />
                 <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
               </div>
             </div>
@@ -83,6 +87,10 @@ function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
                     ))}
                 </div>
                 <div className=" flex space-x-2">
+                  <Play
+                    className="text-orange-400 w-[18px] md:w-[24px]"
+                    onClick={() => router.push(`/anime/watch/${anime.id}`)}
+                  />
                   <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
                 </div>
               </div>

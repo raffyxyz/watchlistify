@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Plus } from "lucide-react";
+import { Plus, Play } from "lucide-react";
 import { DramaResultTypes } from "@/lib/types";
 
 interface DramaResultProps {
@@ -32,6 +32,7 @@ const DramaResult: React.FC<DramaResultProps> = ({ data }) => {
             </div>
 
             <div className="flex space-x-2">
+              <Play className="text-orange-400 w-[18px] md:w-[24px]" />
               <Plus className="text-orange-400  w-[22px] md:w-[26px]" />
             </div>
           </div>
