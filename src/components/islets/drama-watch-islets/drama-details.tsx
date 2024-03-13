@@ -20,7 +20,10 @@ const DramaDetails: React.FC<AnimeDetailsProps> = ({
   console.log("Id: ", id);
   return (
     <div className="mt-10 lg:mt-0 lg:col-span-2">
-      <Link href={`/drama/${id}`} className="text-lg text-orange-400">
+      <Link
+        href={`/drama/${decodeURIComponent(id)}`}
+        className="text-lg text-orange-400"
+      >
         {title}
       </Link>
       <p>{status}</p>
