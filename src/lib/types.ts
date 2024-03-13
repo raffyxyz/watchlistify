@@ -77,3 +77,17 @@ export interface AnimeInfo {
   totalEpisodes: number;
   episodes: EpisodeType[];
 }
+
+export interface AnimeVideoDetailsType {
+  download: string;
+  headers: {
+    Referer: string;
+  };
+  sources: Array<AnimeVideoSourceType>;
+}
+
+export interface AnimeVideoSourceType {
+  isM3U8: boolean;
+  quality: string;
+  url: string;
+}
