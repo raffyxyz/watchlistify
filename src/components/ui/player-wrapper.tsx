@@ -7,9 +7,10 @@ import "vnetwork-player/dist/vnetwork-player.min.css";
 interface Props {
   data: any;
   image: string;
+  autoPlay?: boolean;
 }
 
-const PlayerWrapper: React.FC<Props> = ({ data, image }) => {
+const PlayerWrapper: React.FC<Props> = ({ data, image, autoPlay = false }) => {
   const playerRef = useRef<HTMLVideoElement | null>(null);
 
   return (
@@ -22,7 +23,7 @@ const PlayerWrapper: React.FC<Props> = ({ data, image }) => {
       color="#db8b3c"
       poster={image}
       playerRef={playerRef}
-      autoPlay
+      autoPlay={autoPlay}
     />
   );
 };
