@@ -8,8 +8,8 @@ import {
   AnimeWrapper,
   AnimeDetails,
   AnimeActions,
-} from "@/components/islets/anime-islets";
-import AnimeEpisodes from "@/components/islets/anime-islets/anime-episodes";
+} from "@/components/islets/anime-watch-islets";
+import AnimeEpisodes from "@/components/islets/anime-watch-islets/anime-episodes";
 
 const getData = async (id: string): Promise<{ animeInfo: AnimeInfo }> => {
   const { data } = await axios.get(
@@ -37,6 +37,7 @@ export default async function AnimePage({
 
       <AnimeWrapper>
         <AnimeDetails
+          id={animeInfo.id}
           title={animeInfo.title}
           subOrDub={animeInfo.subOrDub}
           status={animeInfo.status}

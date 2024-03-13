@@ -1,6 +1,12 @@
 import React from "react";
 import axios from "axios";
 
+import {
+  AnimeInfoWrapper,
+  AnimeInfo as AnimeInfoDetails,
+  AnimeInfoPlus,
+} from "@/components/islets/anime-info-islets";
+
 import { AnimeInfo } from "@/lib/types";
 import { API_HOST, GOGOANIME_ENDPOINT, ANIME } from "../../../config";
 
@@ -20,8 +26,9 @@ export default async function AnimePage({
   const { animeInfo } = await getData(params.id);
 
   return (
-    <>
-      <h1>Anime Info: {animeInfo.title}</h1>
-    </>
+    <AnimeInfoWrapper background={animeInfo.image}>
+      <AnimeInfoDetails animeInfo={animeInfo} />
+      <AnimeInfoPlus animeInfo={animeInfo} />
+    </AnimeInfoWrapper>
   );
 }
