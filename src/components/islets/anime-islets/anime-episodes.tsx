@@ -29,7 +29,7 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({ animeEpisodes }) => {
   const animeEpisodesList = animeEpisodes.slice(startIndex - 1, endIndex);
 
   const handleEpisodeClick = (episode: string) => {
-    router.push(`?ep=${episode}`, { scroll: false });
+    router.push(`?ep=${episode}`);
     setEpisode(episode);
   };
 
