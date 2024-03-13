@@ -24,22 +24,25 @@ interface RenderVideoProps {
 const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
   const searchParams = useSearchParams();
   const episodeParams = searchParams.get("ep") as string;
+  const serverParams = searchParams.get("server") as string;
 
   const selectedEpisode = !episodeParams ? episodeId : episodeParams;
 
   const { status, data, error, isFetching } = useQuery({
-    queryKey: ["streamingLinks", selectedEpisode],
-    queryFn: () => fetchAnimeStreamingLinks(selectedEpisode),
+    queryKey: ["streamingLinks", selectedEpisode, serverParams],
+    queryFn: () => fetchAnimeStreamingLinks(selectedEpisode, serverParams),
     refetchOnWindowFocus: false,
   });
 
   const fetchAnimeStreamingLinks = async (
-    episode: string
+    episode: string,
+    serverParams: string | undefined
   ): Promise<AnimeVideoDetailsType> => {
     const { data } = await axios.get(
       `${
         API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT
-      }/watch/${encodeURIComponent(episode)}`
+      }/watch/${encodeURIComponent(episode)}`,
+      { params: { server: serverParams } }
     );
 
     return data;

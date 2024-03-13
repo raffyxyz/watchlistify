@@ -33,7 +33,7 @@ export default async function AnimePage({
         episodeId={animeInfo?.episodes[0]?.id}
         cover={animeInfo.image}
       />
-      <AnimeActions id={animeInfo.episodes[0]?.id} />
+      {/* <AnimeActions id={animeInfo.episodes[0]?.id} /> */}
 
       <AnimeWrapper>
         <AnimeDetails

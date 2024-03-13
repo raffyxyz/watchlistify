@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { API_HOST_CLIENT, GOGOANIME_ENDPOINT, ANIME } from "@/config";
 
@@ -16,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const AnimeServer: React.FC<{ id: string }> = ({ id }) => {
+  const router = useRouter();
   const {
     status,
     data: servers,
@@ -35,6 +37,10 @@ const AnimeServer: React.FC<{ id: string }> = ({ id }) => {
     return data;
   };
 
+  const handleServerChange = (server: string | undefined) => {
+    // router.push(`?ep=${id}&server=${server?.toLowerCase()}`);
+  };
+
   if (isFetching) {
     return <Skeleton className="h-10 w-[140px] md:w-[230px]" />;
   }
@@ -46,7 +52,7 @@ const AnimeServer: React.FC<{ id: string }> = ({ id }) => {
   return (
     <div className="flex items-center space-x-2">
       <Label htmlFor="server">Server: </Label>
-      <Select>
+      <Select onValueChange={handleServerChange}>
         <SelectTrigger className="w-[100px] md:w-[180px]">
           <SelectValue placeholder="Select a server" />
         </SelectTrigger>
