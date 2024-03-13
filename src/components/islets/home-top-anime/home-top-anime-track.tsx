@@ -1,6 +1,9 @@
+"use client";
 import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Plus } from "lucide-react";
+import { Plus, Play } from "lucide-react";
 import { TopAnimeTypes } from "@/lib/types";
 
 interface TopAnimeTrackProps {
@@ -8,6 +11,7 @@ interface TopAnimeTrackProps {
 }
 
 function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
+  const router = useRouter();
   return (
     <div className="hidden md:block">
       <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-3 2xl:gap-5">
@@ -19,6 +23,7 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
               width={280}
               height={400}
               alt={anime.title}
+              onClick={() => router.push(`/anime/${anime.id}`)}
             />
             <div className="mt-2 flex justify-between items-center">
               <div className="flex">
@@ -34,10 +39,19 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
                   ))}
               </div>
               <div className=" flex space-x-2">
+                <Play
+                  className="text-orange-400 w-[18px] md:w-[24px]"
+                  onClick={() => router.push(`/anime/watch/${anime.id}`)}
+                />
                 <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
               </div>
             </div>
-            <h3 className="mt-1 hover:text-orange-400">{anime.title}</h3>
+            <Link
+              href={`/anime/${anime.id}`}
+              className="mt-1 hover:text-orange-400"
+            >
+              {anime.title}
+            </Link>
           </div>
         ))}
       </div>
@@ -46,6 +60,7 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
 }
 
 function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
+  const router = useRouter();
   return (
     <div className="block md:hidden">
       <ScrollArea className="mt-4 w-full whitespace-nowrap">
@@ -56,6 +71,7 @@ function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
                 className="w-[190px] h-[270px]"
                 src={anime.image}
                 alt={anime.title}
+                onClick={() => router.push(`/anime/${anime.id}`)}
               />
               <div className="mt-2 flex justify-between items-center">
                 <div className="flex">
@@ -71,10 +87,16 @@ function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
                     ))}
                 </div>
                 <div className=" flex space-x-2">
+                  <Play
+                    className="text-orange-400 w-[18px] md:w-[24px]"
+                    onClick={() => router.push(`/anime/watch/${anime.id}`)}
+                  />
                   <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
                 </div>
               </div>
-              <h3 className="mt-1 mb-2">{anime.title.substring(0, 20)}</h3>
+              <Link href={`/anime/${anime.id}`} className="mt-1 mb-2">
+                {anime.title.substring(0, 20)}
+              </Link>
             </div>
           ))}
         </div>

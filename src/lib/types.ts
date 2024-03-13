@@ -55,3 +55,39 @@ export interface DramaResultRequestTypes {
   haxNextPage: boolean;
   results: DramaResultTypes[];
 }
+
+export interface EpisodeType {
+  id: string;
+  number: number;
+  url: string;
+}
+
+export interface AnimeInfo {
+  id: string;
+  title: string;
+  url: string;
+  image: string;
+  releaseDate: string | null;
+  description: string | null;
+  genres: string[];
+  subOrDub: "sub"; // Restrict value to the literal string 'sub'
+  type: string | null;
+  status: "Ongoing"; // Restrict value to the literal string 'Ongoing'
+  otherName: string | null;
+  totalEpisodes: number;
+  episodes: EpisodeType[];
+}
+
+export interface AnimeVideoDetailsType {
+  download: string;
+  headers: {
+    Referer: string;
+  };
+  sources: Array<AnimeVideoSourceType>;
+}
+
+export interface AnimeVideoSourceType {
+  isM3U8: boolean;
+  quality: string;
+  url: string;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
   Menubar,
   MenubarContent,
@@ -40,9 +41,11 @@ const UserMenu = () => {
             <UserMenuLabel label="Profile" icon={<UserRound size={17} />} />
           </MenubarItem>
           <MenubarSeparator />
-          <MenubarItem>
-            <UserMenuLabel label="Library" icon={<Library size={17} />} />
-          </MenubarItem>
+          <Link href="/library">
+            <MenubarItem>
+              <UserMenuLabel label="Library" icon={<Library size={17} />} />
+            </MenubarItem>
+          </Link>
           <MenubarSeparator />
           <MenubarItem>
             <UserMenuLabel label="Settings" icon={<Settings size={17} />} />

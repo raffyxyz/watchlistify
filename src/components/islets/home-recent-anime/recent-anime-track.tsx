@@ -1,5 +1,8 @@
 "use client";
 import React from "react";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Plus, Play } from "lucide-react";
 import { RecentAnimeTypes } from "@/lib/types";
@@ -9,6 +12,20 @@ interface RecentAnimeTrackProps {
 }
 
 function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
+  const { status } = useSession();
+  const router = useRouter();
+
+  console.log(status);
+  const handleAddToLibrary = () => {
+    if (status === "unauthenticated") {
+      // Redirect
+      router.push("/login");
+    }
+
+    if (status === "authenticated") {
+      console.log("Add to library.");
+    }
+  };
   return (
     <div className="hidden md:block">
       <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-3 2xl:gap-5">
@@ -18,20 +35,34 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
               className="md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px] hover:scale-105"
               src={anime.image}
               alt={anime.title}
+              onClick={() => router.push(`/anime/${anime.id}`)}
             />
             <div className="mt-2 flex justify-between items-center">
               <p className="text-sm text-muted-foreground">
                 Episode {anime.episodeNumber}
               </p>
               <div className=" flex space-x-2">
-                <Play className="text-orange-400 w-[18px] md:w-[24px]" />
-                <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
+                <Play
+                  className="text-orange-400 w-[18px] md:w-[24px]"
+                  onClick={() =>
+                    router.push(
+                      `/anime/watch/${anime.id}?ep=${anime.episodeId}`
+                    )
+                  }
+                />
+                <Plus
+                  className="text-orange-400 w-[22px] md:w-[26px]"
+                  onClick={handleAddToLibrary}
+                />
               </div>
             </div>
 
-            <h3 className="text-md mt-1 hover:text-orange-400">
+            <Link
+              href={`/anime/${anime.id}`}
+              className="text-md mt-1 hover:text-orange-400"
+            >
               {anime.title}
-            </h3>
+            </Link>
           </div>
         ))}
       </div>
@@ -40,6 +71,7 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
 }
 
 function RecentCardsMobile({ recentAnime }: RecentAnimeTrackProps) {
+  const router = useRouter();
   return (
     <div className="block md:hidden">
       <ScrollArea className="mt-4 w-full whitespace-nowrap">
@@ -50,17 +82,27 @@ function RecentCardsMobile({ recentAnime }: RecentAnimeTrackProps) {
                 className="w-[190px] h-[270px]"
                 src={anime.image}
                 alt={anime.title}
+                onClick={() => router.push(`/anime/${anime.id}`)}
               />
               <div className="mt-2 flex justify-between items-center">
                 <p className="text-sm text-muted-foreground">
                   Episode {anime.episodeNumber}
                 </p>
                 <div className="flex space-x-2">
-                  <Play className="text-orange-400 w-[18px] md:w-[24px]" />
+                  <Play
+                    className="text-orange-400 w-[18px] md:w-[24px]"
+                    onClick={() =>
+                      router.push(
+                        `/anime/watch/${anime.id}?ep=${anime.episodeId}`
+                      )
+                    }
+                  />
                   <Plus className="text-orange-400  w-[22px] md:w-[26px]" />
                 </div>
               </div>
-              <h3 className="mt-1 mb-2">{anime.title.substring(0, 20)}</h3>
+              <Link href={`/anime/${anime.id}`} className="mt-1 mb-2">
+                {anime.title.substring(0, 20)}
+              </Link>
             </div>
           ))}
         </div>

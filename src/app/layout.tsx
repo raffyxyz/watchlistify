@@ -3,6 +3,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import ReactQueryWrapper from "@/components/react-query-wrapper";
 import MainLayout from "@/components/layouts/main-layout";
+import SessionWrapper from "@/components/SessionWrapper";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -20,12 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={lato.className}>
-        <ReactQueryWrapper>
-          <MainLayout>{children}</MainLayout>
-        </ReactQueryWrapper>
-      </body>
-    </html>
+    <SessionWrapper>
+      <html lang="en">
+        <body className={lato.className}>
+          <ReactQueryWrapper>
+            <MainLayout>{children}</MainLayout>
+          </ReactQueryWrapper>
+        </body>
+      </html>
+    </SessionWrapper>
   );
 }

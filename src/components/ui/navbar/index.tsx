@@ -1,18 +1,22 @@
 "use client";
 import React, { useState } from "react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import UserMenu from "./user-menu";
 import WatchListifyLogo from "./logo";
 import Drawer from "./navbar-drawer";
 
 import { Search as SearchIcon, Library, Menu } from "lucide-react";
+import { Button } from "../button";
 
 const Navbar = () => {
+  const { data: session } = useSession();
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
   const handleToggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
   };
+
   return (
     <div className="flex justify-between content-center px-2 md:px-16 py-2 bg-slate-800">
       <div className="flex items-center space-x-8">
@@ -48,8 +52,14 @@ const Navbar = () => {
         <Link href="/search">
           <SearchIcon />
         </Link>
-        <Library />
-        <UserMenu />
+        <Link href="/library">
+          {" "}
+          <Library />
+        </Link>
+        {/* <UserMenu avatar={session?.user?.image} name={session?.user?.name} /> */}
+        <Button size="sm" variant="orange">
+          Login
+        </Button>
       </div>
     </div>
   );
