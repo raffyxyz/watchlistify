@@ -41,7 +41,7 @@ const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo }) => {
         <div className="mt-4 flex space-x-3 items-center">
           <Button
             variant="orange"
-            onClick={() => router.push(`/anime/watch/${dramaInfo.id}`)}
+            onClick={() => router.push(`/drama/watch/${dramaInfo.id}`)}
           >
             <Play className="mr-2 h-4 w-4" strokeWidth="3px" />
             Watch Now

@@ -18,7 +18,11 @@ const getData = async (
   return { dramaInfo: data };
 };
 
-export default async function Drama({ params }: { params: { id: string } }) {
+export default async function DramaPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { dramaInfo } = await getData(params.id);
   return (
     <DramaInfoWrapper background={dramaInfo.image}>
