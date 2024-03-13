@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import PlayerWrapper from "@/components/ui/player-wrapper";
 import { API_HOST_CLIENT, GOGOANIME_ENDPOINT, ANIME } from "@/config";
 import { Spinner } from "@/components/ui/spinner";
-import { AnimeVideoDetailsType, AnimeVideoSourceType } from "@/lib/types";
+import { AnimeVideoDetailsType } from "@/lib/types";
 
 interface AnimePlayerProps {
   episodeId: string;
@@ -24,29 +24,32 @@ interface RenderVideoProps {
 const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
   const searchParams = useSearchParams();
   const episodeParams = searchParams.get("ep") as string;
-  const serverParams = searchParams.get("server") as string;
 
   const selectedEpisode = !episodeParams ? episodeId : episodeParams;
 
-  const { status, data, error, isFetching } = useQuery({
-    queryKey: ["streamingLinks", selectedEpisode, serverParams],
-    queryFn: () => fetchAnimeStreamingLinks(selectedEpisode, serverParams),
+  const { status, data, error, isFetching, refetch } = useQuery({
+    queryKey: ["streamingLinks", selectedEpisode],
+    queryFn: () => fetchAnimeStreamingLinks(selectedEpisode),
     refetchOnWindowFocus: false,
   });
 
   const fetchAnimeStreamingLinks = async (
-    episode: string,
-    serverParams: string | undefined
+    episode: string
   ): Promise<AnimeVideoDetailsType> => {
     const { data } = await axios.get(
       `${
         API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT
-      }/watch/${encodeURIComponent(episode)}`,
-      { params: { server: serverParams } }
+      }/watch/${encodeURIComponent(episode)}`
     );
 
     return data;
   };
+
+  useEffect(() => {
+    if (selectedEpisode) {
+      refetch();
+    }
+  }, [selectedEpisode]);
 
   return (
     <div className="relative backdrop-blur-xl bg-background">
@@ -99,7 +102,7 @@ function RenderVideo({
   if (status === "success") {
     return (
       <div className="w-full 2xl:w-3/4 m-auto mt-0">
-        <PlayerWrapper data={data} image={cover} />
+        <PlayerWrapper data={data} image={cover} autoPlay />
       </div>
     );
   }
