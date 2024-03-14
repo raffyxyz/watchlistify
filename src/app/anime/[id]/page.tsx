@@ -37,5 +37,13 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const { animeInfo } = await getData(params.id);
   return {
     title: animeInfo.title,
+    metadataBase: new URL(process.env.APP_URL as string),
+    openGraph: {
+      title: `Watch ${animeInfo.title} anime online free on WatchListify.site`,
+      type: "video.tv_show",
+      url: `/drama/${animeInfo.id}`,
+      images: animeInfo.image,
+      description: `The best website to watch ${animeInfo.title} anime for free at WatchListify.`,
+    },
   };
 }
