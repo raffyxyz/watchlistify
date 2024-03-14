@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 import ReactQueryWrapper from "@/components/react-query-wrapper";
 import MainLayout from "@/components/layouts/main-layout";
 import SessionWrapper from "@/components/SessionWrapper";
@@ -34,6 +35,7 @@ export default function RootLayout({
           <ReactQueryWrapper>
             <MainLayout>{children}</MainLayout>
           </ReactQueryWrapper>
+          <Toaster />
         </body>
       </html>
     </SessionWrapper>
