@@ -2,14 +2,13 @@
 import React from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 import { Button } from "@/components/ui/button";
-import {
-  IconBrandGoogleFilled,
-  IconBrandFacebookFilled,
-} from "@tabler/icons-react";
+import { IconBrandGoogleFilled, IconBrandGithub } from "@tabler/icons-react";
 
 const Login = () => {
+  const { toast } = useToast();
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -21,27 +20,39 @@ const Login = () => {
   //   }, [session]);
 
   return (
-    <div className="mt-20 flex flex-col justify-center w-full md:w-[700px] m-auto">
-      <h1 className="mt-8 md:mt-16 text-center text-2xl md:text-3xl lg:text-5xl font-semibold">
+    <div className="flex flex-col">
+      <h1 className="text-center text-orange-400 text-2xl md:text-3xl lg:text-4xl font-semibold">
         Login to Your Account
       </h1>
-      <h3 className="mt-4 mb-10 text-center text-2xl font-semibold">
-        Sign in to create an awesome library of drama&apos;s and anime.
+      <h3 className="mt-4 mb-10 text-center text-lg md:text-2xl">
+        Create an awesome library of drama&apos;s and anime.
       </h3>
 
       <Button
-        className="w-9/12 m-auto"
-        variant="facebook"
-        onClick={() => signIn("github")}
+        className="w-8/12 m-auto"
+        variant="secondary"
+        onClick={() => {
+          toast({
+            title: "Not implemented yet. 😅",
+            description:
+              "Rest assured that I'm working on it to synchronize your library.",
+          });
+        }}
       >
-        <IconBrandFacebookFilled className="mr-2 h-4 w-4" />
-        Sign up with Facebook
+        <IconBrandGithub className="mr-2 h-4 w-4" />
+        Sign up with Github
       </Button>
       <p className="text-center text-muted-foreground text-xs mt-2 mb-2">Or</p>
       <Button
-        className="w-9/12 m-auto"
-        variant="orange"
-        onClick={() => signIn("google")}
+        className="w-8/12 m-auto"
+        variant="default"
+        onClick={() => {
+          toast({
+            title: "Not implemented yet. 😅",
+            description:
+              "Rest assured that I'm working on it to synchronize your library.",
+          });
+        }}
       >
         <IconBrandGoogleFilled className="mr-2 h-4 w-4" />
         Sign up with Google
