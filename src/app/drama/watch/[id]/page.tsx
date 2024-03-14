@@ -25,10 +25,6 @@ export default async function DramaWatchPage({
   params: { id: string };
 }) {
   const { dramaInfo } = await getData(params.id);
-
-  console.log("Params: ", params.id);
-  console.log("Id: ", dramaInfo.id);
-
   return (
     <>
       {dramaInfo?.episodes && dramaInfo.episodes.length > 0 && (
