@@ -44,7 +44,7 @@ export async function generateMetadata({
     openGraph: {
       title: dramaInfo.title,
       type: "video.tv_show",
-      url: `watchlistify-re-git-dev-raffyamoguis.vercel.app/drama/${dramaInfo.id}`,
+      url: `https://watchlistify-re-git-dev-raffyamoguis.vercel.app/drama/${dramaInfo.id}`,
       images: dramaInfo.image,
       description: `Watch ${dramaInfo.title} for free at WatchListify.`,
     },
