@@ -8,9 +8,10 @@ import { DramaDetailsType } from "@/lib/types";
 
 interface DramaInfoProps {
   dramaInfo: DramaDetailsType;
+  dramaId: string;
 }
 
-const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo }) => {
+const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo, dramaId }) => {
   const router = useRouter();
 
   return (
@@ -41,7 +42,7 @@ const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo }) => {
         <div className="mt-4 flex space-x-3 items-center">
           <Button
             variant="orange"
-            onClick={() => router.push(`/drama/watch/${dramaInfo.id}`)}
+            onClick={() => router.push(`/drama/watch/${dramaId}`)}
           >
             <Play className="mr-2 h-4 w-4" strokeWidth="3px" />
             Watch Now

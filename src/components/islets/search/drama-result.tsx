@@ -38,7 +38,7 @@ const DramaResult: React.FC<DramaResultProps> = ({ data }) => {
               <Play
                 className="text-orange-400 w-[18px] md:w-[24px]"
                 onClick={() =>
-                  router.push(`/drama/${encodeURIComponent(drama.id)}`)
+                  router.push(`/drama/watch/${encodeURIComponent(drama.id)}`)
                 }
               />
               <Plus className="text-orange-400  w-[22px] md:w-[26px]" />

@@ -26,7 +26,7 @@ export default async function DramaPage({
   const { dramaInfo } = await getData(params.id);
   return (
     <DramaInfoWrapper background={dramaInfo.image}>
-      <DramaInfo dramaInfo={dramaInfo} />
+      <DramaInfo dramaInfo={dramaInfo} dramaId={params.id} />
       <DramaInfoPlus dramaInfo={dramaInfo} />
     </DramaInfoWrapper>
   );
