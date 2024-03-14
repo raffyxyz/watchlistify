@@ -1,4 +1,5 @@
 import React from "react";
+import { Metadata } from "next";
 import axios from "axios";
 import {
   DramaInfoWrapper,
@@ -32,9 +33,20 @@ export default async function DramaPage({
   );
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
   const { dramaInfo } = await getData(params.id);
   return {
     title: dramaInfo.title,
+    openGraph: {
+      title: dramaInfo.title,
+      type: "video.tv_show",
+      url: `watchlistify-re-git-dev-raffyamoguis.vercel.app/drama/${dramaInfo.id}`,
+      images: dramaInfo.image,
+      description: `Watch ${dramaInfo.title} for free at WatchListify.`,
+    },
   };
 }
