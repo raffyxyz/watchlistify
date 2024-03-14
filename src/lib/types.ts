@@ -98,6 +98,7 @@ export interface DramaEpisodeType {
   title: string;
   number: number;
   season: number;
+  episode: number;
 }
 
 export interface DramaDetailsType {
