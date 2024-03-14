@@ -6,6 +6,7 @@ import {
   DramaWatchWrapper,
   DramaPlayer,
   DramaDetails,
+  DramaEpisodes,
 } from "@/components/islets/drama-watch-islets";
 
 const getData = async (
@@ -25,6 +26,9 @@ export default async function DramaWatchPage({
 }) {
   const { dramaInfo } = await getData(params.id);
 
+  console.log("Params: ", params.id);
+  console.log("Id: ", dramaInfo.id);
+
   return (
     <>
       {dramaInfo?.episodes && dramaInfo.episodes.length > 0 && (
@@ -41,6 +45,7 @@ export default async function DramaWatchPage({
           status={dramaInfo.status}
           title={dramaInfo.title}
         />
+        <DramaEpisodes dramaEpisodes={dramaInfo.episodes} />
       </DramaWatchWrapper>
     </>
   );
