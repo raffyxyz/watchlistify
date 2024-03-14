@@ -43,11 +43,11 @@ export async function generateMetadata({
     title: dramaInfo.title,
     metadataBase: new URL(process.env.APP_URL as string),
     openGraph: {
-      title: `Watch ${dramaInfo.title} drama online free on WatchListify.site`,
+      title: `Watch ${dramaInfo.title} Drama Online free on WatchListify.site`,
       type: "video.tv_show",
       url: `/drama/${dramaInfo.id}`,
       images: dramaInfo.image,
-      description: `The best website to watch ${dramaInfo.title} drama for free at WatchListify.`,
+      description: `The best website to watch ${dramaInfo.title} drama for free at WatchListify.site.`,
     },
   };
 }
