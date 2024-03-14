@@ -1,12 +1,16 @@
+"use client";
 import React from "react";
 import DramaPlayer from "./drama-player";
 import DramaDetails from "./drama-details";
+import DramaEpisodes from "./drama-episodes";
+import useResetPlayerDramaState from "@/hooks/useResetPlayerDramaState";
 
 interface DramaWatchWrapperProps {
   children: React.ReactNode;
 }
 
 const DramaWatchWrapper: React.FC<DramaWatchWrapperProps> = ({ children }) => {
+  useResetPlayerDramaState();
   return (
     <div className="px-4 md:px-10 lg:px-16 mb-10">
       <div className="mt-4 w-full xl:w-[1200px] m-auto">
@@ -18,4 +22,4 @@ const DramaWatchWrapper: React.FC<DramaWatchWrapperProps> = ({ children }) => {
   );
 };
 
-export { DramaWatchWrapper, DramaPlayer, DramaDetails };
+export { DramaWatchWrapper, DramaPlayer, DramaDetails, DramaEpisodes };
