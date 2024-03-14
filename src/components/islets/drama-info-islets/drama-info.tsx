@@ -18,7 +18,7 @@ const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo, dramaId }) => {
     <div className="col-span-2">
       <div className="flex flex-col">
         <img
-          className="w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px]"
+          className="rounded-sm w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px]"
           src={dramaInfo.image}
           alt={dramaInfo.title}
         />

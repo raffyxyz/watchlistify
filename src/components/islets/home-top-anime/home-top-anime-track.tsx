@@ -18,7 +18,7 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
         {topAnime.slice(0, 6).map((anime: TopAnimeTypes) => (
           <div key={anime.id} className="cursor-pointer">
             <img
-              className="md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px] hover:scale-105"
+              className="rounded-sm md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px] hover:scale-105"
               src={anime.image}
               width={280}
               height={400}
@@ -68,7 +68,7 @@ function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
           {topAnime.slice(0, 12).map((anime: TopAnimeTypes) => (
             <div key={anime.id} className="cursor-pointer">
               <img
-                className="w-[190px] h-[270px]"
+                className="rounded-sm w-[190px] h-[270px]"
                 src={anime.image}
                 alt={anime.title}
                 onClick={() => router.push(`/anime/${anime.id}`)}
