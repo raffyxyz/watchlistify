@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
 
 import { Spinner } from "@/components/ui/spinner";
 import PlayerWrapper from "@/components/ui/player-wrapper";
@@ -26,9 +27,16 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
   mediaId,
   cover,
 }) => {
+  const searchParams = useSearchParams();
+  const dramaEpisodeParams = searchParams.get("dEp") as string;
+
+  const selectedDramaEpisode = !dramaEpisodeParams
+    ? episodeId
+    : dramaEpisodeParams;
+
   const { status, data, error, isFetching, refetch } = useQuery({
-    queryKey: ["streamingLinks", episodeId],
-    queryFn: () => fetchAnimeStreamingLinks(episodeId, mediaId),
+    queryKey: ["streamingLinks", selectedDramaEpisode],
+    queryFn: () => fetchAnimeStreamingLinks(selectedDramaEpisode, mediaId),
     refetchOnWindowFocus: false,
   });
 
@@ -38,13 +46,18 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
   ): Promise<any> => {
     const { data } = await axios.get(
       `${API_HOST_CLIENT + MOVIE + DRAMA_COOL}/watch`,
-      { params: { episodeId: episodeId, mediaId: mediaId } }
+      { params: { episodeId: episode, mediaId: mediaId } }
     );
 
     return data;
   };
 
-  console.log(data);
+  useEffect(() => {
+    if (selectedDramaEpisode) {
+      refetch();
+    }
+  }, [selectedDramaEpisode]);
+
   return (
     <div className="relative backdrop-blur-xl bg-background">
       <img
