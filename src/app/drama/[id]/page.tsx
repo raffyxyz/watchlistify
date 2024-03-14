@@ -41,10 +41,11 @@ export async function generateMetadata({
   const { dramaInfo } = await getData(params.id);
   return {
     title: dramaInfo.title,
+    metadataBase: new URL(process.env.APP_URL as string),
     openGraph: {
       title: dramaInfo.title,
       type: "video.tv_show",
-      url: `https://rewatchlistify.vercel.app/drama/${dramaInfo.id}`,
+      url: `/drama/${dramaInfo.id}`,
       images: dramaInfo.image,
       description: `Watch ${dramaInfo.title} for free at WatchListify.`,
     },
