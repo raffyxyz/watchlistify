@@ -29,7 +29,7 @@ const RecentUpdatesTrack: React.FC<RecentAnimeTrackProps> = ({ data }) => {
           className="cursor-pointer xs:w-[190px] sm:w-[200px] md:w-full"
         >
           <img
-            className="w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px] hover:scale-105"
+            className="rounded-sm w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px] hover:scale-105"
             src={anime.image}
             alt={anime.title}
             onClick={() => router.push(`/anime/${anime.id}`)}

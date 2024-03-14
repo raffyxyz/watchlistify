@@ -91,3 +91,30 @@ export interface AnimeVideoSourceType {
   quality: string;
   url: string;
 }
+
+export interface DramaEpisodeType {
+  id: string;
+  url: string;
+  title: string;
+  number: number;
+  season: number;
+  episode: number;
+}
+
+export interface DramaDetailsType {
+  id: string;
+  title: string;
+  url: string;
+  image: string;
+  otherNames: string;
+  status: string;
+  releaseDate: string;
+  description: string;
+  genres: string[];
+  type: string; // Or expand for other types if needed
+  casts: string[];
+  tags: string[];
+  production: string;
+  duration: string; // For movies
+  episodes?: DramaEpisodeType[]; // Optional for series
+}

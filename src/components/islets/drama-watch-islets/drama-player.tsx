@@ -1,15 +1,16 @@
 "use client";
 import React, { useEffect } from "react";
 import axios from "axios";
-import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import PlayerWrapper from "@/components/ui/player-wrapper";
-import { API_HOST_CLIENT, GOGOANIME_ENDPOINT, ANIME } from "@/config";
-import { Spinner } from "@/components/ui/spinner";
-import { AnimeVideoDetailsType } from "@/lib/types";
+import { useSearchParams } from "next/navigation";
 
-interface AnimePlayerProps {
+import { Spinner } from "@/components/ui/spinner";
+import PlayerWrapper from "@/components/ui/player-wrapper";
+import { API_HOST_CLIENT, DRAMA_COOL, MOVIE } from "@/config";
+
+interface DramaPlayerProps {
   episodeId: string;
+  mediaId: string;
   cover: string;
 }
 
@@ -21,35 +22,41 @@ interface RenderVideoProps {
   error: any;
 }
 
-const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
+const DramaPlayer: React.FC<DramaPlayerProps> = ({
+  episodeId,
+  mediaId,
+  cover,
+}) => {
   const searchParams = useSearchParams();
-  const episodeParams = searchParams.get("ep") as string;
+  const dramaEpisodeParams = searchParams.get("dEp") as string;
 
-  const selectedEpisode = !episodeParams ? episodeId : episodeParams;
+  const selectedDramaEpisode = !dramaEpisodeParams
+    ? episodeId
+    : dramaEpisodeParams;
 
   const { status, data, error, isFetching, refetch } = useQuery({
-    queryKey: ["streamingLinks", selectedEpisode],
-    queryFn: () => fetchAnimeStreamingLinks(selectedEpisode),
+    queryKey: ["streamingLinks", selectedDramaEpisode],
+    queryFn: () => fetchAnimeStreamingLinks(selectedDramaEpisode, mediaId),
     refetchOnWindowFocus: false,
   });
 
   const fetchAnimeStreamingLinks = async (
-    episode: string
-  ): Promise<AnimeVideoDetailsType> => {
+    episode: string,
+    mediaId: string
+  ): Promise<any> => {
     const { data } = await axios.get(
-      `${
-        API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT
-      }/watch/${encodeURIComponent(episode)}`
+      `${API_HOST_CLIENT + MOVIE + DRAMA_COOL}/watch`,
+      { params: { episodeId: episode, mediaId: mediaId } }
     );
 
     return data;
   };
 
   useEffect(() => {
-    if (selectedEpisode) {
+    if (selectedDramaEpisode) {
       refetch();
     }
-  }, [selectedEpisode]);
+  }, [selectedDramaEpisode]);
 
   return (
     <div className="relative backdrop-blur-xl bg-background">
@@ -103,9 +110,13 @@ function RenderVideo({
     return (
       <div className="w-full 2xl:w-3/4 m-auto mt-0">
         <PlayerWrapper
-          data={data?.sources?.map((item: any) => ({
-            label: item?.quality,
+          data={data?.sources?.map((item: any, index: number) => ({
+            label: `Quality ${index + 1}`,
             url: item?.url,
+          }))}
+          subtitles={data?.subtitles?.map((item: any) => ({
+            lang: item.lang,
+            url: item.url,
           }))}
           image={cover}
           autoPlay
@@ -117,4 +128,4 @@ function RenderVideo({
   return null;
 }
 
-export default AnimePlayer;
+export default DramaPlayer;

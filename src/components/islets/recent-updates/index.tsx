@@ -27,6 +27,7 @@ const RecentUpdates = () => {
     queryFn: () => fetchRecentAnime(page),
     placeholderData: keepPreviousData,
     staleTime: 5000,
+    refetchOnWindowFocus: false,
   });
 
   // Prefetch query.

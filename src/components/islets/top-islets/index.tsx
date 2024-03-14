@@ -32,6 +32,7 @@ const TopPage = () => {
     queryFn: () => fetchTopAnime(page),
     placeholderData: keepPreviousData,
     staleTime: 5000,
+    refetchOnWindowFocus: false,
   });
 
   // Prefetch query.

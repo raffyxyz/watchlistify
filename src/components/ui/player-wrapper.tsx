@@ -5,21 +5,25 @@ import Hls from "hls.js";
 import "vnetwork-player/dist/vnetwork-player.min.css";
 
 interface Props {
-  data: any;
+  data: Array<{ label: string; url: string }>;
+  subtitles?: Array<{ lang: string; url: string }>;
   image: string;
   autoPlay?: boolean;
 }
 
-const PlayerWrapper: React.FC<Props> = ({ data, image, autoPlay = false }) => {
+const PlayerWrapper: React.FC<Props> = ({
+  data,
+  subtitles,
+  image,
+  autoPlay = false,
+}) => {
   const playerRef = useRef<HTMLVideoElement | null>(null);
 
   return (
     <VPlayer
       Hls={Hls}
-      source={data?.sources?.map((item: any) => ({
-        label: item?.quality,
-        url: item?.url,
-      }))}
+      source={data}
+      subtitle={subtitles}
       color="#db8b3c"
       poster={image}
       playerRef={playerRef}

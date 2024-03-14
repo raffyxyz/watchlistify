@@ -49,3 +49,10 @@ export default async function AnimePage({
     </>
   );
 }
+
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const { animeInfo } = await getData(params.id);
+  return {
+    title: `Watch ${animeInfo.title}`,
+  };
+}
