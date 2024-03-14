@@ -15,17 +15,17 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
   const { status } = useSession();
   const router = useRouter();
 
-  console.log(status);
-  const handleAddToLibrary = () => {
-    if (status === "unauthenticated") {
-      // Redirect
-      router.push("/login");
-    }
+  // console.log(status);
+  // const handleAddToLibrary = () => {
+  //   if (status === "unauthenticated") {
+  //     // Redirect
+  //     router.push("/login");
+  //   }
 
-    if (status === "authenticated") {
-      console.log("Add to library.");
-    }
-  };
+  //   if (status === "authenticated") {
+  //     console.log("Add to library.");
+  //   }
+  // };
   return (
     <div className="hidden md:block">
       <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-3 2xl:gap-5">
@@ -52,7 +52,7 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
                 />
                 <Plus
                   className="text-orange-400 w-[22px] md:w-[26px]"
-                  onClick={handleAddToLibrary}
+                  // onClick={handleAddToLibrary}
                 />
               </div>
             </div>

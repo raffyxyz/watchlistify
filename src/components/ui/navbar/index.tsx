@@ -57,9 +57,11 @@ const Navbar = () => {
           <Library />
         </Link>
         {/* <UserMenu avatar={session?.user?.image} name={session?.user?.name} /> */}
-        <Button size="sm" variant="orange">
-          Login
-        </Button>
+        <Link href="/login">
+          <Button size="sm" variant="orange">
+            Login
+          </Button>
+        </Link>
       </div>
     </div>
   );
