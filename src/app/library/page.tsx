@@ -1,33 +1,28 @@
-import React from "react";
-import axios from "axios";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import React, { cache } from "react";
+import connectMongo from "@/utils/mongoose";
+import WatchList from "@/models/watchlist";
 import LibraryData from "@/components/islets/library-islets";
 
-import { TopAnimeTypes } from "@/lib/types";
-import { API_HOST, GOGOANIME_ENDPOINT, ANIME } from "../../config";
+import { WatchListType } from "@/lib/types";
 
-const getData = async (): Promise<{
-  topAnime: TopAnimeTypes[];
-}> => {
-  const { data: dataTop } = await axios.get(
-    `${API_HOST + ANIME + GOGOANIME_ENDPOINT}/top-airing`
-  );
+const getData = cache(async (): Promise<{ watchList: WatchListType[] }> => {
+  await connectMongo();
 
-  return { topAnime: dataTop.results };
-};
+  const watchList = await WatchList.find({
+    userId: "ryzonxyz@gmail.com",
+  }).exec();
+
+  return { watchList };
+});
 
 export default async function Library() {
-  const session = await getServerSession();
-  const { topAnime } = await getData();
-
-  if (!session) {
-    redirect("/login");
-  }
+  const { watchList } = await getData();
 
   return (
     <div className="px-4 md:px-10 lg:px-16 xs:m-auto sm:m-0 xs:w-[450px] sm:w-full">
-      <LibraryData data={topAnime} />
+      <LibraryData data={watchList} />
     </div>
   );
 }
+
+export const revalidate = 0;
