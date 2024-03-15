@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 import {
   Menubar,
   MenubarContent,
@@ -10,10 +11,10 @@ import {
 } from "@/components/ui/menubar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { UserRound, Library, Settings, LogOut } from "lucide-react";
+import { UserRound, Library, Settings, LogOut, Mail } from "lucide-react";
 
 interface UserMenuLabelProps {
-  label: string;
+  label: string | null | undefined;
   icon: React.ReactNode;
 }
 
@@ -26,19 +27,28 @@ const UserMenuLabel: React.FC<UserMenuLabelProps> = ({ label, icon }) => {
   );
 };
 
-const UserMenu = () => {
+interface UserMenuProps {
+  avatar?: string | null;
+  name?: string | null;
+}
+
+const UserMenu: React.FC<UserMenuProps> = ({ avatar, name }) => {
   return (
     <Menubar className="border-0 rounded-none">
       <MenubarMenu>
         <MenubarTrigger className="px-0 py-0">
           <Avatar className="h-7 w-7 md:h-10 md:w-10">
-            <AvatarImage src="images/avatar.jpg" alt="Avatar user" />
-            <AvatarFallback>RA</AvatarFallback>
+            {avatar ? (
+              <AvatarImage src={avatar} alt={name ? name : undefined} />
+            ) : (
+              <AvatarImage src="images/avatar.jpg" alt="Avatar user" />
+            )}
+            <AvatarFallback>{name}</AvatarFallback>
           </Avatar>
         </MenubarTrigger>
         <MenubarContent className="min-w-[8rem]" align="end">
           <MenubarItem>
-            <UserMenuLabel label="Profile" icon={<UserRound size={17} />} />
+            <UserMenuLabel label="Account" icon={<UserRound size={17} />} />
           </MenubarItem>
           <MenubarSeparator />
           <Link href="/library">
@@ -46,14 +56,16 @@ const UserMenu = () => {
               <UserMenuLabel label="Library" icon={<Library size={17} />} />
             </MenubarItem>
           </Link>
-          <MenubarSeparator />
-          <MenubarItem>
+          {/* <MenubarSeparator /> */}
+          {/* <MenubarItem>
             <UserMenuLabel label="Settings" icon={<Settings size={17} />} />
-          </MenubarItem>
+          </MenubarItem> */}
           <MenubarSeparator />
-          <MenubarItem>
-            <UserMenuLabel label="Logout" icon={<LogOut size={17} />} />
-          </MenubarItem>
+          {!!avatar ? (
+            <MenubarItem onClick={() => signOut()}>
+              <UserMenuLabel label="Logout" icon={<LogOut size={17} />} />
+            </MenubarItem>
+          ) : null}
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
