@@ -1,6 +1,5 @@
 // imports
 import NextAuth from "next-auth";
-import mongoose from "mongoose";
 
 // importing providers
 import GithubProvider from "next-auth/providers/github";
