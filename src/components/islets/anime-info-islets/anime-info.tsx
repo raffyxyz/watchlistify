@@ -2,8 +2,9 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Calendar, Globe, Play, Bookmark } from "lucide-react";
+import { Calendar, Globe, Play } from "lucide-react";
 import { AnimeInfo } from "@/lib/types";
+import AnimeWatchList from "./anime-watchlist";
 
 interface AnimeInfoProps {
   animeInfo: AnimeInfo;
@@ -45,10 +46,12 @@ const AnimeInfo: React.FC<AnimeInfoProps> = ({ animeInfo }) => {
             <Play className="mr-2 h-4 w-4" strokeWidth="3px" />
             Watch Now
           </Button>
-          <Button variant="secondary">
-            <Bookmark className="mr-2 h-4 w-4" strokeWidth="3px" />
-            Add to Library
-          </Button>
+          <AnimeWatchList
+            listId={animeInfo.id}
+            title={animeInfo.title}
+            image={animeInfo.image}
+            type="anime"
+          />
         </div>
         <p className="mt-4">{animeInfo.description}</p>
       </div>
