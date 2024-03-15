@@ -23,16 +23,12 @@ interface UserMenuLabelProps {
 interface EditWatchListProps {
   listId: string;
   title: string;
-  image: string;
-  type: "anime" | "drama";
   selectedStatus: string;
 }
 
 const EditWatchlist: React.FC<EditWatchListProps> = ({
   listId,
   title,
-  image,
-  type,
   selectedStatus,
 }) => {
   const { toast } = useToast();
@@ -56,19 +52,19 @@ const EditWatchlist: React.FC<EditWatchListProps> = ({
     },
   });
 
-  if (removeMutation.isSuccess) {
-    // toast({ description: `${title} removed from WatchList.` });
-    console.log("Removed successfully.");
-    queryClient.invalidateQueries({ queryKey: ["watchList"] });
-    window.location.reload();
-  }
+  useEffect(() => {
+    if (updateMutation.isSuccess) {
+      queryClient.invalidateQueries({ queryKey: ["watchList"] });
+      toast({ description: `${title} updated from WatchList.` });
+    }
+  }, [updateMutation.isSuccess]);
 
-  if (updateMutation.isSuccess) {
-    // window.location.reload();
-    // toast({ description: `${title} updated from WatchList.` });
-    console.log("Update successfully.");
-    queryClient.invalidateQueries({ queryKey: ["watchList"] });
-  }
+  useEffect(() => {
+    if (removeMutation.isSuccess) {
+      toast({ description: `${title} removed from WatchList.` });
+      queryClient.invalidateQueries({ queryKey: ["watchList"] });
+    }
+  }, [removeMutation.isSuccess]);
 
   return (
     <>
@@ -118,12 +114,22 @@ const EditWatchlist: React.FC<EditWatchListProps> = ({
 
             <MenubarItem
               onClick={() =>
-                updateMutation.mutate({ listId, status: "On Hold" })
+                updateMutation.mutate({ listId, status: "On-Hold" })
               }
             >
               <UserMenuLabel
-                label="On Hold"
-                icon={selectedStatus === "On Hold" && <Check size={17} />}
+                label="On-Hold"
+                icon={selectedStatus === "On-Hold" && <Check size={17} />}
+              />
+            </MenubarItem>
+            <MenubarItem
+              onClick={() =>
+                updateMutation.mutate({ listId, status: "Plan to watch" })
+              }
+            >
+              <UserMenuLabel
+                label="Plan to watch"
+                icon={selectedStatus === "Plan to watch" && <Check size={17} />}
               />
             </MenubarItem>
             <MenubarItem onClick={() => removeMutation.mutate(listId)}>

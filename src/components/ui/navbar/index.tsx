@@ -56,12 +56,15 @@ const Navbar = () => {
           {" "}
           <Library />
         </Link>
-        {/* <UserMenu avatar={session?.user?.image} name={session?.user?.name} /> */}
-        <Link href="/login">
-          <Button size="sm" variant="orange">
-            Login
-          </Button>
-        </Link>
+        {session && session.user ? (
+          <UserMenu avatar={session.user.image} name={session.user.name} />
+        ) : (
+          <Link href="/login">
+            <Button size="sm" variant="orange">
+              Login
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );

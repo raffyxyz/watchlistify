@@ -36,8 +36,6 @@ const AnimeWatchList: React.FC<AddToWatchListProps> = ({
       <EditWatchlist
         listId={listId}
         title={title}
-        image={image}
-        type="anime"
         selectedStatus={data.status}
       />
     );

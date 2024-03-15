@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import { useFormState, useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "./ui/spinner";
@@ -43,13 +44,13 @@ const AddToWatchList: React.FC<AddToWatchListProps> = ({
   const { toast } = useToast();
   const router = useRouter();
   const [state, formAction] = useFormState(createWatchList, initialState);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (state.message === "success") {
-      window.location.reload();
       toast({ description: "Added successfully." });
+      queryClient.invalidateQueries({ queryKey: ["watchList"] });
     } else if (state.message === "login") {
-      //   console.log(state.message);
       router.push(`/login?ref=${encodeURIComponent(`/anime/${listId}`)}`);
     } else if (state.message === "error") {
       toast({ description: "Mission failed." });
