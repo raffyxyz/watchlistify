@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Calendar, Globe, Play } from "lucide-react";
+import { Img } from "@/components/ui/img";
 import { AnimeInfo } from "@/lib/types";
 import AnimeWatchList from "./anime-watchlist";
 import AnimeWatch from "./anime-watch";
@@ -13,7 +14,7 @@ const AnimeInfo: React.FC<AnimeInfoProps> = ({ animeInfo }) => {
   return (
     <div className="col-span-2">
       <div className="flex flex-col">
-        <img
+        <Img
           className="rounded-sm w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px]"
           src={animeInfo.image}
           alt={animeInfo.title}
