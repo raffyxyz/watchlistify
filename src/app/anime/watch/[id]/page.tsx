@@ -1,13 +1,15 @@
 import React from "react";
 import axios from "axios";
+import { getServerSession } from "next-auth";
+import connectMongo from "@/utils/mongoose";
+import WatchList from "@/models/watchlist";
 
-import { AnimeInfo } from "@/lib/types";
+import { AnimeInfo, WatchListType } from "@/lib/types";
 import { API_HOST, GOGOANIME_ENDPOINT, ANIME } from "../../../../config";
 import {
   AnimePlayer,
   AnimeWrapper,
   AnimeDetails,
-  AnimeActions,
 } from "@/components/islets/anime-watch-islets";
 import AnimeEpisodes from "@/components/islets/anime-watch-islets/anime-episodes";
 
@@ -19,12 +21,35 @@ const getData = async (id: string): Promise<{ animeInfo: AnimeInfo }> => {
   return { animeInfo: data };
 };
 
+const getWatchListData = async (
+  id: string
+): Promise<{ watchList: WatchListType | null }> => {
+  const session = await getServerSession();
+
+  if (session) {
+    await connectMongo();
+
+    const result = await WatchList.findOne({
+      userId: session?.user?.email,
+      listId: id,
+    });
+
+    const watchList = JSON.parse(JSON.stringify(result));
+
+    return { watchList };
+  }
+
+  return { watchList: null };
+};
+
 export default async function AnimePage({
   params,
 }: {
   params: { id: string };
 }) {
   const { animeInfo } = await getData(params.id);
+
+  const { watchList } = await getWatchListData(params.id);
 
   return (
     <>
@@ -44,7 +69,11 @@ export default async function AnimePage({
           description={animeInfo.description}
         />
 
-        <AnimeEpisodes animeEpisodes={animeInfo.episodes} />
+        <AnimeEpisodes
+          animeEpisodes={animeInfo.episodes}
+          id={animeInfo.id}
+          isWatchList={!!watchList}
+        />
       </AnimeWrapper>
     </>
   );
