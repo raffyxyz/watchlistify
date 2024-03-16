@@ -15,5 +15,5 @@ export default function Error({
     console.error(error);
   }, [error]);
 
-  return <ErrorNotFound />;
+  return <ErrorNotFound reset={reset} />;
 }
