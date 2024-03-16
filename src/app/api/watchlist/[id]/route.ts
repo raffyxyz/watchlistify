@@ -68,7 +68,7 @@ export async function PUT(
       listId: id,
       userId: session?.user?.email,
     },
-    { status: body.status },
+    body,
     { new: true }
   );
 
