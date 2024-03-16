@@ -52,7 +52,7 @@ const Navbar = () => {
         <Link href="/search">
           <SearchIcon />
         </Link>
-        <Link href="/library">
+        <Link href="/watchlist">
           {" "}
           <Library />
         </Link>
