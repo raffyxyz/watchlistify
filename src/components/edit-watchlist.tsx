@@ -55,13 +55,19 @@ const EditWatchlist: React.FC<EditWatchListProps> = ({
   useEffect(() => {
     if (updateMutation.isSuccess) {
       queryClient.invalidateQueries({ queryKey: ["watchList"] });
-      toast({ description: `${title} updated from WatchList.` });
+      toast({
+        description: `${title} updated status.`,
+        variant: "orange",
+      });
     }
   }, [updateMutation.isSuccess]);
 
   useEffect(() => {
     if (removeMutation.isSuccess) {
-      toast({ description: `${title} removed from WatchList.` });
+      toast({
+        description: `${title} removed.`,
+        variant: "destructive",
+      });
       queryClient.invalidateQueries({ queryKey: ["watchList"] });
     }
   }, [removeMutation.isSuccess]);

@@ -52,7 +52,7 @@ const AddToWatchList: React.FC<AddToWatchListProps> = ({
 
   useEffect(() => {
     if (state.message === "success") {
-      toast({ description: "Added successfully." });
+      toast({ description: "Added successfully.", variant: "orange" });
       queryClient.invalidateQueries({ queryKey: ["watchList"] });
     } else if (state.message === "login") {
       router.push(`/login?ref=${encodeURIComponent(`/anime/${listId}`)}`);
