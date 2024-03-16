@@ -18,6 +18,8 @@ export async function createWatchList(prevState: any, formData: FormData) {
       title: formData.get("title"),
       image: formData.get("image"),
       type: formData.get("type"),
+      episode: formData.get("episode"),
+      episodeId: formData.get("episodeId"),
       status: formData.get("status"),
     });
 
