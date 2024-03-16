@@ -14,6 +14,8 @@ interface AddToWatchListProps {
   title: string;
   image: string;
   type: "anime" | "drama";
+  episode: number;
+  episodeId: string;
 }
 
 const initialState = {
@@ -40,6 +42,8 @@ const AddToWatchList: React.FC<AddToWatchListProps> = ({
   title,
   image,
   type,
+  episode,
+  episodeId,
 }) => {
   const { toast } = useToast();
   const router = useRouter();
@@ -63,6 +67,8 @@ const AddToWatchList: React.FC<AddToWatchListProps> = ({
       <input value={title} name="title" hidden readOnly />
       <input value={image} name="image" hidden readOnly />
       <input value={type} name="type" hidden readOnly />
+      <input value={episode} name="episode" hidden readOnly />
+      <input value={episodeId} name="episodeId" hidden readOnly />
       <input value="Watching" name="status" hidden readOnly />
       <Submit />
     </form>

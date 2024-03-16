@@ -50,7 +50,8 @@ const AnimeInfo: React.FC<AnimeInfoProps> = ({ animeInfo }) => {
             listId={animeInfo.id}
             title={animeInfo.title}
             image={animeInfo.image}
-            type="anime"
+            episode={animeInfo.episodes[0].number}
+            episodeId={animeInfo.episodes[0].id}
           />
         </div>
         <p className="mt-4">{animeInfo.description}</p>
