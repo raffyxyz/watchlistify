@@ -1,18 +1,15 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { Calendar, Globe, Play } from "lucide-react";
 import { AnimeInfo } from "@/lib/types";
 import AnimeWatchList from "./anime-watchlist";
+import AnimeWatch from "./anime-watch";
 
 interface AnimeInfoProps {
   animeInfo: AnimeInfo;
 }
 
 const AnimeInfo: React.FC<AnimeInfoProps> = ({ animeInfo }) => {
-  const router = useRouter();
-
   return (
     <div className="col-span-2">
       <div className="flex flex-col">
@@ -39,13 +36,7 @@ const AnimeInfo: React.FC<AnimeInfoProps> = ({ animeInfo }) => {
           </div>
         </div>
         <div className="mt-4 flex space-x-3 items-center">
-          <Button
-            variant="orange"
-            onClick={() => router.push(`/anime/watch/${animeInfo.id}`)}
-          >
-            <Play className="mr-2 h-4 w-4" strokeWidth="3px" />
-            Watch Now
-          </Button>
+          <AnimeWatch listId={animeInfo.id} />
           <AnimeWatchList
             listId={animeInfo.id}
             title={animeInfo.title}
