@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Bookmark } from "lucide-react";
+import { AnimeWatchList } from "../anime-info-islets";
 
 interface AnimeDetailsProps {
   id: string;
@@ -9,6 +10,9 @@ interface AnimeDetailsProps {
   subOrDub: string;
   status: string;
   description: string | null;
+  image: string;
+  episode: number;
+  episodeId: string;
 }
 
 const AnimeDetails: React.FC<AnimeDetailsProps> = ({
@@ -17,6 +21,9 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
   subOrDub,
   status,
   description,
+  image,
+  episode,
+  episodeId,
 }) => {
   return (
     <div className="mt-10 lg:mt-0 lg:col-span-2">
@@ -24,14 +31,21 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
         {title}
       </Link>
       <p className="text-muted-foreground text-md">{subOrDub}</p>
-      <p>{status}</p>
-      <Button
+      <p className="mb-3">{status}</p>
+      {/* <Button
         className="mt-3 border-2 rounded-none font-semibold uppercase"
         variant="outline_orange"
       >
         <Bookmark className="mr-2 h-4 w-4" strokeWidth="3px" />
         Add To Library
-      </Button>
+      </Button> */}
+      <AnimeWatchList
+        listId={id}
+        title={title}
+        image={image}
+        episode={episode}
+        episodeId={episodeId}
+      />
       <p className="mt-3">{description}</p>
     </div>
   );

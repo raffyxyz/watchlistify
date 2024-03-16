@@ -24,12 +24,14 @@ interface EditWatchListProps {
   listId: string;
   title: string;
   selectedStatus: string;
+  iconOnly?: boolean;
 }
 
 const EditWatchlist: React.FC<EditWatchListProps> = ({
   listId,
   title,
   selectedStatus,
+  iconOnly = false,
 }) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -74,17 +76,21 @@ const EditWatchlist: React.FC<EditWatchListProps> = ({
 
   return (
     <>
-      <Menubar className="border-0 rounded-none">
+      <Menubar className="border-0 px-0 rounded-none">
         <MenubarMenu>
           <MenubarTrigger className="px-0 py-0">
-            <Button type="submit" variant="secondary">
-              {updateMutation.isPending || removeMutation.isPending ? (
-                <Spinner className="mr-2" size={16} />
-              ) : (
-                <Edit className="mr-2 h-4 w-4" strokeWidth="3px" />
-              )}
-              Edit
-            </Button>
+            {iconOnly ? (
+              <Edit className="mr-2 h-4 w-4" strokeWidth="3px" />
+            ) : (
+              <Button variant="secondary">
+                {updateMutation.isPending || removeMutation.isPending ? (
+                  <Spinner className="mr-2" size={16} />
+                ) : (
+                  <Edit className="mr-2 h-4 w-4" strokeWidth="3px" />
+                )}
+                Edit
+              </Button>
+            )}
           </MenubarTrigger>
           <MenubarContent className="min-w-[8rem] bg-secondary" align="start">
             <MenubarItem

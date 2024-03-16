@@ -67,6 +67,9 @@ export default async function AnimePage({
           subOrDub={animeInfo.subOrDub}
           status={animeInfo.status}
           description={animeInfo.description}
+          image={animeInfo.image}
+          episode={animeInfo.episodes[0].number}
+          episodeId={animeInfo.episodes[0].id}
         />
 
         <AnimeEpisodes

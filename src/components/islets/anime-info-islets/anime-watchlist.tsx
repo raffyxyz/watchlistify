@@ -11,6 +11,7 @@ interface AddToWatchListProps {
   image: string;
   episode: number;
   episodeId: string;
+  iconOnly?: boolean;
 }
 
 const AnimeWatchList: React.FC<AddToWatchListProps> = ({
@@ -19,6 +20,7 @@ const AnimeWatchList: React.FC<AddToWatchListProps> = ({
   image,
   episode,
   episodeId,
+  iconOnly,
 }) => {
   const { data, status } = useQuery({
     queryKey: ["watchList", listId],
@@ -39,19 +41,22 @@ const AnimeWatchList: React.FC<AddToWatchListProps> = ({
         listId={listId}
         title={title}
         selectedStatus={data.status}
+        iconOnly={iconOnly}
       />
     );
   }
 
   return (
-    <AddToWatchList
-      listId={listId}
-      title={title}
-      image={image}
-      type="anime"
-      episode={episode}
-      episodeId={episodeId}
-    />
+    !iconOnly && (
+      <AddToWatchList
+        listId={listId}
+        title={title}
+        image={image}
+        type="anime"
+        episode={episode}
+        episodeId={episodeId}
+      />
+    )
   );
 };
 
