@@ -80,7 +80,7 @@ const EditWatchlist: React.FC<EditWatchListProps> = ({
         <MenubarMenu>
           <MenubarTrigger className="px-0 py-0">
             {iconOnly ? (
-              <Edit className="mr-2 h-4 w-4" strokeWidth="3px" />
+              <Edit className="mr-2 h-4 w-4 cursor-pointer" strokeWidth="3px" />
             ) : (
               <Button variant="secondary">
                 {updateMutation.isPending || removeMutation.isPending ? (
