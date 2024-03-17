@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { WatchListType } from "@/lib/types";
+import { getUserWatchListInfo } from "@/lib/watchList";
 
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
@@ -17,16 +16,8 @@ const AnimeWatch: React.FC<AnimeWatchProps> = ({ listId }) => {
 
   const { data } = useQuery({
     queryKey: ["watchList", listId],
-    queryFn: () => checkWatchList(listId),
+    queryFn: () => getUserWatchListInfo(listId),
   });
-
-  const checkWatchList = async (listId: string): Promise<WatchListType> => {
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api/watchlist/${listId}`
-    );
-
-    return data;
-  };
 
   if (data) {
     return (

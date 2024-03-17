@@ -4,6 +4,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import AddToWatchList from "@/components/add-to-watchlist";
 import EditWatchlist from "@/components/edit-watchlist";
+import { getUserWatchListInfo } from "@/lib/watchList";
 
 interface AddToWatchListProps {
   listId: string;
@@ -24,16 +25,8 @@ const AnimeWatchList: React.FC<AddToWatchListProps> = ({
 }) => {
   const { data, status } = useQuery({
     queryKey: ["watchList", listId],
-    queryFn: () => checkWatchList(listId),
+    queryFn: () => getUserWatchListInfo(listId),
   });
-
-  const checkWatchList = async (listId: string): Promise<any> => {
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api/watchlist/${listId}`
-    );
-
-    return data;
-  };
 
   if (data && status === "success") {
     return (

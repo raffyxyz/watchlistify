@@ -4,15 +4,11 @@ import WatchListTrack from "./watchlist-track";
 
 import { WatchListType } from "@/lib/types";
 
-interface Props {
-  data: WatchListType[];
-}
-
-export default function WatchListData({ data }: Props) {
+export default function WatchListData() {
   return (
     <div>
       <WatchListHeader />
-      <WatchListTrack dataLibrary={data} />
+      <WatchListTrack />
     </div>
   );
 }
