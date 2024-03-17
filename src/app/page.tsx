@@ -36,7 +36,7 @@ export default async function Home() {
       <HomeRecentAnime recentAnime={recentAnime} />
 
       {/* Watch History */}
-      {/* <HomeWatchHistory data={topAnime} /> */}
+      <HomeWatchHistory />
 
       {/* Top Airing Anime */}
       <TopAiringAnime data={topAnime} />
