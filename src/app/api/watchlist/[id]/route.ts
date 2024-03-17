@@ -17,12 +17,15 @@ export async function GET(
 
   await connectMongo();
 
-  const result = await WatchList.findOne({
-    listId: id,
-    userId: session?.user?.email,
-  });
-
-  return NextResponse.json(result);
+  try {
+    const result = await WatchList.findOne({
+      listId: id,
+      userId: session?.user?.email,
+    });
+    return NextResponse.json(result);
+  } catch (error) {
+    return NextResponse.json({ error: error }, { status: 401 });
+  }
 }
 
 export async function DELETE(
