@@ -7,7 +7,7 @@ import { Spinner } from "./ui/spinner";
 import { Bookmark } from "lucide-react";
 
 import { useToast } from "@/components/ui/use-toast";
-import { createWatchList } from "@/app/actions/create-watchlist";
+import { createWatchList } from "@/app/actions/watchlist";
 
 interface AddToWatchListProps {
   listId: string;
