@@ -37,13 +37,7 @@ const Login = () => {
       <Button
         className="w-8/12 m-auto"
         variant="secondary"
-        onClick={() => {
-          toast({
-            title: "Not implemented yet. 😅",
-            description:
-              "Rest assured that I'm working on it to synchronize your library.",
-          });
-        }}
+        onClick={() => handleLoginClick("github", refParams)}
       >
         <IconBrandGithub className="mr-2 h-4 w-4" />
         Sign up with Github
