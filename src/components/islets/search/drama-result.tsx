@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Plus, Play } from "lucide-react";
+import { Img } from "@/components/ui/img";
 import { DramaResultTypes } from "@/lib/types";
 
 interface DramaResultProps {
@@ -19,7 +19,7 @@ const DramaResult: React.FC<DramaResultProps> = ({ data }) => {
           className="cursor-pointer xs:w-[190px] sm:w-[200px] md:w-full"
         >
           <img
-            className="rounded-sm w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px] hover:scale-105"
+            className="rounded-sm w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px]"
             src={drama.image}
             alt={drama.title}
             onClick={() =>
@@ -32,16 +32,6 @@ const DramaResult: React.FC<DramaResultProps> = ({ data }) => {
               <p className="text-sm text-muted-foreground">
                 {drama.releaseDate}
               </p>
-            </div>
-
-            <div className="flex space-x-2">
-              <Play
-                className="text-orange-400 w-[18px] md:w-[24px]"
-                onClick={() =>
-                  router.push(`/drama/watch/${encodeURIComponent(drama.id)}`)
-                }
-              />
-              <Plus className="text-orange-400  w-[22px] md:w-[26px]" />
             </div>
           </div>
           <Link
