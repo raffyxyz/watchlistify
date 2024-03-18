@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import AddToWatchList from "@/components/add-to-watchlist";
 import EditWatchlist from "@/components/edit-watchlist";
