@@ -41,6 +41,7 @@ const WatchListTrack = () => {
               listId={watchList.listId}
               title={watchList.title}
               selectedStatus={watchList.status}
+              type={watchList.type}
               iconOnly
             />
           </div>
