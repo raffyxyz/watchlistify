@@ -51,7 +51,7 @@ const TopPageTrack: React.FC<RecentAnimeTrackProps> = ({ data }) => {
                 className="text-orange-400 w-[18px] md:w-[24px]"
                 onClick={() => router.push(`/anime/watch/${anime.id}`)}
               />
-              <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
+              {/* <Plus className="text-orange-400 w-[22px] md:w-[26px]" /> */}
             </div>
           </div>
           <Link

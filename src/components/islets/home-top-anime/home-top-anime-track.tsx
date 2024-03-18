@@ -42,7 +42,7 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
                   className="text-orange-400 w-[18px] md:w-[24px]"
                   onClick={() => router.push(`/anime/watch/${anime.id}`)}
                 />
-                <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
+                {/* <Plus className="text-orange-400 w-[22px] md:w-[26px]" /> */}
               </div>
             </div>
             <Link
@@ -90,7 +90,7 @@ function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
                     className="text-orange-400 w-[18px] md:w-[24px]"
                     onClick={() => router.push(`/anime/watch/${anime.id}`)}
                   />
-                  <Plus className="text-orange-400 w-[22px] md:w-[26px]" />
+                  {/* <Plus className="text-orange-400 w-[22px] md:w-[26px]" /> */}
                 </div>
               </div>
               <Link href={`/anime/${anime.id}`} className="mt-1 mb-2">

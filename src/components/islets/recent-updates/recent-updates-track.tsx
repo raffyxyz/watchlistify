@@ -46,7 +46,7 @@ const RecentUpdatesTrack: React.FC<RecentAnimeTrackProps> = ({ data }) => {
                   router.push(`/anime/watch/${anime.id}?ep=${anime.episodeId}`)
                 }
               />
-              <Plus className="text-orange-400  w-[22px] md:w-[26px]" />
+              {/* <Plus className="text-orange-400  w-[22px] md:w-[26px]" /> */}
             </div>
           </div>
           <Link
