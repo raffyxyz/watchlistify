@@ -36,18 +36,9 @@ const RecentUpdatesTrack: React.FC<RecentAnimeTrackProps> = ({ data }) => {
             onClick={() => router.push(`/anime/${anime.id}`)}
           />
           <div className="mt-2 flex justify-between items-center">
-            <p className="text-sm text-muted-foreground">
+            <Link href={`/anime/watch/${anime.id}?ep=${anime.episodeId}`} className="text-sm text-muted-foreground">
               Episode {anime.episodeNumber}
-            </p>
-            <div className="flex space-x-2">
-              <Play
-                className="text-orange-400 w-[18px] md:w-[24px]"
-                onClick={() =>
-                  router.push(`/anime/watch/${anime.id}?ep=${anime.episodeId}`)
-                }
-              />
-              {/* <Plus className="text-orange-400  w-[22px] md:w-[26px]" /> */}
-            </div>
+            </Link>
           </div>
           <Link
             href={`/anime/${anime.id}`}

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Img } from "@/components/ui/img";
@@ -13,6 +14,10 @@ interface RecentAnimeTrackProps {
 
 function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
   const router = useRouter();
+
+  const handleAddToLibrary = () => {
+
+  }
   return (
     <div className="hidden md:block">
       <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-3 2xl:gap-5">
@@ -25,23 +30,9 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
               onClick={() => router.push(`/anime/${anime.id}`)}
             />
             <div className="mt-2 flex justify-between items-center">
-              <p className="text-sm text-muted-foreground">
+              <Link href={`/anime/watch/${anime.id}?ep=${anime.episodeId}`} className="text-sm text-muted-foreground">
                 Episode {anime.episodeNumber}
-              </p>
-              <div className=" flex space-x-2">
-                <Play
-                  className="text-orange-400 w-[18px] md:w-[24px]"
-                  onClick={() =>
-                    router.push(
-                      `/anime/watch/${anime.id}?ep=${anime.episodeId}`
-                    )
-                  }
-                />
-                {/* <Plus
-                  className="text-orange-400 w-[22px] md:w-[26px]"
-                  // onClick={handleAddToLibrary}
-                /> */}
-              </div>
+              </Link>
             </div>
 
             <Link
@@ -72,20 +63,9 @@ function RecentCardsMobile({ recentAnime }: RecentAnimeTrackProps) {
                 onClick={() => router.push(`/anime/${anime.id}`)}
               />
               <div className="mt-2 flex justify-between items-center">
-                <p className="text-sm text-muted-foreground">
+                <Link href={`/anime/watch/${anime.id}?ep=${anime.episodeId}`} className="text-sm text-muted-foreground">
                   Episode {anime.episodeNumber}
-                </p>
-                <div className="flex space-x-2">
-                  <Play
-                    className="text-orange-400 w-[18px] md:w-[24px]"
-                    onClick={() =>
-                      router.push(
-                        `/anime/watch/${anime.id}?ep=${anime.episodeId}`
-                      )
-                    }
-                  />
-                  {/* <Plus className="text-orange-400  w-[22px] md:w-[26px]" /> */}
-                </div>
+                </Link>
               </div>
               <Link href={`/anime/${anime.id}`} className="mt-1 mb-2">
                 {anime.title.substring(0, 20)}
