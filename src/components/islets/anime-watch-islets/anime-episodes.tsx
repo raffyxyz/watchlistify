@@ -45,7 +45,7 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({
     }) => {
       const { episode, episodeId, listId } = data;
       return axios.put(
-        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api/watchlist/${listId}`,
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/watchlist/${listId}`,
         { episode, episodeId }
       );
     },
