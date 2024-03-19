@@ -10,11 +10,28 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "You must be login!" }, { status: 401 });
   }
 
+  const url = new URL(request.url);
+  const searchParams = new URLSearchParams(url.searchParams);
+  const statusParams = searchParams.get("status");
+  const typeParams = searchParams.get("type");
+
   await connectMongo();
 
   try {
-    const result = await WatchList.find({
+    const query: any = {
       userId: session?.user?.email,
+    };
+
+    if (statusParams) {
+      query.status = statusParams;
+    }
+
+    if (typeParams) {
+      query.type = typeParams;
+    }
+
+    const result = await WatchList.find(query).sort({
+      updatedAt: "desc",
     });
 
     return NextResponse.json(JSON.parse(JSON.stringify(result)));
