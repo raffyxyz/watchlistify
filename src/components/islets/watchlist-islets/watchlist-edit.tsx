@@ -24,7 +24,7 @@ interface EditWatchListProps {
   listId: string;
   title: string;
   selectedStatus: string;
-  type:string;
+  type: string;
   iconOnly?: boolean;
 }
 
@@ -38,12 +38,12 @@ const WatchListEdit: React.FC<EditWatchListProps> = ({
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  console.log("Listwa Id: ", listId);
-
   const removeMutation = useMutation({
     mutationFn: (listId: string) => {
       return axios.delete(
-        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api/watchlist/${type==="anime" ? listId: encodeURIComponent(listId)}`
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/watchlist/${
+          type === "anime" ? listId : encodeURIComponent(listId)
+        }`
       );
     },
   });
@@ -52,7 +52,7 @@ const WatchListEdit: React.FC<EditWatchListProps> = ({
     mutationFn: (data: { listId: string; status: string }) => {
       const { listId, status } = data;
       return axios.put(
-        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api/watchlist/${
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/watchlist/${
           type === "anime" ? listId : encodeURIComponent(listId)
         }`,
         { status }

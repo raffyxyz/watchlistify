@@ -39,7 +39,7 @@ const EditWatchlist: React.FC<EditWatchListProps> = ({
   const removeMutation = useMutation({
     mutationFn: (listId: string) => {
       return axios.delete(
-        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api/watchlist/${listId}`
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/watchlist/${listId}`
       );
     },
   });
@@ -48,7 +48,7 @@ const EditWatchlist: React.FC<EditWatchListProps> = ({
     mutationFn: (data: { listId: string; status: string }) => {
       const { listId, status } = data;
       return axios.put(
-        `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api/watchlist/${listId}`,
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/watchlist/${listId}`,
         { status }
       );
     },

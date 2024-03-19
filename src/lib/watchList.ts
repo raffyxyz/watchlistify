@@ -7,8 +7,8 @@ export const fetchUserWatchList = async (
 ): Promise<WatchListType[]> => {
   const { data } = await axios.get(
     `${
-      process.env.NEXT_PUBLIC_NEXTAUTH_URL
-    }api/watchlist?status=${status}&type=${type?.toLowerCase()}`
+      process.env.NEXT_PUBLIC_APP_URL
+    }/api/watchlist?status=${status}&type=${type?.toLowerCase()}`
   );
   return data;
 };
@@ -17,7 +17,7 @@ export const getUserWatchListInfo = async (
   listId: string
 ): Promise<WatchListType> => {
   const { data } = await axios.get(
-    `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api/watchlist/${listId}`
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/watchlist/${listId}`
   );
 
   return data;
