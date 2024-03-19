@@ -3,6 +3,9 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Calendar, Globe, Play, Bookmark } from "lucide-react";
+import { Img } from "@/components/ui/img";
+import DramaWatchList from "./drama-watchlist";
+import DramaWatch from "./drama-watch";
 
 import { DramaDetailsType } from "@/lib/types";
 
@@ -12,12 +15,10 @@ interface DramaInfoProps {
 }
 
 const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo, dramaId }) => {
-  const router = useRouter();
-
   return (
     <div className="col-span-2">
       <div className="flex flex-col">
-        <img
+        <Img
           className="rounded-sm w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px]"
           src={dramaInfo.image}
           alt={dramaInfo.title}
@@ -40,17 +41,16 @@ const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo, dramaId }) => {
           </div>
         </div>
         <div className="mt-4 flex space-x-3 items-center">
-          <Button
-            variant="orange"
-            onClick={() => router.push(`/drama/watch/${dramaId}`)}
-          >
-            <Play className="mr-2 h-4 w-4" strokeWidth="3px" />
-            Watch Now
-          </Button>
-          <Button variant="secondary">
-            <Bookmark className="mr-2 h-4 w-4" strokeWidth="3px" />
-            Add to Library
-          </Button>
+          <DramaWatch listId={dramaId} />
+          {dramaInfo?.episodes && (
+            <DramaWatchList
+              listId={dramaId}
+              title={dramaInfo.title}
+              image={dramaInfo.image}
+              episode={dramaInfo.episodes[0].episode}
+              episodeId={dramaInfo.episodes[0].id}
+            />
+          )}
         </div>
         <p className="mt-4">{dramaInfo.description}</p>
       </div>

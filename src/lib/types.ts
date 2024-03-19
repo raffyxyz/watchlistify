@@ -118,3 +118,15 @@ export interface DramaDetailsType {
   duration: string; // For movies
   episodes?: DramaEpisodeType[]; // Optional for series
 }
+
+export interface WatchListType {
+  _id: string;
+  userId: string;
+  listId: string;
+  title: string;
+  image: string;
+  type: "anime" | "drama";
+  status: string;
+  episode?: string;
+  episodeId?: string;
+}

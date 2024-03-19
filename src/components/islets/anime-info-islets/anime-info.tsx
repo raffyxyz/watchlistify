@@ -1,21 +1,20 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Calendar, Globe, Play, Bookmark } from "lucide-react";
+import { Calendar, Globe, Play } from "lucide-react";
+import { Img } from "@/components/ui/img";
 import { AnimeInfo } from "@/lib/types";
+import AnimeWatchList from "./anime-watchlist";
+import AnimeWatch from "./anime-watch";
 
 interface AnimeInfoProps {
   animeInfo: AnimeInfo;
 }
 
 const AnimeInfo: React.FC<AnimeInfoProps> = ({ animeInfo }) => {
-  const router = useRouter();
-
   return (
     <div className="col-span-2">
       <div className="flex flex-col">
-        <img
+        <Img
           className="rounded-sm w-[190px] sm:w-[200px] md:w-[190px] lg:w-[200px] xl:w-[240px] 2xl:w-[280px] h-[260px] sm:h-[260px] md:h-[240px] lg:h-[270px] xl:h-[300px] 2xl:h-[390px]"
           src={animeInfo.image}
           alt={animeInfo.title}
@@ -38,17 +37,14 @@ const AnimeInfo: React.FC<AnimeInfoProps> = ({ animeInfo }) => {
           </div>
         </div>
         <div className="mt-4 flex space-x-3 items-center">
-          <Button
-            variant="orange"
-            onClick={() => router.push(`/anime/watch/${animeInfo.id}`)}
-          >
-            <Play className="mr-2 h-4 w-4" strokeWidth="3px" />
-            Watch Now
-          </Button>
-          <Button variant="secondary">
-            <Bookmark className="mr-2 h-4 w-4" strokeWidth="3px" />
-            Add to Library
-          </Button>
+          <AnimeWatch listId={animeInfo.id} />
+          <AnimeWatchList
+            listId={animeInfo.id}
+            title={animeInfo.title}
+            image={animeInfo.image}
+            episode={animeInfo.episodes[0].number}
+            episodeId={animeInfo.episodes[0].id}
+          />
         </div>
         <p className="mt-4">{animeInfo.description}</p>
       </div>

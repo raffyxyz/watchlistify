@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+// import Link from "next/link";
 
 const WatchHistoryHeader = () => {
   return (
@@ -7,7 +8,9 @@ const WatchHistoryHeader = () => {
       <h2 className="font-semibold text-xl md:text-2xl text-orange-400">
         Continue Watching
       </h2>
-      <h4 className="cursor-pointer text-sm md:text-lg">View History</h4>
+      {/* <Link href="/watchlist" className="cursor-pointer text-sm md:text-lg">
+        View WatchList
+      </Link> */}
     </div>
   );
 };

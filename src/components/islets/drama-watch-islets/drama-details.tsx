@@ -1,14 +1,16 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Bookmark } from "lucide-react";
+import DramaWatchList from "../drama-info-islets/drama-watchlist";
 
 interface AnimeDetailsProps {
   id: string;
   title: string;
   status: string;
   description: string | null;
+  image: string;
+  episode: number;
+  episodeId: string;
 }
 
 const DramaDetails: React.FC<AnimeDetailsProps> = ({
@@ -16,20 +18,27 @@ const DramaDetails: React.FC<AnimeDetailsProps> = ({
   title,
   status,
   description,
+  image,
+  episode,
+  episodeId,
 }) => {
+  console.log("List id: ", id);
   return (
     <div className="mt-10 lg:mt-0 lg:col-span-2">
-      <Link href={`/drama/${id}`} className="text-lg text-orange-400">
+      <Link
+        href={`/drama/${encodeURIComponent(id)}`}
+        className="text-lg text-orange-400"
+      >
         {title}
       </Link>
-      <p>{status}</p>
-      <Button
-        className="mt-3 border-2 rounded-none font-semibold uppercase"
-        variant="outline_orange"
-      >
-        <Bookmark className="mr-2 h-4 w-4" strokeWidth="3px" />
-        Add To Library
-      </Button>
+      <p className="mb-3">{status}</p>
+      <DramaWatchList
+        listId={encodeURIComponent(id)}
+        title={title}
+        image={image}
+        episode={episode}
+        episodeId={episodeId}
+      />
       <p className="mt-3">{description}</p>
     </div>
   );

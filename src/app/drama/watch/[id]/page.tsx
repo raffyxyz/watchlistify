@@ -1,7 +1,11 @@
 import React from "react";
 import axios from "axios";
+import { getServerSession } from "next-auth";
+import connectMongo from "@/utils/mongoose";
+import WatchList from "@/models/watchlist";
+
 import { API_HOST, MOVIE, DRAMA_COOL } from "@/config";
-import { DramaDetailsType } from "@/lib/types";
+import { DramaDetailsType, WatchListType } from "@/lib/types";
 import {
   DramaWatchWrapper,
   DramaPlayer,
@@ -9,14 +13,35 @@ import {
   DramaEpisodes,
 } from "@/components/islets/drama-watch-islets";
 
-const getData = async (
-  id: string
-): Promise<{ dramaInfo: DramaDetailsType }> => {
-  const { data } = await axios.get(`${API_HOST + MOVIE + DRAMA_COOL}/info`, {
-    params: { id },
-  });
+const getData = async (id: string): Promise<DramaDetailsType> => {
+  const res = await fetch(`${API_HOST + MOVIE + DRAMA_COOL}/info?id=${id}`);
 
-  return { dramaInfo: data };
+  if (!res.ok) {
+    throw new Error("Failed to fetch data.");
+  }
+
+  return res.json();
+};
+
+const getWatchListData = async (
+  id: string
+): Promise<{ watchList: WatchListType | null }> => {
+  const session = await getServerSession();
+
+  if (session) {
+    await connectMongo();
+
+    const result = await WatchList.findOne({
+      userId: session?.user?.email,
+      listId: id,
+    });
+
+    const watchList = JSON.parse(JSON.stringify(result));
+
+    return { watchList };
+  }
+
+  return { watchList: null };
 };
 
 export default async function DramaWatchPage({
@@ -24,31 +49,44 @@ export default async function DramaWatchPage({
 }: {
   params: { id: string };
 }) {
-  const { dramaInfo } = await getData(params.id);
+  const dramaInfo = await getData(params.id);
+
+  const { watchList } = await getWatchListData(decodeURIComponent(params.id));
+
   return (
     <>
       {dramaInfo?.episodes && dramaInfo.episodes.length > 0 && (
         <DramaPlayer
-          episodeId={dramaInfo.episodes[0].id}
+          episodeId={dramaInfo?.episodes[0]?.id}
           mediaId={params.id}
           cover={dramaInfo.image}
         />
       )}
+
       <DramaWatchWrapper>
-        <DramaDetails
+        {dramaInfo?.episodes && (
+          <DramaDetails
+            id={dramaInfo.id}
+            description={dramaInfo.description}
+            status={dramaInfo.status}
+            title={dramaInfo.title}
+            image={dramaInfo.image}
+            episode={dramaInfo?.episodes[0].episode}
+            episodeId={dramaInfo?.episodes[0].id}
+          />
+        )}
+        <DramaEpisodes
+          dramaEpisodes={dramaInfo?.episodes}
           id={dramaInfo.id}
-          description={dramaInfo.description}
-          status={dramaInfo.status}
-          title={dramaInfo.title}
+          isWatchList={!!watchList}
         />
-        <DramaEpisodes dramaEpisodes={dramaInfo.episodes} />
       </DramaWatchWrapper>
     </>
   );
 }
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
-  const { dramaInfo } = await getData(params.id);
+  const dramaInfo = await getData(params.id);
   return {
     title: `Watch ${dramaInfo.title}`,
     metadataBase: new URL(process.env.APP_URL as string),

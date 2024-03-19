@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 
 import { Button } from "@/components/ui/button";
@@ -9,15 +9,21 @@ import { IconBrandGoogleFilled, IconBrandGithub } from "@tabler/icons-react";
 
 const Login = () => {
   const { toast } = useToast();
-  const router = useRouter();
-  const { data: session } = useSession();
 
-  //   React.useEffect(() => {
-  //     if (session) {
-  //       router.push("/");
-  //       //   router.refresh();
-  //     }
-  //   }, [session]);
+  const searchParams = useSearchParams();
+  const refParams = searchParams.get("ref") as string;
+
+  function handleLoginClick(type: "google" | "github", callback: string) {
+    if (refParams) {
+      signIn(type, {
+        callbackUrl: `${
+          process.env.NEXT_PUBLIC_NEXTAUTH_URL + decodeURIComponent(callback)
+        }`,
+      });
+    } else {
+      signIn(type);
+    }
+  }
 
   return (
     <div className="flex flex-col">
@@ -31,13 +37,7 @@ const Login = () => {
       <Button
         className="w-8/12 m-auto"
         variant="secondary"
-        onClick={() => {
-          toast({
-            title: "Not implemented yet. 😅",
-            description:
-              "Rest assured that I'm working on it to synchronize your library.",
-          });
-        }}
+        onClick={() => handleLoginClick("github", refParams)}
       >
         <IconBrandGithub className="mr-2 h-4 w-4" />
         Sign up with Github
@@ -46,13 +46,7 @@ const Login = () => {
       <Button
         className="w-8/12 m-auto"
         variant="default"
-        onClick={() => {
-          toast({
-            title: "Not implemented yet. 😅",
-            description:
-              "Rest assured that I'm working on it to synchronize your library.",
-          });
-        }}
+        onClick={() => handleLoginClick("google", refParams)}
       >
         <IconBrandGoogleFilled className="mr-2 h-4 w-4" />
         Sign up with Google

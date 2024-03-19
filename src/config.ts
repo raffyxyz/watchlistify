@@ -8,3 +8,7 @@ export const DRAMA_COOL = "/dramacool";
 export const ANIME = "/anime";
 
 export const MOVIE = "/movies";
+
+export const MONGO_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}`;
+
+export const DATABASE: string | undefined = process.env.MONGO_DATABASE;

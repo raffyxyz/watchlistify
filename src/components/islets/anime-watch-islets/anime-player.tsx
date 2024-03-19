@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import PlayerWrapper from "@/components/ui/player-wrapper";
 import { API_HOST_CLIENT, GOGOANIME_ENDPOINT, ANIME } from "@/config";
 import { Spinner } from "@/components/ui/spinner";
@@ -22,12 +22,13 @@ interface RenderVideoProps {
 }
 
 const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
+  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const episodeParams = searchParams.get("ep") as string;
 
   const selectedEpisode = !episodeParams ? episodeId : episodeParams;
 
-  const { status, data, error, isFetching, refetch } = useQuery({
+  const { status, data, error, isFetching } = useQuery({
     queryKey: ["streamingLinks", selectedEpisode],
     queryFn: () => fetchAnimeStreamingLinks(selectedEpisode),
     refetchOnWindowFocus: false,
@@ -47,7 +48,9 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
 
   useEffect(() => {
     if (selectedEpisode) {
-      refetch();
+      queryClient.invalidateQueries({
+        queryKey: ["streamingLinks", selectedEpisode],
+      });
     }
   }, [selectedEpisode]);
 

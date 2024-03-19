@@ -1,6 +1,5 @@
 import React from "react";
 import { Metadata } from "next";
-import axios from "axios";
 import {
   DramaInfoWrapper,
   DramaInfo,
@@ -9,14 +8,14 @@ import {
 import { API_HOST, MOVIE, DRAMA_COOL } from "@/config";
 import { DramaDetailsType } from "@/lib/types";
 
-const getData = async (
-  id: string
-): Promise<{ dramaInfo: DramaDetailsType }> => {
-  const { data } = await axios.get(`${API_HOST + MOVIE + DRAMA_COOL}/info`, {
-    params: { id: encodeURIComponent(id) },
-  });
+const getData = async (id: string): Promise<DramaDetailsType> => {
+  const res = await fetch(`${API_HOST + MOVIE + DRAMA_COOL}/info?id=${id}`);
 
-  return { dramaInfo: data };
+  if (!res.ok) {
+    throw new Error("Failed to fetch data.");
+  }
+
+  return res.json();
 };
 
 export default async function DramaPage({
@@ -24,7 +23,8 @@ export default async function DramaPage({
 }: {
   params: { id: string };
 }) {
-  const { dramaInfo } = await getData(params.id);
+  const dramaInfo = await getData(params.id);
+
   return (
     <DramaInfoWrapper background={dramaInfo.image}>
       <DramaInfo dramaInfo={dramaInfo} dramaId={params.id} />
@@ -38,7 +38,7 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const { dramaInfo } = await getData(params.id);
+  const dramaInfo = await getData(params.id);
   return {
     title: dramaInfo.title,
     metadataBase: new URL(process.env.APP_URL as string),

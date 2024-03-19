@@ -1,28 +1,64 @@
+"use client";
 import React from "react";
+import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
 
+import { Img } from "@/components/ui/img";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { TopAnimeTypes } from "@/lib/types";
+import { WatchListType } from "@/lib/types";
+import { fetchUserWatchList } from "@/lib/watchList";
 
-interface WatchHistoryTrackProps {
-  watchHistory: TopAnimeTypes[];
-}
+const WatchHistoryTrack = () => {
+  const { data: userWatchList } = useQuery({
+    queryKey: ["userWatchList", "", ""],
+    queryFn: () => fetchUserWatchList("", ""),
+  });
 
-const WatchHistoryTrack: React.FC<WatchHistoryTrackProps> = ({
-  watchHistory,
-}) => {
   return (
     <>
       <div className="hidden md:block">
         <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-5">
-          {watchHistory.slice(0, 6).map((anime: TopAnimeTypes) => (
-            <div key={anime.id} className="cursor-pointer">
-              <img
-                className="w-[280px] h-[200px] object-cover"
-                src={anime.image}
-                alt={anime.title}
-              />
-              <h5 className="mt-2">{anime.title.substring(0, 27)}</h5>
-              <h3 className="text-lg">Episode 7</h3>
+          {userWatchList?.slice(0, 6).map((watchList: WatchListType) => (
+            <div key={watchList._id} className="cursor-pointer">
+              <Link
+                href={`${
+                  watchList.type === "anime"
+                    ? "anime/watch/" +
+                      watchList.listId +
+                      "?ep=" +
+                      watchList.episodeId
+                    : "drama/watch/" +
+                      encodeURIComponent(watchList.listId) +
+                      "?dEp=" +
+                      watchList.episodeId
+                }`}
+                className="mt-3 hover:text-orange-400"
+              >
+                <Img
+                  className="w-[280px] h-[200px] object-cover"
+                  src={watchList.image}
+                  alt={watchList.title}
+                />
+              </Link>
+              <h3 className="text-xs text-muted-foreground">
+                Episode {watchList.episode ?? 0}
+              </h3>
+              <Link
+                href={`${
+                  watchList.type === "anime"
+                    ? "anime/watch/" +
+                      watchList.listId +
+                      "?ep=" +
+                      watchList.episodeId
+                    : "drama/watch/" +
+                      encodeURIComponent(watchList.listId) +
+                      "?dEp=" +
+                      watchList.episodeId
+                }`}
+                className="mt-3 hover:text-orange-400"
+              >
+                {watchList.title.substring(0, 27)}
+              </Link>
             </div>
           ))}
         </div>
@@ -31,14 +67,46 @@ const WatchHistoryTrack: React.FC<WatchHistoryTrackProps> = ({
       <div className="block md:hidden">
         <ScrollArea className="mt-4 w-full whitespace-nowrap">
           <div className="flex w-max space-x-2">
-            {watchHistory.slice(0, 12).map((anime: TopAnimeTypes) => (
-              <div key={anime.id} className="cursor-pointer">
-                <img
-                  className="w-[200px] h-[190px] object-cover"
-                  src={anime.image}
-                  alt={anime.title}
-                />
-                <h3 className="mt-2 mb-2">{anime.title.substring(0, 20)}</h3>
+            {userWatchList?.slice(0, 12).map((watchList: WatchListType) => (
+              <div key={watchList._id} className="cursor-pointer">
+                <Link
+                  href={`${
+                    watchList.type === "anime"
+                      ? "anime/watch/" +
+                        watchList.listId +
+                        "?ep=" +
+                        watchList.episodeId
+                      : "drama/watch/" +
+                        encodeURIComponent(watchList.listId) +
+                        "?dEp=" +
+                        watchList.episodeId
+                  }`}
+                >
+                  <Img
+                    className="w-[200px] h-[190px] object-cover"
+                    src={watchList.image}
+                    alt={watchList.title}
+                  />
+                </Link>
+                <h3 className="text-xs text-muted-foreground">
+                  Episode {watchList.episode ?? 0}
+                </h3>
+                <Link
+                  href={`${
+                    watchList.type === "anime"
+                      ? "anime/watch/" +
+                        watchList.listId +
+                        "?ep=" +
+                        watchList.episodeId
+                      : "drama/watch/" +
+                        encodeURIComponent(watchList.listId) +
+                        "?dEp=" +
+                        watchList.episodeId
+                  }`}
+                  className="mt-3 hover:text-orange-400"
+                >
+                  {watchList.title.substring(0, 27)}
+                </Link>
               </div>
             ))}
           </div>
