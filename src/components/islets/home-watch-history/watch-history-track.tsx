@@ -10,9 +10,10 @@ import { fetchUserWatchList } from "@/lib/watchList";
 
 const WatchHistoryTrack = () => {
   const { data: userWatchList } = useQuery({
-    queryKey: ["userWatchList"],
-    queryFn: fetchUserWatchList,
+    queryKey: ["userWatchList", "", ""],
+    queryFn: () => fetchUserWatchList("", ""),
   });
+
   return (
     <>
       <div className="hidden md:block">
@@ -20,8 +21,16 @@ const WatchHistoryTrack = () => {
           {userWatchList?.slice(0, 6).map((watchList: WatchListType) => (
             <div key={watchList._id} className="cursor-pointer">
               <Link
-                href={`/anime/watch/${watchList.listId}?ep=${
-                  watchList.episodeId ?? ""
+                href={`${
+                  watchList.type === "anime"
+                    ? "anime/watch/" +
+                      watchList.listId +
+                      "?ep=" +
+                      watchList.episodeId
+                    : "drama/watch/" +
+                      encodeURIComponent(watchList.listId) +
+                      "?dEp=" +
+                      watchList.episodeId
                 }`}
                 className="mt-3 hover:text-orange-400"
               >
@@ -35,8 +44,16 @@ const WatchHistoryTrack = () => {
                 Episode {watchList.episode ?? 0}
               </h3>
               <Link
-                href={`/anime/watch/${watchList.listId}?ep=${
-                  watchList.episodeId ?? ""
+                href={`${
+                  watchList.type === "anime"
+                    ? "anime/watch/" +
+                      watchList.listId +
+                      "?ep=" +
+                      watchList.episodeId
+                    : "drama/watch/" +
+                      encodeURIComponent(watchList.listId) +
+                      "?dEp=" +
+                      watchList.episodeId
                 }`}
                 className="mt-3 hover:text-orange-400"
               >
@@ -53,8 +70,16 @@ const WatchHistoryTrack = () => {
             {userWatchList?.slice(0, 12).map((watchList: WatchListType) => (
               <div key={watchList._id} className="cursor-pointer">
                 <Link
-                  href={`/anime/watch/${watchList.listId}?ep=${
-                    watchList.episodeId ?? ""
+                  href={`${
+                    watchList.type === "anime"
+                      ? "anime/watch/" +
+                        watchList.listId +
+                        "?ep=" +
+                        watchList.episodeId
+                      : "drama/watch/" +
+                        encodeURIComponent(watchList.listId) +
+                        "?dEp=" +
+                        watchList.episodeId
                   }`}
                 >
                   <Img
@@ -67,8 +92,16 @@ const WatchHistoryTrack = () => {
                   Episode {watchList.episode ?? 0}
                 </h3>
                 <Link
-                  href={`/anime/watch/${watchList.listId}?ep=${
-                    watchList.episodeId ?? ""
+                  href={`${
+                    watchList.type === "anime"
+                      ? "anime/watch/" +
+                        watchList.listId +
+                        "?ep=" +
+                        watchList.episodeId
+                      : "drama/watch/" +
+                        encodeURIComponent(watchList.listId) +
+                        "?dEp=" +
+                        watchList.episodeId
                   }`}
                   className="mt-3 hover:text-orange-400"
                 >
