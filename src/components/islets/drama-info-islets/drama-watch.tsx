@@ -24,7 +24,7 @@ const DramaWatch: React.FC<AnimeWatchProps> = ({ listId }) => {
       <Button
         variant="orange"
         onClick={() =>
-          router.push(`/drama/watch/${listId}?ep=${data.episodeId}`)
+          router.push(`/drama/watch/${listId}?dEp=${data.episodeId}`)
         }
       >
         <Play className="mr-2 h-4 w-4" strokeWidth="3px" />

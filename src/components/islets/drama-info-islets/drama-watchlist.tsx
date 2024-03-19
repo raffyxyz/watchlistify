@@ -26,9 +26,6 @@ const DramaWatchList: React.FC<AddToWatchListProps> = ({
     queryFn: () => getUserWatchListInfo(listId),
   });
 
-  console.log(data);
-
-  console.log("Listid: ", listId);
   if (data && status === "success") {
     return (
       <EditWatchlist

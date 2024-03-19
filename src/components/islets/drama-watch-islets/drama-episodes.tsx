@@ -1,5 +1,7 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useDramaEpisode } from "@/states/useDramaEpisode";
@@ -10,19 +12,23 @@ import DramaEpisodeChange from "./drama-episode-select";
 
 interface DramaEpisodesProps {
   dramaEpisodes: Array<DramaEpisodeType> | undefined;
+  id: string;
+  isWatchList: boolean;
 }
 
-const DramaEpisodes: React.FC<DramaEpisodesProps> = ({ dramaEpisodes }) => {
+const DramaEpisodes: React.FC<DramaEpisodesProps> = ({
+  dramaEpisodes,
+  id,
+  isWatchList,
+}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const dramaEpisodeParams = searchParams.get("dEp") as string;
 
-  const selectedDramaEpisode =
-    dramaEpisodes && !dramaEpisodeParams
-      ? dramaEpisodes[0]?.id
-      : dramaEpisodeParams;
-
-  const setDramaEpisode = useDramaEpisode((state) => state.setDramaEpisode);
+  const [setDramaEpisode, selectedDramaEpisode] = useDramaEpisode((state) => [
+    state.setDramaEpisode,
+    state.dramaEpisode,
+  ]);
 
   const [startIndexDrama, endIndexDrama] = useDramaEpisodeChange((state) => [
     state.startIndexDrama,
@@ -34,10 +40,54 @@ const DramaEpisodes: React.FC<DramaEpisodesProps> = ({ dramaEpisodes }) => {
     endIndexDrama
   );
 
-  const handleEpisodeClick = (episode: string) => {
-    router.push(`?dEp=${episode}`);
+  const updateMutation = useMutation({
+    mutationFn: async (data: {
+      episode: number;
+      episodeId: string;
+      listId: string;
+    }) => {
+      const { episode, episodeId, listId } = data;
+      return axios.put(
+        `${
+          process.env.NEXT_PUBLIC_NEXTAUTH_URL
+        }api/watchlist/${encodeURIComponent(listId)}`,
+        { episode, episodeId }
+      );
+    },
+  });
+
+  const handleEpisodeClick = (episode: string, epNumber: number) => {
     setDramaEpisode(episode);
+
+    if (isWatchList) {
+      updateMutation.mutate({
+        episode: epNumber,
+        episodeId: episode,
+        listId: id,
+      });
+    }
+
+    router.push(`?dEp=${episode}`);
   };
+
+  useEffect(() => {
+    if (dramaEpisodeParams) {
+      setDramaEpisode(dramaEpisodeParams);
+    } else if (dramaEpisodes && dramaEpisodes[0]) {
+      setDramaEpisode(dramaEpisodes[0]?.id);
+    }
+
+    if (dramaEpisodeParams && isWatchList) {
+      const parts = dramaEpisodeParams.split("-");
+      const episodeNumber = parseInt(parts[parts.length - 1]);
+
+      updateMutation.mutate({
+        episode: episodeNumber,
+        episodeId: dramaEpisodeParams,
+        listId: id,
+      });
+    }
+  }, [dramaEpisodeParams]);
 
   if (dramaEpisodes?.length === 0) {
     return <div className="mt-10 w-full">No episodes found.</div>;
@@ -59,7 +109,7 @@ const DramaEpisodes: React.FC<DramaEpisodesProps> = ({ dramaEpisodes }) => {
             variant={`${
               selectedDramaEpisode === episode.id ? "orange" : "secondary"
             }`}
-            onClick={() => handleEpisodeClick(episode.id)}
+            onClick={() => handleEpisodeClick(episode.id, episode.episode)}
           >
             {episode.episode}
           </Button>

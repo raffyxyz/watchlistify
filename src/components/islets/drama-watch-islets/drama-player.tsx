@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
 import { Spinner } from "@/components/ui/spinner";
@@ -27,6 +27,7 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
   mediaId,
   cover,
 }) => {
+  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const dramaEpisodeParams = searchParams.get("dEp") as string;
 
@@ -34,8 +35,8 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
     ? episodeId
     : dramaEpisodeParams;
 
-  const { status, data, error, isFetching, refetch } = useQuery({
-    queryKey: ["streamingLinks", selectedDramaEpisode],
+  const { status, data, error, isFetching } = useQuery({
+    queryKey: ["streamingLinksDrama", selectedDramaEpisode, mediaId],
     queryFn: () => fetchAnimeStreamingLinks(selectedDramaEpisode, mediaId),
     refetchOnWindowFocus: false,
   });
@@ -54,7 +55,9 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
 
   useEffect(() => {
     if (selectedDramaEpisode) {
-      refetch();
+      queryClient.invalidateQueries({
+        queryKey: ["streamingLinksDrama", selectedDramaEpisode, mediaId],
+      });
     }
   }, [selectedDramaEpisode]);
 
