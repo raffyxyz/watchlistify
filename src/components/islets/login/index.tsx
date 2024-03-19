@@ -2,14 +2,11 @@
 import React from "react";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import { useToast } from "@/components/ui/use-toast";
 
 import { Button } from "@/components/ui/button";
 import { IconBrandGoogleFilled, IconBrandGithub } from "@tabler/icons-react";
 
 const Login = () => {
-  const { toast } = useToast();
-
   const searchParams = useSearchParams();
   const refParams = searchParams.get("ref") as string;
 
@@ -17,7 +14,7 @@ const Login = () => {
     if (refParams) {
       signIn(type, {
         callbackUrl: `${
-          process.env.NEXT_PUBLIC_NEXTAUTH_URL + decodeURIComponent(callback)
+          process.env.NEXT_PUBLIC_APP_URL + decodeURIComponent(callback)
         }`,
       });
     } else {

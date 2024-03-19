@@ -2,12 +2,12 @@ import React from "react";
 import { Separator } from "@/components/ui/separator";
 
 export default function Footer() {
-  const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+  // const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
   return (
     <div className="mt-28">
       <Separator className="my-4" />
 
-      <div className="flex space-x-4">
+      {/* <div className="flex space-x-4">
         <h2 className="text-lg font-semibold">A-Z List</h2>
       </div>
 
@@ -20,7 +20,7 @@ export default function Footer() {
             {letter}
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div className="mt-4 mb-2">
         <p className="text-slate-500">
