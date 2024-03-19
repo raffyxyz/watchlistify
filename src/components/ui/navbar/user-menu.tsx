@@ -10,7 +10,7 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
+import { useToast } from "../use-toast";
 import { UserRound, Library, Settings, LogOut, Mail } from "lucide-react";
 
 interface UserMenuLabelProps {
@@ -33,6 +33,7 @@ interface UserMenuProps {
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ avatar, name }) => {
+  const { toast } = useToast();
   return (
     <Menubar className="border-0 rounded-none">
       <MenubarMenu>
@@ -47,7 +48,14 @@ const UserMenu: React.FC<UserMenuProps> = ({ avatar, name }) => {
           </Avatar>
         </MenubarTrigger>
         <MenubarContent className="min-w-[8rem]" align="end">
-          <MenubarItem>
+          <MenubarItem
+            onClick={() =>
+              toast({
+                description: "In development.",
+                variant: "orange",
+              })
+            }
+          >
             <UserMenuLabel label="Profile" icon={<UserRound size={17} />} />
           </MenubarItem>
           <MenubarSeparator />
