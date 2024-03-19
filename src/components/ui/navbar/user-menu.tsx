@@ -48,12 +48,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ avatar, name }) => {
         </MenubarTrigger>
         <MenubarContent className="min-w-[8rem]" align="end">
           <MenubarItem>
-            <UserMenuLabel label="Account" icon={<UserRound size={17} />} />
+            <UserMenuLabel label="Profile" icon={<UserRound size={17} />} />
           </MenubarItem>
           <MenubarSeparator />
-          <Link href="/library">
+          <Link href="/watchlist">
             <MenubarItem>
-              <UserMenuLabel label="Library" icon={<Library size={17} />} />
+              <UserMenuLabel label="WatchList" icon={<Library size={17} />} />
             </MenubarItem>
           </Link>
           {/* <MenubarSeparator /> */}

@@ -1,19 +1,15 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
 
 import { Img } from "@/components/ui/img";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { WatchListType } from "@/lib/types";
 import { fetchUserWatchList } from "@/lib/watchList";
 
-const WatchHistoryTrack = () => {
-  const { data: userWatchList } = useQuery({
-    queryKey: ["userWatchList", "", ""],
-    queryFn: () => fetchUserWatchList("", ""),
-  });
-
+const WatchHistoryTrack: React.FC<{
+  userWatchList: WatchListType[] | undefined;
+}> = ({ userWatchList }) => {
   return (
     <>
       <div className="hidden md:block">
