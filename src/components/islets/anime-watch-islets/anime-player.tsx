@@ -111,6 +111,7 @@ function RenderVideo({
             url: item?.url,
           }))}
           image={cover}
+          autoPlay
         />
       </div>
     );
