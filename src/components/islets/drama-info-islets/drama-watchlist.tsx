@@ -40,7 +40,7 @@ const DramaWatchList: React.FC<AddToWatchListProps> = ({
   return (
     !iconOnly && (
       <AddToWatchList
-        listId={decodeURIComponent(listId)}
+        listId={listId}
         title={title}
         image={image}
         type="drama"

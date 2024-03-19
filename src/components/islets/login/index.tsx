@@ -13,9 +13,7 @@ const Login = () => {
   function handleLoginClick(type: "google" | "github", callback: string) {
     if (refParams) {
       signIn(type, {
-        callbackUrl: `${
-          process.env.NEXT_PUBLIC_APP_URL + decodeURIComponent(callback)
-        }`,
+        callbackUrl: `${process.env.NEXT_PUBLIC_APP_URL + callback}`,
       });
     } else {
       signIn(type);
