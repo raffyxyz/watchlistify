@@ -23,7 +23,7 @@ const TypeFilter = () => {
     <Menubar className="border-0 px-0 rounded-none">
       <MenubarMenu>
         <MenubarTrigger className="px-0 py-0">
-          <Button variant="ghost" size="sm">
+          <Button variant="secondary" size="sm">
             {!!type ? type : "Type"}
             <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
