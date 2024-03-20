@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Calendar, Globe, Play, Bookmark } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { Img } from "@/components/ui/img";
 import DramaWatchList from "./drama-watchlist";
 import DramaWatch from "./drama-watch";
@@ -27,14 +25,6 @@ const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo, dramaId }) => {
           {dramaInfo.title}
         </h1>
         <div className=" flex space-x-3 items-center">
-          {/* <div className="flex items-center space-x-2">
-            <Play size={16} />
-            <span className="font-sm lowercase">{dramaInfo.type}</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Globe size={16} />
-            <span className="font-sm">{dramaInfo.duration}</span>
-          </div> */}
           <div className="flex items-center space-x-2">
             <Calendar size={16} />
             <span className="font-sm">{dramaInfo.releaseDate}</span>
