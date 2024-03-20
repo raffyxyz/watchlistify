@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { IconBrandGoogleFilled, IconBrandGithub } from "@tabler/icons-react";
+import { encodeUrlPart } from "@/lib/utils";
 
 const Login = () => {
   const searchParams = useSearchParams();
@@ -13,7 +14,9 @@ const Login = () => {
   function handleLoginClick(type: "google" | "github", callback: string) {
     if (refParams) {
       signIn(type, {
-        callbackUrl: `${process.env.NEXT_PUBLIC_APP_URL + callback}`,
+        callbackUrl: `${
+          process.env.NEXT_PUBLIC_APP_URL + encodeUrlPart(callback)
+        }`,
       });
     } else {
       signIn(type);
