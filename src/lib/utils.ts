@@ -10,3 +10,8 @@ export function encodeUrlPart(url: string) {
   const partToEncode = url.substring(prefixIndex);
   return url.substring(0, prefixIndex) + encodeURIComponent(partToEncode);
 }
+
+export function isEncoded(uri: string) {
+  uri = uri || ""; // Handle empty input
+  return uri !== decodeURIComponent(uri);
+}
