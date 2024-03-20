@@ -22,7 +22,6 @@ const DramaDetails: React.FC<AnimeDetailsProps> = ({
   episode,
   episodeId,
 }) => {
-  console.log("List id: ", id);
   return (
     <div className="mt-10 lg:mt-0 lg:col-span-2">
       <Link

@@ -41,7 +41,7 @@ const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo, dramaId }) => {
           </div>
         </div>
         <div className="mt-4 flex space-x-3 items-center">
-          <DramaWatch listId={dramaId} />
+          <DramaWatch listId={decodeURIComponent(dramaId)} />
           {dramaInfo?.episodes && (
             <DramaWatchList
               listId={dramaId}
@@ -49,6 +49,7 @@ const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo, dramaId }) => {
               image={dramaInfo.image}
               episode={dramaInfo.episodes[0].episode}
               episodeId={dramaInfo.episodes[0].id}
+              decode
             />
           )}
         </div>
