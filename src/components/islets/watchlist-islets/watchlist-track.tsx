@@ -10,7 +10,7 @@ import { Img } from "@/components/ui/img";
 import WatchListEdit from "./watchlist-edit";
 import { useWatchListStatus } from "@/states/useWatchListStatus";
 import { useWatchListType } from "@/states/useWatchListType";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@/components/ui/spinner";
 
 const WatchListTrack = () => {
   const router = useRouter();
@@ -25,25 +25,19 @@ const WatchListTrack = () => {
 
   if (data?.length === 0) {
     return (
-      <div className="flex h-[calc(100vh-200px)] items-center justify-center">
-        <h1 className="text-center text-xl font-semibold">No data.</h1>
+      <div className="flex h-[calc(100vh-280px)] items-center justify-center">
+        <h1>No data found.</h1>
       </div>
     );
   }
 
-  // if (isFetching) {
-  //   const dummyData = Array.from({ length: 6 }, (_, index) => index + 1);
-  //   return (
-  //     <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-4 xl:gap-5">
-  //       {dummyData.map((index) => (
-  //         <div key={index} className="flex flex-col space-y-2">
-  //           <Skeleton className="w-[280px] h-[200px]" />
-  //           <Skeleton className="w-[160px] h-3" />
-  //         </div>
-  //       ))}
-  //     </div>
-  //   );
-  // }
+  if (isFetching) {
+    return (
+      <div className="flex h-[calc(100vh-250px)] items-center justify-center">
+        <Spinner className="text-orange-400" size={40} />
+      </div>
+    );
+  }
 
   return (
     <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-5 mb-10">

@@ -22,22 +22,19 @@ const DramaDetails: React.FC<AnimeDetailsProps> = ({
   episode,
   episodeId,
 }) => {
-  console.log("List id: ", id);
   return (
     <div className="mt-10 lg:mt-0 lg:col-span-2">
-      <Link
-        href={`/drama/${encodeURIComponent(id)}`}
-        className="text-lg text-orange-400"
-      >
+      <Link href={`/drama/${id}`} className="text-lg text-orange-400">
         {title}
       </Link>
       <p className="mb-3">{status}</p>
       <DramaWatchList
-        listId={encodeURIComponent(id)}
+        listId={id}
         title={title}
         image={image}
         episode={episode}
         episodeId={episodeId}
+        decode
       />
       <p className="mt-3">{description}</p>
     </div>

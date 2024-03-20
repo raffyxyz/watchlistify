@@ -11,6 +11,7 @@ interface AddToWatchListProps {
   episode: number;
   episodeId: string;
   iconOnly?: boolean;
+  decode?: boolean;
 }
 
 const DramaWatchList: React.FC<AddToWatchListProps> = ({
@@ -20,10 +21,13 @@ const DramaWatchList: React.FC<AddToWatchListProps> = ({
   episode,
   episodeId,
   iconOnly,
+  decode = false,
 }) => {
+  const newId = decode ? decodeURIComponent(listId) : listId;
+
   const { data, status } = useQuery({
-    queryKey: ["watchList", listId],
-    queryFn: () => getUserWatchListInfo(listId),
+    queryKey: ["watchList", newId],
+    queryFn: () => getUserWatchListInfo(newId),
   });
 
   if (data && status === "success") {
@@ -40,7 +44,7 @@ const DramaWatchList: React.FC<AddToWatchListProps> = ({
   return (
     !iconOnly && (
       <AddToWatchList
-        listId={decodeURIComponent(listId)}
+        listId={newId}
         title={title}
         image={image}
         type="drama"

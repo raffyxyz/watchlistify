@@ -66,7 +66,7 @@ export default async function DramaWatchPage({
       <DramaWatchWrapper>
         {dramaInfo?.episodes && (
           <DramaDetails
-            id={dramaInfo.id}
+            id={params.id}
             description={dramaInfo.description}
             status={dramaInfo.status}
             title={dramaInfo.title}

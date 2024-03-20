@@ -3,7 +3,7 @@ import { Spinner } from "./spinner";
 
 const Loader = () => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="flex h-[calc(100vh-56px)] items-center justify-center">
       <Spinner className="text-orange-400" size={45} />
     </div>
   );
