@@ -32,7 +32,7 @@ const DramaDetails: React.FC<AnimeDetailsProps> = ({
       </Link>
       <p className="mb-3">{status}</p>
       <DramaWatchList
-        listId={encodeURIComponent(id)}
+        listId={id}
         title={title}
         image={image}
         episode={episode}
