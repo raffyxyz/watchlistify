@@ -1,6 +1,6 @@
 # WatchListify
 
-This is a Next.js project for a watchlist website redesign called WatchListify. 
+Watch anime and drama online for free. 
 
 ## Overview
 
@@ -18,47 +18,22 @@ Key features:
 
 ### Environment Variables
 
-Create a `.env.local` file with the following:
-
-
-
-APP_URL=
-API_URL=
-NEXT_PUBLIC_API_URL=
-NEXTAUTH_SECRET=
-NEXTAUTH_URL=
-NEXT_PUBLIC_APP_URL=
-GITHUB_ID=
-GITHUB_SECRET=
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-MONGO_USER=
-MONGO_PASSWORD=
-MONGO_CLUSTER=
-MONGO_DATABASE=
-NEXT_PUBLIC_GOOGLE_ID=
+Create a copy of `.env.example` file.
 
 
 ### Install Dependencies
 
 
-
+```bash
 npm install
-
+```
 
 ### Run Development Server 
 
 
-
+```bash
 npm run dev
-
-
-### Build for Production
-
-
-
-npm run buildnpm run start
-
+```
 
 ## File Structure
 
@@ -81,7 +56,8 @@ npm run buildnpm run start
 - [MongoDB](https://www.mongodb.com/) - Database
 - [Mongoose](https://mongoosejs.com/) - MongoDB ODM
 - [Zustand](https://github.com/pmndrs/zustand) - State Management
-
+- [Consumet](https://github.com/consumet/api.consumet.org) - Anime and Drama API's
+  
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
