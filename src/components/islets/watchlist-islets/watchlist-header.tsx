@@ -9,7 +9,7 @@ const WatchListHeader = () => {
         WatchList
       </h2>
 
-      <div className="flex items-center space-x-6 cursor-pointer">
+      <div className="flex items-center space-x-2 cursor-pointer">
         <TypeFilter />
         <StatusFilter />
       </div>

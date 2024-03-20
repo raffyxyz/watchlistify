@@ -25,8 +25,8 @@ const WatchListTrack = () => {
 
   if (data?.length === 0) {
     return (
-      <div className="mt-10">
-        <h1 className="flex justify-center mt-20">No data found.</h1>
+      <div className="flex h-[calc(100vh-280px)] items-center justify-center">
+        <h1>No data found based on the selected filter.</h1>
       </div>
     );
   }

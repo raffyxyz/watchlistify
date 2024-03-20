@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { FileType2, Check, FileType } from "lucide-react";
+import { ChevronDown, Check } from "lucide-react";
 import {
   Menubar,
   MenubarContent,
@@ -8,6 +8,7 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import { Button } from "@/components/ui/button";
 import { useWatchListType } from "@/states/useWatchListType";
 
 const TYPE = ["Anime", "Drama"];
@@ -22,10 +23,10 @@ const TypeFilter = () => {
     <Menubar className="border-0 px-0 rounded-none">
       <MenubarMenu>
         <MenubarTrigger className="px-0 py-0">
-          <div className="flex items-center space-x-2 cursor-pointer">
-            <FileType2 size={18} />
-            <h1 className="text-md">{!!type ? type : "All"}</h1>
-          </div>
+          <Button variant="ghost" size="sm">
+            {!!type ? type : "Type"}
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
         </MenubarTrigger>
         <MenubarContent className="min-w-[8rem] bg-secondary" align="end">
           <MenubarItem onClick={() => setType("")}>
