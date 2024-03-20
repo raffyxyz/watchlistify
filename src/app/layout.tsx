@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import ReactQueryWrapper from "@/components/react-query-wrapper";
 import MainLayout from "@/components/layouts/main-layout";
 import SessionWrapper from "@/components/SessionWrapper";
+import GoogleAnalytics from "@/components/google-analytics";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
     <SessionWrapper>
       <html lang="en">
         <body className={lato.className}>
+          <GoogleAnalytics />
           <ReactQueryWrapper>
             <MainLayout>{children}</MainLayout>
           </ReactQueryWrapper>
