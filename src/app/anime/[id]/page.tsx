@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cache } from "react";
 import axios from "axios";
 
 import {
@@ -10,13 +10,13 @@ import {
 import { AnimeInfo } from "@/lib/types";
 import { API_HOST, GOGOANIME_ENDPOINT, ANIME } from "../../../config";
 
-const getData = async (id: string): Promise<{ animeInfo: AnimeInfo }> => {
+const getData = cache(async (id: string): Promise<{ animeInfo: AnimeInfo }> => {
   const { data } = await axios.get(
     `${API_HOST + ANIME + GOGOANIME_ENDPOINT}/info/${encodeURIComponent(id)}`
   );
 
   return { animeInfo: data };
-};
+});
 
 export default async function AnimePage({
   params,

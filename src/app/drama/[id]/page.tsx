@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cache } from "react";
 import { Metadata } from "next";
 import {
   DramaInfoWrapper,
@@ -8,7 +8,7 @@ import {
 import { API_HOST, MOVIE, DRAMA_COOL } from "@/config";
 import { DramaDetailsType } from "@/lib/types";
 
-const getData = async (id: string): Promise<DramaDetailsType> => {
+const getData = cache(async (id: string): Promise<DramaDetailsType> => {
   const res = await fetch(`${API_HOST + MOVIE + DRAMA_COOL}/info?id=${id}`);
 
   if (!res.ok) {
@@ -16,7 +16,7 @@ const getData = async (id: string): Promise<DramaDetailsType> => {
   }
 
   return res.json();
-};
+});
 
 export default async function DramaPage({
   params,
