@@ -1,3 +1,4 @@
+import { cache } from "react";
 import axios from "axios";
 
 import HomeHeader from "@/components/islets/home-header";
@@ -10,20 +11,22 @@ import { API_HOST, GOGOANIME_ENDPOINT, ANIME } from "../config";
 
 import Footer from "@/components/islets/footer";
 
-const getData = async (): Promise<{
-  recentAnime: RecentAnimeTypes[];
-  topAnime: TopAnimeTypes[];
-}> => {
-  const { data: dataRecent } = await axios.get(
-    `${API_HOST + ANIME + GOGOANIME_ENDPOINT}/recent-episodes`
-  );
+const getData = cache(
+  async (): Promise<{
+    recentAnime: RecentAnimeTypes[];
+    topAnime: TopAnimeTypes[];
+  }> => {
+    const { data: dataRecent } = await axios.get(
+      `${API_HOST + ANIME + GOGOANIME_ENDPOINT}/recent-episodes`
+    );
 
-  const { data: dataTop } = await axios.get(
-    `${API_HOST + ANIME + GOGOANIME_ENDPOINT}/top-airing`
-  );
+    const { data: dataTop } = await axios.get(
+      `${API_HOST + ANIME + GOGOANIME_ENDPOINT}/top-airing`
+    );
 
-  return { recentAnime: dataRecent.results, topAnime: dataTop.results };
-};
+    return { recentAnime: dataRecent.results, topAnime: dataTop.results };
+  }
+);
 
 export default async function Home() {
   const { recentAnime, topAnime } = await getData();
