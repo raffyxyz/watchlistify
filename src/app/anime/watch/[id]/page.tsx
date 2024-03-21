@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cache } from "react";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 import connectMongo from "@/utils/mongoose";
@@ -13,34 +13,34 @@ import {
 } from "@/components/islets/anime-watch-islets";
 import AnimeEpisodes from "@/components/islets/anime-watch-islets/anime-episodes";
 
-const getData = async (id: string): Promise<{ animeInfo: AnimeInfo }> => {
+const getData = cache(async (id: string): Promise<{ animeInfo: AnimeInfo }> => {
   const { data } = await axios.get(
     `${API_HOST + ANIME + GOGOANIME_ENDPOINT}/info/${encodeURIComponent(id)}`
   );
 
   return { animeInfo: data };
-};
+});
 
-const getWatchListData = async (
-  id: string
-): Promise<{ watchList: WatchListType | null }> => {
-  const session = await getServerSession();
+const getWatchListData = cache(
+  async (id: string): Promise<{ watchList: WatchListType | null }> => {
+    const session = await getServerSession();
 
-  if (session) {
-    await connectMongo();
+    if (session) {
+      await connectMongo();
 
-    const result = await WatchList.findOne({
-      userId: session?.user?.email,
-      listId: id,
-    });
+      const result = await WatchList.findOne({
+        userId: session?.user?.email,
+        listId: id,
+      });
 
-    const watchList = JSON.parse(JSON.stringify(result));
+      const watchList = JSON.parse(JSON.stringify(result));
 
-    return { watchList };
+      return { watchList };
+    }
+
+    return { watchList: null };
   }
-
-  return { watchList: null };
-};
+);
 
 export default async function AnimePage({
   params,

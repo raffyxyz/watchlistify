@@ -13,7 +13,7 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "WatchListify",
+  title: { default: "WatchListify", template: "%s | WatchListify" },
   description: "Watch Anime and Drama online for free at WatchListify.site",
   generator: "Next.js",
   manifest: "/manifest.json",
@@ -30,10 +30,6 @@ export const metadata: Metadata = {
       name: "Raffy Amoguis",
       url: "https://raffy.tech/",
     },
-  ],
-  icons: [
-    { rel: "apple-touch-icon", url: "icons/apple-touch-icon.png" },
-    { rel: "icon", url: "icons/icons/apple-touch-icon.png" },
   ],
 };
 
