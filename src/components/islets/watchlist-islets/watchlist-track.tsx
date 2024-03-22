@@ -21,6 +21,7 @@ const WatchListTrack = () => {
   const { data, isFetching } = useQuery({
     queryKey: ["userWatchList", status, type],
     queryFn: () => fetchUserWatchList(status, type),
+    refetchOnWindowFocus: false,
   });
 
   if (data?.length === 0) {
