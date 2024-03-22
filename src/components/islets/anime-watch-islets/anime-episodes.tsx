@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,7 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({
   id,
   isWatchList,
 }) => {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const searchParams = useSearchParams();
   const episodeParams = searchParams.get("ep") as string;
@@ -61,6 +62,10 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({
         listId: id,
       });
     }
+
+    queryClient.invalidateQueries({
+      queryKey: ["streamingLinks", selectedEpisode],
+    });
 
     router.push(`?ep=${episode}`);
   };

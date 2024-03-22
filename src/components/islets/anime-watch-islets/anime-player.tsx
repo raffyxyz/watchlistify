@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery} from "@tanstack/react-query";
 import PlayerWrapper from "@/components/ui/player-wrapper";
 import { API_HOST_CLIENT, GOGOANIME_ENDPOINT, ANIME } from "@/config";
 import { Spinner } from "@/components/ui/spinner";
@@ -22,7 +22,6 @@ interface RenderVideoProps {
 }
 
 const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
-  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const episodeParams = searchParams.get("ep") as string;
 
@@ -45,14 +44,6 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
 
     return data;
   };
-
-  useEffect(() => {
-    if (selectedEpisode) {
-      queryClient.invalidateQueries({
-        queryKey: ["streamingLinks", selectedEpisode],
-      });
-    }
-  }, [selectedEpisode]);
 
   return (
     <div className="relative backdrop-blur-xl bg-background">

@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
 import { Spinner } from "@/components/ui/spinner";
@@ -27,7 +27,6 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
   mediaId,
   cover,
 }) => {
-  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const dramaEpisodeParams = searchParams.get("dEp") as string;
 
@@ -52,14 +51,6 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
 
     return data;
   };
-
-  useEffect(() => {
-    if (selectedDramaEpisode) {
-      queryClient.invalidateQueries({
-        queryKey: ["streamingLinksDrama", selectedDramaEpisode, mediaId],
-      });
-    }
-  }, [selectedDramaEpisode]);
 
   return (
     <div className="relative backdrop-blur-xl bg-background">
