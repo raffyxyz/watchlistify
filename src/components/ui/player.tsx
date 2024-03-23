@@ -19,7 +19,10 @@ const Player: React.FC<PlayerProps> = ({ src, cover }) => {
       <MediaProvider>
         <Poster src={cover} alt="Poster" />
       </MediaProvider>
-      <DefaultVideoLayout icons={defaultLayoutIcons} />
+      <DefaultVideoLayout
+        icons={defaultLayoutIcons}
+        slots={{ googleCastButton: null }}
+      />
     </MediaPlayer>
   );
 };
