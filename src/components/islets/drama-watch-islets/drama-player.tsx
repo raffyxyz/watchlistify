@@ -1,11 +1,11 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
 import { Spinner } from "@/components/ui/spinner";
-import PlayerWrapper from "@/components/ui/player-wrapper";
+import Player from "@/components/ui/player";
 import { API_HOST_CLIENT, DRAMA_COOL, MOVIE } from "@/config";
 
 interface DramaPlayerProps {
@@ -27,6 +27,7 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
   mediaId,
   cover,
 }) => {
+  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const dramaEpisodeParams = searchParams.get("dEp") as string;
 
@@ -51,6 +52,12 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
 
     return data;
   };
+
+  useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["streamingLinksDrama", selectedDramaEpisode, mediaId],
+    });
+  }, [selectedDramaEpisode]);
 
   return (
     <div className="relative backdrop-blur-xl bg-background">
@@ -103,18 +110,7 @@ function RenderVideo({
   if (status === "success") {
     return (
       <div className="w-full 2xl:w-3/4 m-auto mt-0">
-        <PlayerWrapper
-          data={data?.sources?.map((item: any, index: number) => ({
-            label: `Quality ${index + 1}`,
-            url: item?.url,
-          }))}
-          subtitles={data?.subtitles?.map((item: any) => ({
-            lang: item.lang,
-            url: item.url,
-          }))}
-          image={cover}
-          autoPlay
-        />
+        <Player src={data?.sources[0].url} />
       </div>
     );
   }

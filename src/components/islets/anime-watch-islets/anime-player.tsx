@@ -1,11 +1,12 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import { useQuery} from "@tanstack/react-query";
-import PlayerWrapper from "@/components/ui/player-wrapper";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Player from "@/components/ui/player";
 import { API_HOST_CLIENT, GOGOANIME_ENDPOINT, ANIME } from "@/config";
 import { Spinner } from "@/components/ui/spinner";
+import Ripple from "@/components/ui/ripple";
 import { AnimeVideoDetailsType } from "@/lib/types";
 
 interface AnimePlayerProps {
@@ -22,6 +23,7 @@ interface RenderVideoProps {
 }
 
 const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
+  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const episodeParams = searchParams.get("ep") as string;
 
@@ -44,6 +46,12 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
 
     return data;
   };
+
+  useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["streamingLinks", selectedEpisode],
+    });
+  }, [selectedEpisode]);
 
   return (
     <div className="relative backdrop-blur-xl bg-background">
@@ -88,7 +96,8 @@ function RenderVideo({
   if (isFetching) {
     return (
       <div className="flex justify-center items-center h-[260px] sm:h-[340px] md:h-[460px] lg:h-[580px] xl:h-[670px]">
-        <Spinner className="text-orange-400" size={40} />
+        {/* <Spinner className="text-orange-400" size={40} /> */}
+        <Ripple />
       </div>
     );
   }
@@ -96,13 +105,11 @@ function RenderVideo({
   if (status === "success") {
     return (
       <div className="w-full 2xl:w-3/4 m-auto mt-0">
-        <PlayerWrapper
-          data={data?.sources?.map((item: any) => ({
-            label: item?.quality,
-            url: item?.url,
-          }))}
-          image={cover}
-          autoPlay
+        <Player
+          src={
+            data?.sources?.filter((item: any) => item.quality === "default")[0]
+              .url
+          }
         />
       </div>
     );

@@ -68,9 +68,9 @@ const DramaEpisodes: React.FC<DramaEpisodesProps> = ({
       });
     }
 
-    queryClient.invalidateQueries({
-      queryKey: ["streamingLinksDrama", selectedDramaEpisode, id],
-    });
+    // queryClient.invalidateQueries({
+    //   queryKey: ["streamingLinksDrama", selectedDramaEpisode, id],
+    // });
 
     router.push(`?dEp=${episode}`);
   };

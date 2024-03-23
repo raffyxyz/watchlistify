@@ -63,11 +63,11 @@ const AnimeEpisodes: React.FC<AnimeEpisodesProps> = ({
       });
     }
 
-    queryClient.invalidateQueries({
-      queryKey: ["streamingLinks", selectedEpisode],
-    });
-
     router.push(`?ep=${episode}`);
+
+    // queryClient.invalidateQueries({
+    //   queryKey: ["streamingLinks", selectedEpisode],
+    // });
   };
 
   useEffect(() => {
