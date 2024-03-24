@@ -25,3 +25,17 @@ export const getUserWatchListInfo = async (
 
   return data;
 };
+
+export const updateUserWatchList = async (data: {
+  episode: number;
+  episodeId: string;
+  listId: string;
+}) => {
+  const { episode, episodeId, listId } = data;
+  return axios.put(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/watchlist/${encodeURIComponent(
+      listId
+    )}`,
+    { episode, episodeId }
+  );
+};
