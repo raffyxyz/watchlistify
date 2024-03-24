@@ -13,21 +13,23 @@ interface AnimePlayerProps {
 const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
-  const episodeParams = searchParams.get("ep") as string;
+  const episodeParams = searchParams.get("ep") || "";
 
-  const selectedEpisode = !episodeParams ? episodeId : episodeParams;
+  const selectedEpisode = episodeParams || episodeId;
 
   const { status, data, error, isFetching } = useQuery({
     queryKey: ["streamingLinks", selectedEpisode],
     queryFn: () => fetchAnimeStreamingLinks(selectedEpisode),
     refetchOnWindowFocus: false,
+    enabled: !!selectedEpisode, // Only fetch data if selectedEpisode is provided
   });
 
   useEffect(() => {
+    // Invalidate the query when the selected episode changes
     queryClient.invalidateQueries({
       queryKey: ["streamingLinks", selectedEpisode],
     });
-  }, [selectedEpisode]);
+  }, [queryClient, selectedEpisode]);
 
   return (
     <div className="relative backdrop-blur-xl bg-background">
@@ -36,7 +38,6 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
         alt="Background"
         className="absolute h-full w-full object-cover blur-lg opacity-20"
       />
-
       <div className="relative px-0 md:px-10 lg:px-16">
         <RenderVideoAnime
           data={data}

@@ -18,23 +18,23 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
 }) => {
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
-  const dramaEpisodeParams = searchParams.get("dEp") as string;
+  const dramaEpisodeParams = searchParams.get("dEp") || "";
 
-  const selectedDramaEpisode = !dramaEpisodeParams
-    ? episodeId
-    : dramaEpisodeParams;
+  const selectedDramaEpisode = dramaEpisodeParams || episodeId;
 
   const { status, data, error, isFetching } = useQuery({
     queryKey: ["streamingLinksDrama", selectedDramaEpisode, mediaId],
     queryFn: () => fetchDramaStreamingLinks(selectedDramaEpisode, mediaId),
     refetchOnWindowFocus: false,
+    enabled: !!selectedDramaEpisode && !!mediaId, // Only fetch data if selectedDramaEpisode and mediaId are provided
   });
 
   useEffect(() => {
+    // Invalidate the query when the selected episode or mediaId changes
     queryClient.invalidateQueries({
       queryKey: ["streamingLinksDrama", selectedDramaEpisode, mediaId],
     });
-  }, [selectedDramaEpisode]);
+  }, [queryClient, selectedDramaEpisode, mediaId]);
 
   return (
     <div className="relative backdrop-blur-xl bg-background">
@@ -43,7 +43,6 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
         alt="Background"
         className="absolute h-full w-full object-cover blur-lg opacity-20"
       />
-
       <div className="relative px-0 md:px-10 lg:px-16">
         <RenderVideoDrama
           data={data}
