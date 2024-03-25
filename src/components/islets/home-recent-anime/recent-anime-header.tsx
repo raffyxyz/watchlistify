@@ -8,7 +8,10 @@ const RecentAnimeHeader = () => {
       <h2 className="font-semibold text-xl md:text-2xl text-orange-400">
         Recently Updated
       </h2>
-      <Link href="/recent" className="cursor-pointer text-sm md:text-lg">
+      <Link
+        href="/recent-updates"
+        className="cursor-pointer text-sm md:text-lg"
+      >
         View More
       </Link>
     </div>

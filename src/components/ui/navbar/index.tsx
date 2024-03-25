@@ -40,10 +40,10 @@ const Navbar = () => {
 
         {/* Links */}
         <div className="hidden md:flex items-center space-x-4">
-          <Link className="text-md lg:text-lg" href="/recent">
+          <Link className="text-md lg:text-lg" href="/recent-updates">
             Recent Updates
           </Link>
-          <Link className="text-md lg:text-lg" href="/top">
+          <Link className="text-md lg:text-lg" href="/top-airing">
             Top Airing
           </Link>
         </div>

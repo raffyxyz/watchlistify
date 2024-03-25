@@ -29,11 +29,11 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
         {/* <div className="mt-16 w-1/2 m-auto"> */}
         <Separator className="my-4" />
         <div className="mt-6 flex flex-col justify-items-center space-y-2">
-          <Link className="text-sm" href="/recent">
+          <Link className="text-sm" href="/recent-updates">
             Recent Updates
           </Link>
           <Separator className="my-4" />
-          <Link className="text-sm" href="/top">
+          <Link className="text-sm" href="/top-airing">
             Top Airing
           </Link>
         </div>
