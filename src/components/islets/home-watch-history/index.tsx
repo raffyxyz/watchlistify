@@ -7,7 +7,7 @@ import WatchHistoryTrack from "./watch-history-track";
 import { fetchUserWatchList } from "@/lib/watchList";
 
 export default function HomeWatchHistory() {
-  const { data: userWatchList } = useQuery({
+  const { data: userWatchList, isSuccess } = useQuery({
     queryKey: ["userWatchList", "", ""],
     queryFn: () => fetchUserWatchList("", ""),
   });
@@ -21,10 +21,12 @@ export default function HomeWatchHistory() {
     return null;
   }
 
-  return (
-    <div className="mt-16">
-      <WatchHistoryHeader />
-      <WatchHistoryTrack userWatchList={userWatchList} />
-    </div>
-  );
+  if (isSuccess) {
+    return (
+      <div className="mt-16">
+        <WatchHistoryHeader />
+        <WatchHistoryTrack userWatchList={userWatchList} />
+      </div>
+    );
+  }
 }

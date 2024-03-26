@@ -24,7 +24,10 @@ const getData = cache(
       `${API_HOST + ANIME + GOGOANIME_ENDPOINT}/top-airing`
     );
 
-    return { recentAnime: dataRecent.results, topAnime: dataTop.results };
+    return {
+      recentAnime: dataRecent.results,
+      topAnime: dataTop.results,
+    };
   }
 );
 

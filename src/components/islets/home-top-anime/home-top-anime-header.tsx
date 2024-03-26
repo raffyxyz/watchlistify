@@ -8,7 +8,7 @@ const TopAnimeHeader = () => {
       <h2 className="font-semibold text-xl md:text-2xl text-orange-400">
         Top Anime
       </h2>
-      <Link href="/top" className="cursor-pointer text-sm md:text-lg">
+      <Link href="/top-airing" className="cursor-pointer text-sm md:text-lg">
         View More
       </Link>
     </div>

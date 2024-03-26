@@ -5,8 +5,8 @@ const URL = process.env.NEXT_PUBLIC_APP_URL;
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
-    "/recent",
-    "/top",
+    "/recent-updates",
+    "/top-airing",
     "/anime",
     "/anime/watch",
     "/drama",
