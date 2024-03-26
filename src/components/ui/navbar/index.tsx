@@ -1,6 +1,5 @@
 "use client";
-import React, { useState } from "react";
-import { useSession } from "next-auth/react";
+import React, { useState, FC } from "react";
 import Link from "next/link";
 import UserMenu from "./user-menu";
 import WatchListifyLogo from "./logo";
@@ -9,8 +8,15 @@ import Drawer from "./navbar-drawer";
 import { Search as SearchIcon, Library, Menu } from "lucide-react";
 import { Button } from "../button";
 
-const Navbar = () => {
-  const { data: session } = useSession();
+interface NavbarProps {
+  user: {
+    name: string;
+    email: string;
+    image: string;
+  };
+}
+
+const Navbar: FC<NavbarProps> = ({ user }) => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
   const handleToggleDrawer = () => {
@@ -56,8 +62,8 @@ const Navbar = () => {
           {" "}
           <Library />
         </Link>
-        {session && session.user ? (
-          <UserMenu avatar={session.user.image} name={session.user.name} />
+        {user ? (
+          <UserMenu avatar={user.image} name={user.name} />
         ) : (
           <Link href="/login">
             <Button size="sm" variant="orange">
