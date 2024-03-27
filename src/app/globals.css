@@ -122,7 +122,11 @@
   --video-gesture-seek-width: 20%;
 
   /* Control size */
-  --media-button-size: 37px;
+  --media-button-size: 31px;
+  --media-sm-fullscreen-button-size: 32px;
+  --media-fullscreen-button-size: 35px;
+
+  /* --media-menu-bg: rgba(37, 37, 37, 0.95); */
 
   /* Load. */
   --video-load-button-size: 56px;
@@ -167,4 +171,16 @@
 .vds-buffering-indicator {
   /* CSS variables available for customization (defaults shown). */
   --media-buffering-size: 40px;
+}
+
+.vds-play-button {
+  background-color: transparent !important;
+}
+
+.vds-button {
+  margin-right: 11px;
+}
+
+.vds-play-button {
+  margin-left: 7px;
 }

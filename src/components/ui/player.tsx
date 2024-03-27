@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { FC } from "react";
 import { MediaPlayer, MediaProvider, Poster } from "@vidstack/react";
 import {
   defaultLayoutIcons,
@@ -8,19 +8,21 @@ import {
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
 
+import { customPlayerIcons } from "@/lib/utils";
+
 interface PlayerProps {
   src: string;
   cover?: string;
 }
 
-const Player: React.FC<PlayerProps> = ({ src, cover }) => {
+const Player: FC<PlayerProps> = ({ src, cover }) => {
   return (
     <MediaPlayer src={src} autoPlay>
       <MediaProvider>
         <Poster src={cover} alt="Poster" />
       </MediaProvider>
       <DefaultVideoLayout
-        icons={defaultLayoutIcons}
+        icons={{ ...defaultLayoutIcons, ...customPlayerIcons }}
         slots={{ googleCastButton: null }}
       />
     </MediaPlayer>
