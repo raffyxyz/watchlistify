@@ -1,4 +1,4 @@
-import { cache } from "react";
+
 import axios from "axios";
 import {
   AnimeVideoDetailsType,
@@ -30,22 +30,18 @@ export const fetchAnimeInfo = async (id: string): Promise<AnimeInfo> => {
   return data;
 };
 
-export const getHomeData = cache(
-  async (): Promise<{
-    recentAnime: RecentAnimeTypes[];
-    topAnime: TopAnimeTypes[];
-  }> => {
-    const { data: dataRecent } = await axios.get(
-      `${API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT}/recent-episodes`
-    );
+export const fetchRecentAnime = async (): Promise<RecentAnimeTypes[]> => {
+  const { data: dataRecent } = await axios.get(
+    `${API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT}/recent-episodes`
+  );
 
-    const { data: dataTop } = await axios.get(
-      `${API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT}/top-airing`
-    );
+  return dataRecent.results;
+};
 
-    return {
-      recentAnime: dataRecent.results,
-      topAnime: dataTop.results,
-    };
-  }
-);
+export const fetchTopAnime = async (): Promise<TopAnimeTypes[]> => {
+  const { data: dataTop } = await axios.get(
+    `${API_HOST_CLIENT + ANIME + GOGOANIME_ENDPOINT}/top-airing`
+  );
+
+  return dataTop.results;
+};
