@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { DramaEpisodeType } from "@/lib/types";
 import DramaEpisodeChange from "./drama-episode-select";
 import { updateUserWatchList } from "@/lib/watchList";
+import { getLastDigits } from "@/lib/utils";
 
 interface DramaEpisodesProps {
   dramaEpisodes: DramaEpisodeType[] | undefined;
@@ -65,8 +66,7 @@ const DramaEpisodes: React.FC<DramaEpisodesProps> = ({
     }
 
     if (dramaEpisodeParams && isWatchList) {
-      const parts = dramaEpisodeParams.split("-");
-      const episodeNumber = parseInt(parts[parts.length - 1]);
+      const episodeNumber = parseInt(getLastDigits(dramaEpisodeParams));
       updateMutation.mutate({
         episode: episodeNumber,
         episodeId: dramaEpisodeParams,
