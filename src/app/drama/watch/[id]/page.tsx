@@ -59,6 +59,7 @@ export default async function DramaWatchPage({
           episodeId={dramaInfo?.episodes[0]?.id}
           mediaId={params.id}
           cover={dramaInfo.image}
+          title={dramaInfo.title}
         />
       )}
 
