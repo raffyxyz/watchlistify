@@ -6,6 +6,7 @@ import DramaWatchList from "./drama-watchlist";
 import DramaWatch from "./drama-watch";
 
 import { DramaDetailsType } from "@/lib/types";
+import { Description } from "@/components/ui/description";
 
 interface DramaInfoProps {
   dramaInfo: DramaDetailsType;
@@ -43,7 +44,7 @@ const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo, dramaId }) => {
             />
           )}
         </div>
-        <p className="mt-4">{dramaInfo.description}</p>
+        <Description className="mt-4" message={dramaInfo.description} />
       </div>
     </div>
   );
