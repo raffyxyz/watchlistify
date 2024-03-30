@@ -5,6 +5,7 @@ import { Img } from "@/components/ui/img";
 import { AnimeInfo } from "@/lib/types";
 import AnimeWatchList from "./anime-watchlist";
 import AnimeWatch from "./anime-watch";
+import { Description } from "@/components/ui/description";
 
 interface AnimeInfoProps {
   animeInfo: AnimeInfo;
@@ -46,7 +47,7 @@ const AnimeInfo: React.FC<AnimeInfoProps> = ({ animeInfo }) => {
             episodeId={animeInfo.episodes[0].id}
           />
         </div>
-        <p className="mt-4">{animeInfo.description}</p>
+        <Description className="mt-4" message={animeInfo.description} />
       </div>
     </div>
   );

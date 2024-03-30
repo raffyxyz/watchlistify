@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Plus, Minus } from "lucide-react";
 
 interface DescriptionProps {
-  className: string;
+  className?: string;
   message: string | null;
 }
 

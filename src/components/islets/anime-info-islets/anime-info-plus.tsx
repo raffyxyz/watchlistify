@@ -9,7 +9,7 @@ const AnimeInfoPlus: React.FC<AnimeInfoPlusProps> = ({ animeInfo }) => {
   return (
     <div className="flex space-x-3 items-center">
       <div className="flex flex-col">
-        <h1>
+        <h1 className="mt-4 lg:mt-0">
           <span className="font-semibold">Alternative: </span>
           {animeInfo.otherName}
         </h1>
