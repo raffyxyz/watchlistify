@@ -4,7 +4,6 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import RenderVideoDrama from "./drama-render-video";
 import { fetchDramaStreamingLinks } from "@/lib/drama";
-import NextBreadcrumb from "@/components/ui/next-breadcrumb";
 
 interface DramaPlayerProps {
   episodeId: string;
@@ -47,15 +46,6 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
         className="absolute h-full w-full object-cover blur-lg opacity-20"
       />
       <div className="relative px-0 md:px-10 lg:px-16">
-        <div className="w-full 2xl:w-3/4 m-auto py-3 rounded-sm mb-1">
-          <div className="flex justify-between items-center">
-            <NextBreadcrumb current={title}/>
-            <h1>
-              You are watching Episode{" "}
-              {selectedDramaEpisode[selectedDramaEpisode.length - 1]}
-            </h1>
-          </div>
-        </div>
         <RenderVideoDrama
           data={data}
           cover={cover}

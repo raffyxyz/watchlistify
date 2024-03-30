@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Bookmark } from "lucide-react";
 import { AnimeWatchList } from "../anime-info-islets";
+import { Description } from "@/components/ui/description";
 
 interface AnimeDetailsProps {
   id: string;
@@ -46,7 +47,7 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
         episode={episode}
         episodeId={episodeId}
       />
-      <p className="mt-3">{description}</p>
+      <Description className="mt-3" message={description} />
     </div>
   );
 };

@@ -4,8 +4,6 @@ import { useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchAnimeStreamingLinks } from "@/lib/anime";
 import RenderVideoAnime from "./anime-render-video";
-import NextBreadcrumb from "@/components/ui/next-breadcrumb";
-import { getLastDigits } from "@/lib/utils";
 
 interface AnimePlayerProps {
   episodeId: string;
@@ -46,12 +44,6 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({
         className="absolute h-full w-full object-cover blur-lg opacity-20"
       />
       <div className="relative px-0 md:px-10 lg:px-16">
-        <div className="w-full 2xl:w-3/4 m-auto py-3 rounded-sm mb-1">
-          <div className="flex justify-between items-center">
-            <NextBreadcrumb current={title} />
-            <h1>You are watching Episode {getLastDigits(selectedEpisode)}</h1>
-          </div>
-        </div>
         <RenderVideoAnime
           data={data}
           cover={cover}

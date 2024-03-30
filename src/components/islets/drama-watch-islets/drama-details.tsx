@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import DramaWatchList from "../drama-info-islets/drama-watchlist";
+import { Description } from "@/components/ui/description";
 
 interface AnimeDetailsProps {
   id: string;
@@ -36,7 +37,7 @@ const DramaDetails: React.FC<AnimeDetailsProps> = ({
         episodeId={episodeId}
         decode
       />
-      <p className="mt-3">{description}</p>
+      <Description className="mt-3" message={description} />
     </div>
   );
 };
