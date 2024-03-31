@@ -40,7 +40,7 @@ function TopAnimeCards({ topAnime }: TopAnimeTrackProps) {
             </div>
             <Link
               href={`/anime/${anime.id}`}
-              className="mt-1 hover:text-orange-400"
+              className="mt-1 hover:text-orange-400 line-clamp-2"
             >
               {anime.title}
             </Link>
@@ -79,8 +79,11 @@ function TopAnimeCardsMobile({ topAnime }: TopAnimeTrackProps) {
                     ))}
                 </div>
               </div>
-              <Link href={`/anime/${anime.id}`} className="mt-1 mb-2">
-                {anime.title.substring(0, 20)}
+              <Link
+                href={`/anime/${anime.id}`}
+                className="mt-1 mb-2 line-clamp-2"
+              >
+                {anime.title}
               </Link>
             </div>
           ))}

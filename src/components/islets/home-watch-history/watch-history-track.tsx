@@ -51,9 +51,9 @@ const WatchHistoryTrack: React.FC<{
                       "?dEp=" +
                       watchList.episodeId
                 }`}
-                className="mt-3 hover:text-orange-400"
+                className="mt-3 hover:text-orange-400 line-clamp-2"
               >
-                {watchList.title.substring(0, 27)}
+                {watchList.title}
               </Link>
             </div>
           ))}
@@ -99,9 +99,9 @@ const WatchHistoryTrack: React.FC<{
                         "?dEp=" +
                         watchList.episodeId
                   }`}
-                  className="mt-3 hover:text-orange-400"
+                  className="mt-3 hover:text-orange-400 line-clamp-2"
                 >
-                  {watchList.title.substring(0, 27)}
+                  {watchList.title}
                 </Link>
               </div>
             ))}
