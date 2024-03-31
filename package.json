@@ -26,6 +26,7 @@
     "@vidstack/react": "^1.10.9",
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
+    "classnames": "^2.5.1",
     "clsx": "^2.1.0",
     "hls.js": "^1.5.7",
     "lucide-react": "^0.312.0",

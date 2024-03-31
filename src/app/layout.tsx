@@ -5,24 +5,23 @@ import MainLayout from "@/components/layouts/main-layout";
 import SessionWrapper from "@/components/SessionWrapper";
 import GoogleAnalytics from "@/components/google-analytics";
 import { Toaster } from "@/components/ui/toaster";
-import { Lato } from "next/font/google";
+import classNames from "classnames";
+import { LATO } from "@/next.font";
 import "./globals.css";
 
-const lato = Lato({
-  subsets: ["latin"],
-  weight: "400",
-});
+const fontClass = classNames(LATO.variable);
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
+  const session = await getServerSession(); // Get server side session
+
   return (
     <SessionWrapper>
-      <html lang="en">
-        <body className={lato.className}>
+      <html className={fontClass} lang="en">
+        <body suppressHydrationWarning>
           <GoogleAnalytics />
           <ReactQueryWrapper>
             <MainLayout

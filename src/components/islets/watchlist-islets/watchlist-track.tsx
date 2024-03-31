@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { WatchListType } from "@/lib/types";
 import { fetchUserWatchList } from "@/lib/watchList";
 import { Img } from "@/components/ui/img";
+import { GridLayoutPage } from "@/components/layouts/grid-layout-page";
 
 import WatchListEdit from "./watchlist-edit";
 import { useWatchListStatus } from "@/states/useWatchListStatus";
@@ -41,7 +42,7 @@ const WatchListTrack = () => {
   }
 
   return (
-    <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-5 mb-10">
+    <GridLayoutPage className="mb-10">
       {data?.map((watchList: WatchListType) => (
         <div key={watchList._id} className="cursor-pointer">
           <Img
@@ -94,7 +95,7 @@ const WatchListTrack = () => {
           </Link>
         </div>
       ))}
-    </div>
+    </GridLayoutPage>
   );
 };
 

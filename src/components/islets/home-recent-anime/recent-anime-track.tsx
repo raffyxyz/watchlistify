@@ -15,9 +15,7 @@ interface RecentAnimeTrackProps {
 function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
   const router = useRouter();
 
-  const handleAddToLibrary = () => {
-
-  }
+  const handleAddToLibrary = () => {};
   return (
     <div className="hidden md:block">
       <div className="mt-4 grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-3 2xl:gap-5">
@@ -30,16 +28,19 @@ function RecentCards({ recentAnime }: RecentAnimeTrackProps) {
               onClick={() => router.push(`/anime/${anime.id}`)}
             />
             <div className="mt-2 flex justify-between items-center">
-              <Link href={`/anime/watch/${anime.id}?ep=${anime.episodeId}`} className="text-sm text-muted-foreground">
+              <Link
+                href={`/anime/watch/${anime.id}?ep=${anime.episodeId}`}
+                className="text-sm text-muted-foreground"
+              >
                 Episode {anime.episodeNumber}
               </Link>
             </div>
 
             <Link
               href={`/anime/${anime.id}`}
-              className="text-md mt-1 hover:text-orange-400"
+              className="text-md mt-1 hover:text-orange-400 line-clamp-2"
             >
-              {anime.title.substring(0, 27)}
+              {anime.title}
             </Link>
           </div>
         ))}
@@ -63,12 +64,18 @@ function RecentCardsMobile({ recentAnime }: RecentAnimeTrackProps) {
                 onClick={() => router.push(`/anime/${anime.id}`)}
               />
               <div className="mt-2 flex justify-between items-center">
-                <Link href={`/anime/watch/${anime.id}?ep=${anime.episodeId}`} className="text-sm text-muted-foreground">
+                <Link
+                  href={`/anime/watch/${anime.id}?ep=${anime.episodeId}`}
+                  className="text-sm text-muted-foreground"
+                >
                   Episode {anime.episodeNumber}
                 </Link>
               </div>
-              <Link href={`/anime/${anime.id}`} className="mt-1 mb-2">
-                {anime.title.substring(0, 20)}
+              <Link
+                href={`/anime/${anime.id}`}
+                className="mt-1 mb-2 line-clamp-2"
+              >
+                {anime.title}
               </Link>
             </div>
           ))}
