@@ -2,6 +2,11 @@
 
 Watch anime and drama online for free. 
 
+![iPhone-13-PRO-MAX-watchlistify site](https://github.com/raffyxyz/watchlistify-re/assets/86818651/5b815cec-5907-4313-8a55-1eb763d918f4)
+![iPad-PRO-11-watchlistify site](https://github.com/raffyxyz/watchlistify-re/assets/86818651/c0f6842a-5b17-4852-967d-79193703e5c4)
+![Macbook-Air-watchlistify site](https://github.com/raffyxyz/watchlistify-re/assets/86818651/670c2233-4fe6-47d7-b58d-cd2c62f5767d)
+
+
 ## Overview
 
 Key features:

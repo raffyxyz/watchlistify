@@ -8,14 +8,9 @@ import RenderVideoAnime from "./anime-render-video";
 interface AnimePlayerProps {
   episodeId: string;
   cover: string;
-  title: string;
 }
 
-const AnimePlayer: React.FC<AnimePlayerProps> = ({
-  episodeId,
-  cover,
-  title,
-}) => {
+const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const episodeParams = searchParams.get("ep") || "";

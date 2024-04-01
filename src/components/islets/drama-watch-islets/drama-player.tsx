@@ -9,14 +9,12 @@ interface DramaPlayerProps {
   episodeId: string;
   mediaId: string;
   cover: string;
-  title: string;
 }
 
 const DramaPlayer: React.FC<DramaPlayerProps> = ({
   episodeId,
   mediaId,
   cover,
-  title,
 }) => {
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();

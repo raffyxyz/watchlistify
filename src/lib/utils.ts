@@ -36,11 +36,6 @@ export function isEncoded(uri: string) {
   return uri !== decodeURIComponent(uri);
 }
 
-export function getLastDigits(message: string) {
-  let lastHyphenIndex = message.lastIndexOf("-");
-  return message.substring(lastHyphenIndex + 1);
-}
-
 export const customPlayerIcons: Partial<DefaultLayoutIcons> = {
   PlayButton: {
     Play: Play,
@@ -72,18 +67,3 @@ export const customPlayerIcons: Partial<DefaultLayoutIcons> = {
     Font: Type,
   },
 };
-
-export const SOCIAL_LINKS = [
-  {
-    name: "Github",
-    url: "https://github.com/raffyxyz/watchlistify-re/",
-  },
-  {
-    name: "Facebook",
-    url: "https://facebook.com/raffyxyz",
-  },
-  {
-    name: "Website",
-    url: "https://raffy.tech",
-  },
-];
