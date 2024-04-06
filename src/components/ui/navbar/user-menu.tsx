@@ -44,19 +44,17 @@ const UserMenu: React.FC<UserMenuProps> = ({ avatar, name }) => {
             ) : (
               <AvatarImage src="images/avatar.jpg" alt="Avatar user" />
             )}
-            <AvatarFallback>{name}</AvatarFallback>
+            <AvatarFallback>
+              {name?.substring(0, 2).toUpperCase()}
+            </AvatarFallback>
           </Avatar>
         </MenubarTrigger>
         <MenubarContent className="min-w-[8rem]" align="end">
-          <MenubarItem
-            onClick={() =>
-              toast({
-                description: "In development.",
-                variant: "orange",
-              })
-            }
-          >
-            <UserMenuLabel label="Profile" icon={<UserRound size={17} />} />
+          <MenubarItem>
+            <UserMenuLabel
+              label={name?.split(" ")[0]}
+              icon={<UserRound size={17} />}
+            />
           </MenubarItem>
           <MenubarSeparator />
           <Link href="/watchlist">
@@ -64,10 +62,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ avatar, name }) => {
               <UserMenuLabel label="WatchList" icon={<Library size={17} />} />
             </MenubarItem>
           </Link>
-          {/* <MenubarSeparator /> */}
-          {/* <MenubarItem>
-            <UserMenuLabel label="Settings" icon={<Settings size={17} />} />
-          </MenubarItem> */}
           <MenubarSeparator />
           {!!avatar ? (
             <MenubarItem onClick={() => signOut()}>
