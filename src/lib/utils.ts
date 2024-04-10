@@ -67,18 +67,3 @@ export const customPlayerIcons: Partial<DefaultLayoutIcons> = {
     Font: Type,
   },
 };
-
-export const SOCIAL_LINKS = [
-  {
-    name: "Github",
-    url: "https://github.com/raffxyz/watchlistify-re",
-  },
-  {
-    name: "Facebook",
-    url: "https://facebook.com/raffyxyz",
-  },
-  {
-    name: "Website",
-    url: "https://raffy.tech/",
-  },
-]

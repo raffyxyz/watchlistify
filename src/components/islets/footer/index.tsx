@@ -1,12 +1,7 @@
 import React from "react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { SOCIAL_LINKS } from "@/lib/utils";
-
-type LinkType = {
-  name: string;
-  url: string;
-};
+import { IconBrandGithub } from "@tabler/icons-react";
 
 export default function Footer() {
   return (
@@ -24,17 +19,14 @@ export default function Footer() {
           </p>
         </div>
         <div className="flex space-x-2 mt-4 lg:mt-0">
-          {SOCIAL_LINKS.map((link: LinkType) => (
-            <Link
-              key={link.name}
-              href={link.url}
-              className="text-sm text-slate-500"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {link.name}
-            </Link>
-          ))}
+          <Link
+            href="https://github.com/raffyxyz/watchlistify-re"
+            className="text-sm text-slate-500"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <IconBrandGithub size={20} />
+          </Link>
         </div>
       </div>
     </div>
