@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -46,7 +47,6 @@ const DramaPlayer: React.FC<DramaPlayerProps> = ({
       <div className="relative px-0 md:px-10 lg:px-16">
         <RenderVideoDrama
           data={data}
-          cover={cover}
           isFetching={isFetching}
           status={status}
           error={error}
