@@ -1,30 +1,22 @@
 "use client";
 import { FC } from "react";
-import { MediaPlayer, MediaProvider, Poster } from "@vidstack/react";
+import { MediaPlayer, MediaProvider } from "@vidstack/react";
 import {
-  defaultLayoutIcons,
-  DefaultVideoLayout,
-} from "@vidstack/react/player/layouts/default";
-import "@vidstack/react/player/styles/default/theme.css";
-import "@vidstack/react/player/styles/default/layouts/video.css";
-
-import { customPlayerIcons } from "@/lib/utils";
+  PlyrLayout,
+  plyrLayoutIcons,
+} from "@vidstack/react/player/layouts/plyr";
+import "@vidstack/react/player/styles/base.css";
+import "@vidstack/react/player/styles/plyr/theme.css";
 
 interface PlayerProps {
   src: string;
-  cover?: string;
 }
 
-const Player: FC<PlayerProps> = ({ src, cover }) => {
+const Player: FC<PlayerProps> = ({ src }) => {
   return (
     <MediaPlayer src={src} autoPlay>
-      <MediaProvider>
-        <Poster src={cover} alt="Poster" />
-      </MediaProvider>
-      <DefaultVideoLayout
-        icons={{ ...defaultLayoutIcons, ...customPlayerIcons }}
-        slots={{ googleCastButton: null }}
-      />
+      <MediaProvider />
+      <PlyrLayout icons={plyrLayoutIcons} clickToPlay />
     </MediaPlayer>
   );
 };
