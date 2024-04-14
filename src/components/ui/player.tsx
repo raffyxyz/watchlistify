@@ -16,7 +16,7 @@ const Player: FC<PlayerProps> = ({ src }) => {
   return (
     <MediaPlayer src={src} autoPlay>
       <MediaProvider />
-      <PlyrLayout icons={plyrLayoutIcons} clickToPlay />
+      <PlyrLayout icons={plyrLayoutIcons} />
     </MediaPlayer>
   );
 };
