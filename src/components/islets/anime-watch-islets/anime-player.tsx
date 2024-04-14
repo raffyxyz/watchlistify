@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
@@ -41,7 +42,6 @@ const AnimePlayer: React.FC<AnimePlayerProps> = ({ episodeId, cover }) => {
       <div className="relative px-0 md:px-10 lg:px-16">
         <RenderVideoAnime
           data={data}
-          cover={cover}
           isFetching={isFetching}
           status={status}
           error={error}

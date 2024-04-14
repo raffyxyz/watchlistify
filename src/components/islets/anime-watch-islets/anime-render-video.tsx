@@ -5,7 +5,6 @@ import { Img } from "@/components/ui/img";
 
 interface RenderVideoProps {
   data: any;
-  cover: string;
   isFetching: boolean;
   status: string;
   error: any;
@@ -13,7 +12,6 @@ interface RenderVideoProps {
 
 const RenderVideoAnime: React.FC<RenderVideoProps> = ({
   data,
-  cover,
   isFetching,
   error,
   status,

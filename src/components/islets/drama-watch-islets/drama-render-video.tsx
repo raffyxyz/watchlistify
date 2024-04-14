@@ -1,11 +1,10 @@
 import React from "react";
 import Player from "@/components/ui/player";
-import { Spinner } from "@/components/ui/spinner";
+import Ripple from "@/components/ui/ripple";
 import { Img } from "@/components/ui/img";
 
 interface RenderVideoProps {
   data: any;
-  cover: string;
   isFetching: boolean;
   status: string;
   error: any;
@@ -13,7 +12,6 @@ interface RenderVideoProps {
 
 const RenderVideoDrama: React.FC<RenderVideoProps> = ({
   data,
-  cover,
   isFetching,
   error,
   status,
@@ -33,7 +31,7 @@ const RenderVideoDrama: React.FC<RenderVideoProps> = ({
   if (isFetching) {
     return (
       <div className="flex justify-center items-center h-[260px] sm:h-[340px] md:h-[460px] lg:h-[580px] xl:h-[670px]">
-        <Spinner className="text-orange-400" size={40} />
+        <Ripple />
       </div>
     );
   }
