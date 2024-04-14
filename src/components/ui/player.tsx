@@ -14,7 +14,7 @@ interface PlayerProps {
 
 const Player: FC<PlayerProps> = ({ src }) => {
   return (
-    <MediaPlayer src={src} autoPlay>
+    <MediaPlayer src={src} autoPlay hideControlsOnMouseLeave>
       <MediaProvider />
       <PlyrLayout icons={plyrLayoutIcons} />
     </MediaPlayer>
