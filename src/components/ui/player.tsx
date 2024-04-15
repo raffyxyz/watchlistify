@@ -1,6 +1,10 @@
 "use client";
-import { FC } from "react";
-import { MediaPlayer, MediaProvider } from "@vidstack/react";
+import { FC, useRef } from "react";
+import {
+  MediaPlayer,
+  MediaProvider,
+  type MediaPlayerInstance,
+} from "@vidstack/react";
 import {
   PlyrLayout,
   plyrLayoutIcons,
@@ -13,8 +17,10 @@ interface PlayerProps {
 }
 
 const Player: FC<PlayerProps> = ({ src }) => {
+  let playerRef = useRef<MediaPlayerInstance>(null);
+
   return (
-    <MediaPlayer src={src} autoPlay hideControlsOnMouseLeave>
+    <MediaPlayer src={src} ref={playerRef} playsInline autoPlay>
       <MediaProvider />
       <PlyrLayout icons={plyrLayoutIcons} />
     </MediaPlayer>
