@@ -33,13 +33,6 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
       </Link>
       <p className="text-muted-foreground text-md">{subOrDub}</p>
       <p className="mb-3">{status}</p>
-      {/* <Button
-        className="mt-3 border-2 rounded-none font-semibold uppercase"
-        variant="outline_orange"
-      >
-        <Bookmark className="mr-2 h-4 w-4" strokeWidth="3px" />
-        Add To Library
-      </Button> */}
       <AnimeWatchList
         listId={id}
         title={title}
