@@ -109,10 +109,10 @@
 
 .vds-video-layout {
   border-radius: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
 
   --video-brand: #fb923c;
-  --video-bg: transparent;
-  --video-border: none;
 
   --media-buffering-size: 76px;
 
@@ -121,4 +121,9 @@
 
 [data-media-player][data-layout="video"]:not([data-fullscreen]) {
   border-radius: 0 !important;
+  border: none !important;
+}
+
+[data-media-player][data-layout="video"] {
+  background-color: transparent !important;
 }
