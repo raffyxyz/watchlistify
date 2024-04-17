@@ -107,11 +107,23 @@
   }
 }
 
-.plyr {
-  --plyr-color-main: hsl(30, 100%, 60%);
+.vds-video-layout {
   border-radius: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+
+  --video-brand: #fb923c;
+
+  --media-buffering-size: 76px;
+
+  --media-button-icon-size: 60%;
 }
 
-[data-media-player][data-layout="plyr"]:not([data-fullscreen]) {
+[data-media-player][data-layout="video"]:not([data-fullscreen]) {
   border-radius: 0 !important;
+  border: none !important;
+}
+
+[data-media-player][data-layout="video"] {
+  background-color: transparent !important;
 }
