@@ -20,7 +20,7 @@ export default function Footer() {
         </div>
         <div className="flex space-x-2 mt-4 lg:mt-0">
           <Link
-            href="https://github.com/raffyxyz/watchlistify-re"
+            href="https://github.com/raffyxyz"
             className="text-sm text-slate-500"
             rel="noopener noreferrer"
             target="_blank"
