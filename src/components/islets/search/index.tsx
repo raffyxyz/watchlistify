@@ -48,6 +48,7 @@ const SearchSomething = () => {
     if (!!filter) {
       setFilter(filter);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, filter]);
 
   return (
