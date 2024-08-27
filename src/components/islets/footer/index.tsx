@@ -11,12 +11,10 @@ export default function Footer() {
       <div className="mt-4 mb-2 flex flex-col lg:flex-row lg:justify-between lg:items-center">
         <div>
           <p className="text-slate-500 text-sm">
-            WatchListify does not store any files on our server, we only linked
-            to the media which is hosted on 3rd party services.
+            Dranime does not store any files on our server, we only linked to
+            the media which is hosted on 3rd party services.
           </p>
-          <p className="text-slate-500 text-sm">
-            © WatchListify.site. All rights reserved.
-          </p>
+          <p className="text-slate-500 text-sm">© dranime.netlify.app</p>
         </div>
         <div className="flex space-x-2 mt-4 lg:mt-0">
           <Link

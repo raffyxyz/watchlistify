@@ -88,11 +88,11 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     title: `Watch ${animeInfo.title}`,
     metadataBase: new URL(process.env.APP_URL as string),
     openGraph: {
-      title: `Watch ${animeInfo.title} Anime Online free on WatchListify.site`,
+      title: `Watch ${animeInfo.title} Anime Online free on dranime.netlify.app`,
       type: "video.episode",
       url: `/drama/${animeInfo.id}`,
       images: animeInfo.image,
-      description: `The best website to watch ${animeInfo.title} anime for free at WatchListify.site.`,
+      description: `The best website to watch ${animeInfo.title} anime for free at dranime.netlify.app`,
     },
   };
 }

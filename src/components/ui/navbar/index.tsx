@@ -40,7 +40,7 @@ const Navbar: FC<NavbarProps> = ({ user }) => {
           {/* App logo */}
           <WatchListifyLogo />
           <Link href="/" className="text-xl font-semibold hidden md:block">
-            WatchListify
+            Dranime
           </Link>
         </div>
 
