@@ -22,7 +22,7 @@ const RecentUpdates = () => {
     state.setPage,
     state.fetchRecentAnime,
   ]);
-  const { status, data, error, isFetching, isPlaceholderData } = useQuery({
+  const { data, isFetching, isPlaceholderData } = useQuery({
     queryKey: ["recentAnime", page],
     queryFn: () => fetchRecentAnime(page),
     placeholderData: keepPreviousData,
@@ -43,7 +43,7 @@ const RecentUpdates = () => {
     if (!!page) {
       setPage(page); // Set page to re render the data.
     }
-  }, [data, isPlaceholderData, page, queryClient]);
+  }, [data, fetchRecentAnime, isPlaceholderData, page, queryClient, setPage]);
 
   return (
     <>

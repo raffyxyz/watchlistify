@@ -65,7 +65,7 @@ const AddToWatchList: React.FC<AddToWatchListProps> = ({
     } else if (state.message === "error") {
       toast({ description: "Mission failed." });
     }
-  }, [state]);
+  }, [listId, queryClient, router, state, toast, type]);
 
   return (
     <form action={formAction}>

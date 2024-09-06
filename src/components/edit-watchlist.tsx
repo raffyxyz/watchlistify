@@ -62,7 +62,7 @@ const EditWatchlist: React.FC<EditWatchListProps> = ({
         variant: "orange",
       });
     }
-  }, [updateMutation.isSuccess]);
+  }, [queryClient, title, toast, updateMutation.isSuccess]);
 
   useEffect(() => {
     if (removeMutation.isSuccess) {
@@ -72,7 +72,7 @@ const EditWatchlist: React.FC<EditWatchListProps> = ({
       });
       queryClient.invalidateQueries({ queryKey: ["watchList"] });
     }
-  }, [removeMutation.isSuccess]);
+  }, [queryClient, removeMutation.isSuccess, title, toast]);
 
   return (
     <>
