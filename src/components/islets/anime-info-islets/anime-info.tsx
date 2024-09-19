@@ -2,13 +2,11 @@
 import React from "react";
 import { Calendar, Globe, Play } from "lucide-react";
 import { Img } from "@/components/ui/img";
-import { AnimeInfo } from "@/lib/types";
-import AnimeWatchList from "./anime-watchlist";
 import AnimeWatch from "./anime-watch";
 import { Description } from "@/components/ui/description";
 
 interface AnimeInfoProps {
-  animeInfo: AnimeInfo;
+  animeInfo: any;
 }
 
 const AnimeInfo: React.FC<AnimeInfoProps> = ({ animeInfo }) => {
@@ -39,13 +37,6 @@ const AnimeInfo: React.FC<AnimeInfoProps> = ({ animeInfo }) => {
         </div>
         <div className="mt-4 flex space-x-3 items-center">
           <AnimeWatch listId={animeInfo.id} />
-          <AnimeWatchList
-            listId={animeInfo.id}
-            title={animeInfo.title}
-            image={animeInfo.image}
-            episode={animeInfo.episodes[0].number}
-            episodeId={animeInfo.episodes[0].id}
-          />
         </div>
         <Description className="mt-4" message={animeInfo.description} />
       </div>

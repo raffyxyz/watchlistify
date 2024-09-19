@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import DramaWatchList from "../drama-info-islets/drama-watchlist";
 import { Description } from "@/components/ui/description";
 
 interface AnimeDetailsProps {
@@ -29,14 +28,7 @@ const DramaDetails: React.FC<AnimeDetailsProps> = ({
         {title}
       </Link>
       <p className="mb-3">{status}</p>
-      <DramaWatchList
-        listId={id}
-        title={title}
-        image={image}
-        episode={episode}
-        episodeId={episodeId}
-        decode
-      />
+
       <Description className="mt-3" message={description} />
     </div>
   );

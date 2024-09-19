@@ -14,7 +14,7 @@ export default function Footer() {
             Dranime does not store any files on our server, we only linked to
             the media which is hosted on 3rd party services.
           </p>
-          <p className="text-slate-500 text-sm">© dranime.netlify.app</p>
+          <p className="text-slate-500 text-sm">© dranime.xyz</p>
         </div>
         <div className="flex space-x-2 mt-4 lg:mt-0">
           <Link

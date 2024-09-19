@@ -2,7 +2,6 @@
 import React from "react";
 import { Calendar } from "lucide-react";
 import { Img } from "@/components/ui/img";
-import DramaWatchList from "./drama-watchlist";
 import DramaWatch from "./drama-watch";
 
 import { DramaDetailsType } from "@/lib/types";
@@ -33,16 +32,6 @@ const DramaInfo: React.FC<DramaInfoProps> = ({ dramaInfo, dramaId }) => {
         </div>
         <div className="mt-4 flex space-x-3 items-center">
           <DramaWatch listId={decodeURIComponent(dramaId)} />
-          {dramaInfo?.episodes && (
-            <DramaWatchList
-              listId={dramaId}
-              title={dramaInfo.title}
-              image={dramaInfo.image}
-              episode={dramaInfo.episodes[0].episode}
-              episodeId={dramaInfo.episodes[0].id}
-              decode
-            />
-          )}
         </div>
         <Description className="mt-4" message={dramaInfo.description} />
       </div>

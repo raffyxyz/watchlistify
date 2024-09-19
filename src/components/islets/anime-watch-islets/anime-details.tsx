@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Bookmark } from "lucide-react";
-import { AnimeWatchList } from "../anime-info-islets";
 import { Description } from "@/components/ui/description";
 
 interface AnimeDetailsProps {
@@ -33,13 +32,6 @@ const AnimeDetails: React.FC<AnimeDetailsProps> = ({
       </Link>
       <p className="text-muted-foreground text-md">{subOrDub}</p>
       <p className="mb-3">{status}</p>
-      <AnimeWatchList
-        listId={id}
-        title={title}
-        image={image}
-        episode={episode}
-        episodeId={episodeId}
-      />
       <Description className="mt-3" message={description} />
     </div>
   );

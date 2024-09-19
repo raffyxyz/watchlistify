@@ -1,8 +1,5 @@
 import React, { cache } from "react";
 import axios from "axios";
-import { getServerSession } from "next-auth";
-import connectMongo from "@/utils/mongoose";
-import WatchList from "@/models/watchlist";
 
 import { AnimeInfo, WatchListType } from "@/lib/types";
 import { API_HOST, GOGOANIME_ENDPOINT, ANIME } from "../../../../config";
@@ -21,35 +18,12 @@ const getData = cache(async (id: string): Promise<{ animeInfo: AnimeInfo }> => {
   return { animeInfo: data };
 });
 
-const getWatchListData = cache(
-  async (id: string): Promise<{ watchList: WatchListType | null }> => {
-    const session = await getServerSession();
-
-    if (session) {
-      await connectMongo();
-
-      const result = await WatchList.findOne({
-        userId: session?.user?.email,
-        listId: id,
-      });
-
-      const watchList = JSON.parse(JSON.stringify(result));
-
-      return { watchList };
-    }
-
-    return { watchList: null };
-  }
-);
-
 export default async function AnimePage({
   params,
 }: {
   params: { id: string };
 }) {
   const { animeInfo } = await getData(params.id);
-
-  const { watchList } = await getWatchListData(params.id);
 
   return (
     <>
@@ -75,7 +49,7 @@ export default async function AnimePage({
         <AnimeEpisodes
           animeEpisodes={animeInfo.episodes}
           id={animeInfo.id}
-          isWatchList={!!watchList}
+          isWatchList={false}
         />
       </AnimeWrapper>
     </>
@@ -88,11 +62,11 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     title: `Watch ${animeInfo.title}`,
     metadataBase: new URL(process.env.APP_URL as string),
     openGraph: {
-      title: `Watch ${animeInfo.title} Anime Online free on dranime.netlify.app`,
+      title: `Watch ${animeInfo.title} Anime Online free on dranime.xyz`,
       type: "video.episode",
       url: `/drama/${animeInfo.id}`,
       images: animeInfo.image,
-      description: `The best website to watch ${animeInfo.title} anime for free at dranime.netlify.app`,
+      description: `The best website to watch ${animeInfo.title} anime for free at dranime.xyz`,
     },
   };
 }

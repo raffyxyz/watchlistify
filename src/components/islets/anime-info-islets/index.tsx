@@ -1,7 +1,6 @@
 import React from "react";
 import AnimeInfo from "./anime-info";
 import AnimeInfoPlus from "./anime-info-plus";
-import AnimeWatchList from "./anime-watchlist";
 
 interface AnimeWrapperProps {
   children: React.ReactNode;
@@ -27,4 +26,4 @@ function AnimeInfoWrapper({ children, background }: AnimeWrapperProps) {
   );
 }
 
-export { AnimeInfoWrapper, AnimeInfo, AnimeInfoPlus, AnimeWatchList };
+export { AnimeInfoWrapper, AnimeInfo, AnimeInfoPlus };
